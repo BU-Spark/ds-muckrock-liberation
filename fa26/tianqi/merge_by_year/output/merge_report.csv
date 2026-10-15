@@ -1,0 +1,19 @@
+Fiscal Year,tables found,agencies,columns,missing tables,notes,requests received (check)
+2008,32,71,245,,,560978
+2009,32,73,245,,,514478
+2010,32,97,245,,,597415
+2011,32,99,245,,,644165
+2012,32,99,245,,,651254
+2013,30,99,239,backlog_appeals_vs_prev_year; appeals_vs_prev_year,,704394
+2014,32,100,245,,,714231
+2015,32,100,245,,,713168
+2016,31,115,243,backlog_appeals_vs_prev_year,skipped foia-received-processed-and-pending-foia-requests (1).csv: Fiscal Year is [2018],788769
+2017,32,116,245,,,818272
+2018,32,118,245,,,863729
+2019,32,118,245,,,858952
+2020,31,119,234,appeals_other_reasons,,790688
+2021,32,118,245,,,838164
+2022,32,119,245,,,928261
+2023,32,121,245,,,1199699
+2024,32,122,245,,,1501432
+2025,32,117,245,,,1707197
