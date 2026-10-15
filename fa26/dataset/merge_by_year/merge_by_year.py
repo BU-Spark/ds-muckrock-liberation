@@ -1,26 +1,3 @@
-"""
-Merge the 32 FOIA annual-report tables of each fiscal year into one CSV per year.
-
-Input : the official foia.gov annual CSV zips, unzipped into one folder per year
-        (csv_2008/, csv_2009/, ... csv_2025/). Sub-folders are fine.
-Output: output/FY2008.csv ... output/FY2025.csv   (one row per agency, all tables side by side)
-        output/exemption_statutes_FY2008-2025.csv (kept separate, see below)
-        output/merge_report.csv                   (what was found / skipped per year)
-
-Rules
-- Each column is renamed "<table>__<original column>", because several tables share
-  column names (e.g. 7 tables have a column called "Total").
-- The "All agencies" summary row is dropped (summing it with the agencies would double count).
-- A file is only used if its own "Fiscal Year" column matches the folder year
-  (the FY2016 zip contains an FY2018 file).
-- Files ending in ".csv.crdownload" are read too (one FY2017 file has that name).
-- exemption-statutes has many rows per agency (one per statute), so joining it would
-  repeat every other number. It is saved as its own file instead.
-- Values are kept exactly as published (text), so nothing is lost; "N/A", "<1" etc. stay as is.
-
-Usage:  python merge_by_year.py --data ~/ds701-spark/data/extracted
-"""
-
 import argparse
 import re
 from pathlib import Path
