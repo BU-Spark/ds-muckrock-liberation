@@ -95,7 +95,7 @@ def main():
     data, out = Path(args.data).expanduser(), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
 
-    report, statutes = [], []
+    report, statutes, years = [], [], []
     for year in YEARS:
         tables, notes = load_year(data / f"csv_{year}", year)
         merged = merge_year(tables)
@@ -113,6 +113,8 @@ def main():
             statutes.append(tables["exemption-statutes"])
 
         missing = [SHORT[t] for t in SHORT if t not in tables]
+        # all-years file: a missing table stays blank (not reported), never 0
+        years.append(merged.reset_index().assign(**{"missing tables": "; ".join(missing)}))
         report.append({"Fiscal Year": year, "tables found": len(tables), "agencies": len(merged),
                        "columns": merged.shape[1], "missing tables": "; ".join(missing),
                        "notes": "; ".join(notes), "requests received (check)": int(after)})
@@ -120,6 +122,15 @@ def main():
               + (f" | missing: {', '.join(missing)}" if missing else "") + (f" | {'; '.join(notes)}" if notes else ""))
 
     pd.concat(statutes, ignore_index=True).to_csv(out / "exemption_statutes_FY2008-2025.csv", index=False)
+
+    # stack the 18 years into one file, one row per agency per year
+    stacked = pd.concat(years, ignore_index=True)
+    stacked = stacked[["Agency", "Fiscal Year", "missing tables"]
+                      + [c for c in stacked.columns if c not in ("Agency", "Fiscal Year", "missing tables")]]
+    assert len(stacked) == sum(r["agencies"] for r in report)
+    assert not stacked.duplicated(["Agency", "Fiscal Year"]).any()
+    stacked.to_csv(out / "FOIA_agency_FY2008-2025.csv", index=False)
+    print(f"all years: {len(stacked)} rows x {stacked.shape[1]} columns")
     pd.DataFrame(report).to_csv(out / "merge_report.csv", index=False)
 
 
