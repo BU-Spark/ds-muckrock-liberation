@@ -97,11 +97,13 @@ def fill_from_supplement(tables, folder, year, number_to_table):
         d = d[d["Agency"] != ALL].assign(Agency=lambda x: x["Agency"].replace(NAME_FIX))
         if t in tables:
             wrong_table = list(tables[t].columns) != list(d.columns)
-            if not wrong_table and not is_blank(tables[t]):
+            partial = not wrong_table and bool(set(d["Agency"]) - set(tables[t]["Agency"]))  # FY2012 zip: some tables list only part of the agencies
+            if not wrong_table and not partial and not is_blank(tables[t]):
                 continue
-            if not wrong_table and set(d["Agency"]) != set(tables[t]["Agency"]):
+            if not wrong_table and not partial and set(d["Agency"]) != set(tables[t]["Agency"]):
                 raise ValueError(f"{f}: agencies differ from the blank zip copy")
-            action = "replaced (zip file has another table's columns)" if wrong_table else "filled"
+            action = ("replaced (zip file has another table's columns)" if wrong_table
+                      else f"replaced (zip file lists {len(tables[t])} of {len(d)} agencies)" if partial else "filled")
         else:
             action = "added"
         if is_blank(d):

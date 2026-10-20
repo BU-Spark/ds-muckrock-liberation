@@ -3,7 +3,7 @@ Fiscal Year,tables found,agencies,columns,missing tables,notes,requests received
 2009,32,73,245,,filled subsection_c_used from 24_exclusions.csv; filled subsection_a_postings from 25_proactive_disclosures.csv,514478
 2010,32,97,245,,,597415
 2011,32,99,245,,,644165
-2012,32,99,245,,,651254
+2012,32,99,245,,replaced (zip file lists 69 of 99 agencies) expedited from 04_requests_expedited_processing.csv; replaced (zip file lists 69 of 99 agencies) exemptions_applied from 05_exemptions.csv; replaced (zip file lists 14 of 99 agencies) appeals_non_exemption_reasons from 10_appeals_dis_other_than_exs.csv; replaced (zip file lists 14 of 99 agencies) appeals_other_reasons from 11_appeals_dis_other_reasons.csv; replaced (zip file lists 14 of 99 agencies) appeals_response_time from 12_appeals_response_time.csv,651254
 2013,32,99,245,,added appeals_vs_prev_year from 31_comparisons_administrative_appeals.csv; added backlog_appeals_vs_prev_year from 32_comparisons_appeals_backlogged.csv,704394
 2014,32,100,245,,,714231
 2015,32,100,245,,,713168
