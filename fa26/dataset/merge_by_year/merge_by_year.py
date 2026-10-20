@@ -167,7 +167,6 @@ def main():
         if len(extra):
             merged = pd.concat([merged, extra.reindex(columns=merged.columns)])
             notes.append("added from API: " + ", ".join(extra.index))
-            statutes.append(api_statutes[(api_statutes["Fiscal Year"] == str(year)) & api_statutes["Agency"].isin(extra.index)])
 
         merged.insert(0, "Fiscal Year", year)
         merged.reset_index().to_csv(out / f"FY{year}.csv", index=False)
@@ -183,7 +182,12 @@ def main():
         print(f"FY{year}: {len(tables)} tables, {len(merged)} agencies x {merged.shape[1]} columns"
               + (f" | missing: {', '.join(missing)}" if missing else "") + (f" | {'; '.join(notes)}" if notes else ""))
 
-    pd.concat(statutes, ignore_index=True).to_csv(out / "exemption_statutes_FY2008-2025.csv", index=False)
+    # exemption statutes: agency-years whose statutes the zip leaves out (most of FY2012) come from the API, replacing the zip rows
+    st = pd.concat(statutes, ignore_index=True)
+    from_api = set(zip(api_statutes["Agency"], api_statutes["Fiscal Year"]))
+    st = st[[k not in from_api for k in zip(st["Agency"], st["Fiscal Year"].astype(str))]]
+    st = pd.concat([st, api_statutes], ignore_index=True).sort_values("Fiscal Year", kind="stable")
+    st.to_csv(out / "exemption_statutes_FY2008-2025.csv", index=False)
 
     # stack the 18 years into one file, one row per agency per year
     stacked = pd.concat(years, ignore_index=True)
