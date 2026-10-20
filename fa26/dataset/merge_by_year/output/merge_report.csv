@@ -1,17 +1,17 @@
 Fiscal Year,tables found,agencies,columns,missing tables,notes,requests received (check)
 2008,32,71,245,,,560978
-2009,32,73,245,,,514478
+2009,32,73,245,,filled subsection_c_used from 24_exclusions.csv; filled subsection_a_postings from 25_proactive_disclosures.csv,514478
 2010,32,97,245,,,597415
 2011,32,99,245,,,644165
 2012,32,99,245,,,651254
-2013,30,99,239,backlog_appeals_vs_prev_year; appeals_vs_prev_year,,704394
+2013,32,99,245,,added appeals_vs_prev_year from 31_comparisons_administrative_appeals.csv; added backlog_appeals_vs_prev_year from 32_comparisons_appeals_backlogged.csv,704394
 2014,32,100,245,,,714231
 2015,32,100,245,,,713168
-2016,31,115,243,backlog_appeals_vs_prev_year,skipped foia-received-processed-and-pending-foia-requests (1).csv: Fiscal Year is [2018],788769
+2016,32,115,245,,skipped foia-received-processed-and-pending-foia-requests (1).csv: Fiscal Year is [2018]; added backlog_appeals_vs_prev_year from 32_comparisons_appeals_backlogged.csv,788769
 2017,32,116,245,,,818272
 2018,32,118,245,,,863729
 2019,32,118,245,,,858952
-2020,31,119,234,appeals_other_reasons,,790688
+2020,32,119,245,,replaced (zip file has another table's columns) appeals_non_exemption_reasons from 10_appeals_dis_other_than_exs.csv; added appeals_other_reasons from 11_appeals_dis_other_reasons.csv; filled subsection_a_postings from 25_proactive_disclosures.csv,790688
 2021,32,118,245,,,838164
 2022,32,119,245,,,928261
 2023,32,121,245,,,1199699

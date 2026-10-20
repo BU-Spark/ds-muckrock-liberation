@@ -71,6 +71,46 @@ def load_year(folder, year):
     return tables, notes
 
 
+# The yearly "all agencies" zips from foia.gov miss some tables (e.g. FY2013 tables 31-32) or hold
+# all-blank copies (e.g. FY2020 table 25). Per-table downloads from foia.gov's data page
+# (files named 01_...csv to 32_...csv, one folder per year) fill those gaps.
+# The per-table files use the agency's current name, so rename it back to the name used in the zips.
+NAME_FIX = {"U.S. Chemical Safety and Hazard Investigation Board": "Chemical Safety and Hazard Investigation Board"}
+
+
+def is_blank(d):
+    data = [c for c in d.columns if c not in KEYS]
+    return not (d[data] != "").to_numpy().any()
+
+
+def fill_from_supplement(tables, folder, year, number_to_table):
+    """Use a per-table download when the zip has no file for a table, an all-blank one,
+    or one whose columns belong to a different table (FY2020 zip: table 10's file holds table 11)."""
+    used = []
+    for f in sorted(folder.glob("*.csv")) if folder.is_dir() else []:
+        t = number_to_table.get(f.name[:2])
+        if t is None:
+            continue
+        d = pd.read_csv(f, dtype=str, keep_default_na=False)
+        if not (pd.to_numeric(d["Fiscal Year"], errors="coerce") == year).all():
+            raise ValueError(f"{f}: Fiscal Year is not {year}")
+        d = d[d["Agency"] != ALL].assign(Agency=lambda x: x["Agency"].replace(NAME_FIX))
+        if t in tables:
+            wrong_table = list(tables[t].columns) != list(d.columns)
+            if not wrong_table and not is_blank(tables[t]):
+                continue
+            if not wrong_table and set(d["Agency"]) != set(tables[t]["Agency"]):
+                raise ValueError(f"{f}: agencies differ from the blank zip copy")
+            action = "replaced (zip file has another table's columns)" if wrong_table else "filled"
+        else:
+            action = "added"
+        if is_blank(d):
+            continue
+        used.append(f"{action} {SHORT[t]} from {f.name}")
+        tables[t] = d
+    return used
+
+
 def merge_year(tables):
     """Join every one-row-per-agency table side by side on Agency."""
     merged = None
@@ -90,14 +130,24 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", default=str(Path.home() / "ds701-spark/data/extracted"),
                         help="folder that contains csv_2008/ ... csv_2025/")
+    parser.add_argument("--supplement", default=str(Path(__file__).parent / "per_table_supplement"),
+                        help="folder with per-table downloads, one subfolder per year (2013/31_...csv)")
     parser.add_argument("--out", default=str(Path(__file__).parent / "output"))
     args = parser.parse_args()
     data, out = Path(args.data).expanduser(), Path(args.out)
+    supplement = Path(args.supplement).expanduser()
     out.mkdir(parents=True, exist_ok=True)
+    number_to_table = {r["No."]: r["Official file name (foia-*.csv)"]
+                       for r in pd.read_csv(Path(__file__).parent / "data_type_map.csv", dtype=str).to_dict("records")}
 
     report, statutes, years = [], [], []
     for year in YEARS:
         tables, notes = load_year(data / f"csv_{year}", year)
+        req_agencies = set(tables["received-processed-and-pending-foia-requests"]["Agency"])
+        filled = fill_from_supplement(tables, supplement / str(year), year, number_to_table)
+        for t in tables:
+            assert set(tables[t]["Agency"]) <= req_agencies, f"FY{year} {t}: agencies not in the requests table"
+        notes += filled
         merged = merge_year(tables)
 
         # check: no agency row was duplicated by the joins
@@ -113,7 +163,7 @@ def main():
             statutes.append(tables["exemption-statutes"])
 
         missing = [SHORT[t] for t in SHORT if t not in tables]
-        # all-years file: a missing table stays blank (not reported), never 0
+        # all-years file: a table still missing after the supplement stays blank, never 0
         years.append(merged.reset_index().assign(**{"missing tables": "; ".join(missing)}))
         report.append({"Fiscal Year": year, "tables found": len(tables), "agencies": len(merged),
                        "columns": merged.shape[1], "missing tables": "; ".join(missing),
