@@ -143,6 +143,8 @@ def main():
                        for r in pd.read_csv(Path(__file__).parent / "data_type_map.csv", dtype=str).to_dict("records")}
 
     report, statutes, years = [], [], []
+    api_years = pd.read_csv(supplement / "agency_years_from_api.csv", dtype=str, keep_default_na=False)
+    api_statutes = pd.read_csv(supplement / "exemption_statutes_from_api.csv", dtype=str, keep_default_na=False)
     for year in YEARS:
         tables, notes = load_year(data / f"csv_{year}", year)
         req_agencies = set(tables["received-processed-and-pending-foia-requests"]["Agency"])
@@ -158,6 +160,14 @@ def main():
         before = pd.to_numeric(req["Number of Requests Received in Fiscal Year"].str.replace(",", ""), errors="coerce").sum()
         after = pd.to_numeric(merged[col].str.replace(",", ""), errors="coerce").sum()
         assert before == after, f"FY{year}: received total changed {before} -> {after}"
+
+        # agency-years whose whole report is missing from the zip: rows built from the foia.gov API's agency totals
+        extra = api_years[api_years["Fiscal Year"] == str(year)].drop(columns="Fiscal Year").set_index("Agency")
+        extra = extra[~extra.index.isin(merged.index)]
+        if len(extra):
+            merged = pd.concat([merged, extra.reindex(columns=merged.columns)])
+            notes.append("added from API: " + ", ".join(extra.index))
+            statutes.append(api_statutes[(api_statutes["Fiscal Year"] == str(year)) & api_statutes["Agency"].isin(extra.index)])
 
         merged.insert(0, "Fiscal Year", year)
         merged.reset_index().to_csv(out / f"FY{year}.csv", index=False)

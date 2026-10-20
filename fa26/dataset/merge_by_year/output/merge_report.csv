@@ -13,7 +13,7 @@ Fiscal Year,tables found,agencies,columns,missing tables,notes,requests received
 2019,32,118,245,,,858952
 2020,32,119,245,,replaced (zip file has another table's columns) appeals_non_exemption_reasons from 10_appeals_dis_other_than_exs.csv; added appeals_other_reasons from 11_appeals_dis_other_reasons.csv; filled subsection_a_postings from 25_proactive_disclosures.csv,790688
 2021,32,118,245,,,838164
-2022,32,119,245,,,928261
+2022,32,120,245,,added from API: U.S. Agency for Global Media,928261
 2023,32,121,245,,,1199699
 2024,32,122,245,,,1501432
-2025,32,117,245,,,1707197
+2025,32,118,245,,added from API: Council of the Inspectors General on Integrity and Efficiency,1707197
