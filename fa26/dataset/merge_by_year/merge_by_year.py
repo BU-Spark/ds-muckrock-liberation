@@ -58,7 +58,7 @@ def load_year(folder, year):
     for f in sorted(folder.rglob("*")):
         if not f.name.endswith((".csv", ".csv.crdownload")):
             continue
-        d = pd.read_csv(f, dtype=str)
+        d = pd.read_csv(f, dtype=str, keep_default_na=False)  # keep "N/A" as written; pandas would turn it into blank
         fy = pd.to_numeric(d["Fiscal Year"], errors="coerce")
         if not (fy == year).all():
             notes.append(f"skipped {f.name}: Fiscal Year is {[int(x) for x in sorted(fy.dropna().unique())]}")
