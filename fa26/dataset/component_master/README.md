@@ -17,7 +17,7 @@ Values are copied as reported: blank, 0 and N/A are not changed.
 
 ## Columns to know
 - `Level`: `agency_overall`, `component`, or `duplicate_entry` (5 rows where the XML reports the same component twice with different numbers). Don't add Agency Overall rows to component rows.
-- `Exclude From Component Sum`: `yes` for 1 row (Commerce FY2025 "DOC", which repeats the Agency Overall numbers). Leave it out when adding up components.
+- `Exclude From Component Sum`: `yes` for Commerce FY2025 "DOC" (Departmental Offices), which is a duplicate total, not a separate office: in the master table it repeats the Agency Overall numbers; in the 06 table it repeats the other components (see above). Leave it out when adding up components.
 
 ## Not included
 - Rows the XML does not link to any component.
