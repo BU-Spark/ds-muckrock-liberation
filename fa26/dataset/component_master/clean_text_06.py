@@ -1,6 +1,8 @@
-"""Standard text cleaning for FOIA text columns (API, XML or foia.gov CSV).
+"""Text cleaning for the three text columns of exemption_statutes_06.csv
+(Statute, Type of Information Withheld, Case Citation).
 
-Run every text column through clean_text() when building the final tables.
+The 06 text can come from the foia.gov API, the XML annual reports or the foia.gov CSV export,
+and each writes the same text differently. clean_text() puts them in one format.
 It only changes formatting (HTML codes, quotes, whitespace, N/A spelling), never the content.
 Do not use it on number columns.
 
@@ -8,7 +10,7 @@ Not done on purpose:
 - No Unicode normalization (NFKC): it breaks characters such as a mistyped "¸" (meant as a comma).
 - "None" is not changed to "N/A": "none" and "not applicable" mean different things.
 
-    from foia_text import clean_text
+    from clean_text_06 import clean_text
     df[col] = df[col].map(clean_text)
 """
 import html
