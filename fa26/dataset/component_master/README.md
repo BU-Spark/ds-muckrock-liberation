@@ -3,8 +3,8 @@
 Component-level FOIA data, FY2008-2025, from the foia.gov XML annual reports, with data the XML is missing filled from the foia.gov API.
 
 - `component_master_no_03_11.csv` (8,088 rows, 253 columns): one row per fiscal year x agency x component, plus one "Agency Overall" row per agency per year (1,923). 9 ID columns and 244 data columns covering 31 of the 32 data types. Column names start with the data type number (01-32). For 03 and 11 ("Other" reasons) only the total column is kept.
-- `other_reasons_03_11.csv` (13,700 rows): the 03 and 11 "Other" reasons, one row per fiscal year x agency x component x reason. Only reported values are included.
-- `exemption_statutes_06.csv` (16,632 rows): 06 Exemption 3 statutes, one row per fiscal year x agency x component x statute, with the same 9 ID columns as the master table. Columns: Statute, Type of Information Withheld, Case Citation, Number of Times Relied Upon.
+- `other_reasons_03_11.csv` (13,700 rows, 13 columns): the 03 and 11 "Other" reasons, one row per fiscal year x agency x component x reason. The same 9 ID columns as the master table, plus Data Type No., Data Type, Reason, Quantity. Only reported values are included.
+- `exemption_statutes_06.csv` (16,632 rows, 13 columns): 06 Exemption 3 statutes, one row per fiscal year x agency x component x statute. The same 9 ID columns as the master table, plus Statute, Type of Information Withheld, Case Citation, Number of Times Relied Upon.
 - `clean_text_06.py`: the text cleaning used for the 06 text columns (see below).
 
 Values are copied as reported: blank, 0 and N/A are not changed.
