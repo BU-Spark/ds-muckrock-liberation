@@ -13,7 +13,7 @@ Values are copied as reported: blank, 0 and N/A are not changed.
 - Text columns are cleaned with `clean_text_06.clean_text()`, because the same text is written differently depending on the source (foia.gov API, XML annual reports, or the foia.gov CSV export): HTML codes such as `&quot;`, curly vs straight quotes, line breaks, and spellings of N/A. Only formatting changes; counts and ID columns are not touched.
 - An agency sometimes lists the same statute more than once; every entry is kept (the foia.gov CSV export shows only one of them).
 - Statute names are written in many ways (1,587 different texts; 30 for 26 U.S.C. § 6103). Group them before ranking statutes.
-- Commerce FY2025: the "DOC" row equals the other components combined (138), and the Agency Overall counts it twice (276). It is flagged in `Exclude From Component Sum`.
+- Commerce FY2025: the "DOC" (Departmental Offices) row is not a separate office. In this file it repeats the other components (same statutes, same counts, 138 in all), and the Agency Overall row adds both, so every count is doubled (276; the correct total is 138). The DOC row is flagged in `Exclude From Component Sum`; for Commerce FY2025, add up the components instead of using Agency Overall.
 
 ## Columns to know
 - `Level`: `agency_overall`, `component`, or `duplicate_entry` (5 rows where the XML reports the same component twice with different numbers). Don't add Agency Overall rows to component rows.
