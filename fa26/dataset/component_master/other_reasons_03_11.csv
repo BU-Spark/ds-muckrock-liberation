@@ -1,4 +1,4 @@
-Fiscal Year,Agency,Agency Abbreviation,Component,Component Name,Level,Org Ref ID,Exclude From Component Sum,Exclude Reason,Data Type No.,Data Type,Reason,Quantity
+Fiscal Year,Agency,Agency Abbreviation,Component,Component Name,Row Type,Org Ref ID,Exclude From Component Sum,Exclude Reason,Data Type No.,Data Type,Reason,Quantity
 2008,Chemical Safety and Hazard Investigation Board,CSB,Agency Overall,Chemical Safety and Hazard Investigation Board,agency_overall,ORG0,,,03,DispositionOtherReasons,None,0
 2008,Chemical Safety and Hazard Investigation Board,CSB,Agency Overall,Chemical Safety and Hazard Investigation Board,agency_overall,ORG0,,,11,AppealsOtherReasons,None,0
 2008,Committee for Purchase from People Who Are Blind or Severely Disabled,CPPBSD,Agency Overall,Committee for Purchase from People Who Are Blind or Severely Disabled,agency_overall,ORG0,,,03,DispositionOtherReasons,Handled as a public affairs information request rather than a FOIA,46

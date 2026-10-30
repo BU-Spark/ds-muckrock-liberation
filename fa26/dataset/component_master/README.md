@@ -17,9 +17,23 @@ Values are copied as reported: blank, 0 and N/A are not changed.
 
 ## Columns to know
 
-### `Level`: what kind of row it is
+### ID columns (the first 9 columns of every file)
 
-| Level | Meaning |
+| Column | Meaning |
+|---|---|
+| `Fiscal Year` | 2008-2025. |
+| `Agency` | Agency name, spelled as in the agency-level table (128 agencies). |
+| `Agency Abbreviation` | As written in the report (EXIM appears as both "EXIM" and "EXIM Bank"). |
+| `Component` | Component abbreviation as written in that year's report; "Agency Overall" for the agency total. Abbreviations can change between years (e.g. DoD's ARMY became DA in FY2025). |
+| `Component Name` | Full component name. Use it, not the abbreviation, to follow a component across years. |
+| `Row Type` | What kind of row it is (see below). |
+| `Org Ref ID` | The organization ID inside the XML report (ORG0 = the agency itself). Numbered separately in each report, so it does not match across years; it tells apart two components with the same abbreviation in one year (e.g. USPS FY2019 has two "PS"). "API-HQ" and "API-OIG" mark 2 rows (EXIM FY2024) taken from the foia.gov API. |
+| `Exclude From Component Sum` | `yes` = leave this row out when adding up components (see below). |
+| `Exclude Reason` | Why the row is excluded (only Commerce FY2025 "DOC"). |
+
+### `Row Type`: what kind of row it is
+
+| Row Type | Meaning |
 |---|---|
 | `agency_overall` | The whole agency's total (one row per agency per year). |
 | `component` | One office inside the agency. |
