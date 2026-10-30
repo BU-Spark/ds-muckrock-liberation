@@ -49,7 +49,7 @@ Columns in the master table start with the data type number and a short name (e.
 | 31 | `31_ComparisonsAppeals__` | Comparisons - Administrative Appeals |
 | 32 | `32_ComparisonsAppealsBacklogged__` | Comparisons - Appeals Backlogged |
 
-## Text cleaning (03/11 and 06)
+## Text cleaning (03, 11 and 06)
 The text columns (`Reason` in the 03/11 file; `Statute`, `Type of Information Withheld`, `Case Citation` in the 06 file) are cleaned with `clean_text_03_06_11.clean_text()`, because the same text is written differently depending on the source (foia.gov API, XML annual reports, or the foia.gov CSV export): HTML codes such as `&quot;`, curly vs straight quotes, line breaks, and spellings of N/A. Only formatting changes; counts and ID columns are not touched.
 
 ## 06 Exemption 3 statutes
