@@ -39,7 +39,7 @@ All data is public and comes from foia.gov in four ways:
 1. **Report page, by browser automation** (`scripts/foia_downloader.py` → `dataset/raw_agency_level/`). The script uses Playwright to drive Chromium on foia.gov's "Create an Annual Report" page. For each year and data type it selects all agencies, clicks View Report, waits for the page to finish loading its data from api.foia.gov, then clicks Download CSV.
 2. **Yearly bulk zips** (input to `scripts/merge_by_year.py` → `dataset/agency_level/`). These are the "All Agency Data set" CSV zips from https://www.foia.gov/foia-dataset-download.html. They are downloaded by hand and not stored in this repo.
 3. **Gap fills** (`dataset/supplement/`). Thirteen tables in the zips are blank, incomplete or mislabeled. These were replaced with single-table downloads from the report page (method 1). Agency-years missing from the zips were taken from the foia.gov API.
-4. **XML annual reports** (→ `dataset/component_level/`). The component-level tables were built from foia.gov's XML annual reports, with a few rows filled from the API. The build script for these tables is not in the repo yet.
+4. **foia.gov API** (→ `dataset/component_level/`). The component-level tables are built from the API's annual reports (api.foia.gov, the data behind foia.gov's report pages), downloaded October 18-19, 2026. The build script for these tables is not in the repo yet.
 
 ## Setup
 

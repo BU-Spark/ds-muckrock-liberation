@@ -44,7 +44,7 @@ The FY2016 zip also holds a second copy of table 01 (`... (1).csv`) whose rows a
 - Column names are the data type prefix (see `data_type_map.csv`) plus the column name in foia.gov's CSV, e.g. `requests__Number of Requests Received in Fiscal Year`.
 
 ## Checks
-- Every cell was compared with the foia.gov API: values match (29 cells differ only in spaces around "N/A").
+- Every cell was compared with the foia.gov API (1,923 rows x 244 columns): all match except 8 cells that foia.gov's CSV export leaves blank and the API has: Small Business Administration FY2021 fee waiver median and average days, Council on Environmental Quality FY2023 pending requests median and average days (6 cells). 53 cells have spaces around the value (e.g. "N/A ", "1167 "); they are kept as they are.
 - Requests received add up to the official "All agencies" row in every year except FY2022 (+92) and FY2025 (+237): the two agency-years added from the API are not in that row.
 - 24 (Exclusions) and 25 (Proactive Disclosures) are blank for almost all agencies in FY2008-2016; the foia.gov API is blank for those years too.
 
