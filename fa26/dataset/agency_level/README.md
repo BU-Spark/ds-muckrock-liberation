@@ -45,7 +45,7 @@ The FY2016 zip also holds a second copy of table 01 (`... (1).csv`) whose rows a
 
 ## Checks
 - Every cell was compared with the foia.gov API (1,923 rows x 244 columns): all match except 8 cells that foia.gov's CSV export leaves blank and the API has: Small Business Administration FY2021 fee waiver median and average days, Council on Environmental Quality FY2023 pending requests median and average days (6 cells). 53 cells have spaces around the value (e.g. "N/A ", "1167 "); they are kept as they are.
-- Requests received add up to the official "All agencies" row in every year except FY2022 (+92) and FY2025 (+237): the two agency-years added from the API are not in that row.
+- Requests received add up to the "All agencies" row of foia.gov's yearly zips in every year except FY2022 (+92) and FY2025 (+237): the two agency-years added from the API are not in the zips. The report-page downloads in `../raw_agency_level/` include CIGIE FY2025, so against them only FY2022 differs.
 - 24 (Exclusions) and 25 (Proactive Disclosures) are blank for almost all agencies in FY2008-2016; the foia.gov API is blank for those years too.
 
 ## How to rebuild this folder

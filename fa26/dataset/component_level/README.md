@@ -55,7 +55,7 @@ The text columns (`Reason` in the 03/11 file; `Statute`, `Type of Information Wi
 ## 06 Exemption 3 statutes
 - An agency sometimes lists the same statute more than once; every entry is kept.
 - Statute names are written in many ways (1,588 different texts; 30 for 26 U.S.C. § 6103). Group them before ranking statutes.
-- Commerce FY2025: the "DOC" (Departmental Offices) rows repeat the other components (same statutes, same counts, 138 in all), and the Agency Overall rows add both, so every count is doubled (276; the correct total is 138). The DOC rows are flagged in `Exclude From Component Sum`; for Commerce FY2025, add up the components instead of using Agency Overall.
+- Commerce FY2025: the "DOC" (Departmental Offices) rows list the same 11 statutes as the other components, each with the count of the other components added together (138 in all), and the Agency Overall rows add both, so every count is doubled (276; the correct total is 138). The DOC rows are flagged in `Exclude From Component Sum`; for Commerce FY2025, add up the components instead of using Agency Overall.
 
 ## Columns to know
 
@@ -81,9 +81,9 @@ The text columns (`Reason` in the 03/11 file; `Statute`, `Type of Information Wi
 | `second_entry` | A second entry the agency reported for the same office in one table. foia.gov keeps both, and its agency total counts both (e.g. Peace Corps FY2022 costs: OIG 310,000 + second entry 86,900 = Agency Overall 396,900). Only that table's columns are filled. | 10 |
 | `no_component` | Numbers foia.gov does not link to any office (e.g. Commerce FY2014, Legal Services Corporation FY2016-2018). | 15 |
 
-**Use the Agency Overall row or the other rows, never both.** The `component`, `second_entry` and `no_component` rows (without the Exclude row) add up to the Agency Overall row, except in the 13 agency-years listed below. Example, DHS FY2024 backlog: the 15 components add up to 141,420, and the Agency Overall row is also 141,420. Adding all 16 rows would give 282,840, twice the real number.
+**Use the Agency Overall row or the other rows, never both.** For counts, dollar amounts and FTE, the `component`, `second_entry` and `no_component` rows (without the Exclude row) add up to the Agency Overall row, except in the 13 agency-years listed below. Medians, averages and days cannot be added up. Example, DHS FY2024 backlog: the 15 components add up to 141,420, and the Agency Overall row is also 141,420. Adding all 16 rows would give 282,840, twice the real number.
 
-**Agencies that are one organization** (no components, or one component that is the agency itself) have only the Agency Overall row: 1,441 of the 1,923 agency-years. 482 agency-years (32 agencies) have component rows.
+**Agencies reported as one organization** have only the Agency Overall row: 1,441 of the 1,923 agency-years. These are reports with no component, or with one component that never shares a table with numbers linked to no component. Usually that one component is the agency itself; in 24 agency-years it has its own name (e.g. OPM FY2020-2025 "OPM Central Office", GSA FY2008-2015 "Headquarters"), and its numbers are the Agency Overall row. 482 agency-years (32 agencies) have component rows.
 
 **The Agency Overall row** is foia.gov's agency total. Where foia.gov has no total for a one-organization agency, its own entry is used. These totals match the agency-level table except 8 cells where foia.gov's CSV export (which the agency-level table comes from) is blank and the API has the number: Small Business Administration FY2021 fee waiver median and average days (13, 7.98), Council on Environmental Quality FY2023 pending requests median and average days (6 cells).
 
@@ -105,11 +105,11 @@ These are in foia.gov's own data; the numbers are kept as reported.
 ## How the tables were checked
 - Every cell of every row against the API reports, read a second time by separate code: no differences.
 - Agency Overall rows against the agency-level table (`agency_level/FOIA_agency_FY2008-2025.csv`, from foia.gov's CSV export), all 244 columns: 469,204 cells the same, 8 different (listed above).
-- FY2024 components against foia.gov's component-level CSV export: 36,466 cells, all the same.
+- FY2024 components against foia.gov's component-level CSV export (23 of the 31 data types in the master table; the other 8 were not downloaded): 36,466 cells, all the same.
 - 06 Agency Overall rows against the agency-level statute table: all 1,919 agency-years with statutes the same.
 
 ## Changes from the earlier version (built from the XML)
-- All three tables now come from the API. The XML left some blocks of data without an office (e.g. DoD FY2008 Army, USPS "PS" FY2020-2024, DHS CRCL FY2009 and FY2011-2016), so those offices were missing; they are in now. The earlier "Not included" note no longer applies.
+- All three tables now come from the API. The XML left some blocks of data without an office (e.g. DoD FY2008 Army, DHS CRCL FY2009 and FY2011-2016, and most tables of USPS "PS" FY2021-2024), so those numbers were missing; they are in now. The earlier "Not included" note no longer applies.
 - Component abbreviations are foia.gov's current ones, the same in every year (DoD `ARMY` -> `DA`, `NAVY` -> `DON`, `AF` -> `DAF`, `DoD IG` -> `DoW OIG`, ...).
 - One-organization agencies (e.g. NARA, NCUA, Amtrak) no longer have a component row that repeated the Agency Overall.
 - The `Org Ref ID` column (the organization ID inside the XML report) is removed; tell components apart by `Component` and `Component Name`.
