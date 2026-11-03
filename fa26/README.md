@@ -14,7 +14,7 @@ fa26/
 │   └── clean_text_03_06_11.py    text clean-up used for the component-level text columns
 └── dataset/
     ├── data_type_map.csv     the 32 data types: number, foia.gov name, file name, column prefix
-    ├── raw_agency_level/     raw downloads: <year>/NN_<data type>.csv, all agencies + components
+    ├── raw_agency_level/     raw downloads: <year>/NN_<data type>.csv, agency totals only (no components)
     ├── supplement/           files used to fill gaps in foia.gov's yearly zips
     ├── agency_level/         cleaned: one row per agency per year (start here)
     └── component_level/      cleaned: one row per agency office (component) per year
