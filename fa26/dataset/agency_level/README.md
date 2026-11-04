@@ -8,12 +8,12 @@ Agency-level FOIA data, FY2008-2025: foia.gov's 32 annual tables merged into one
 - `exemption_statutes_FY2008-2025.csv` (6,307 rows): 06 Exemption 3 statutes, one row per statute (it does not fit one row per agency, so it is kept separately).
 - `merge_report.csv`: one row per year: number of tables and agencies, which per-table downloads and API rows were used (`notes`), and total requests received as a check.
 - `../data_type_map.csv`: the 32 data types: number (01-32, the order on foia.gov's data page), foia.gov name, official file name, and the column prefix used in the merged table (e.g. `requests__`).
-- `merge_by_year.py`: the script that builds ``.
-- `../supplement/`: data used to fill gaps in foia.gov's yearly zips (see below).
+- `../../scripts/merge_by_year.py`: the script that builds this folder.
+- `api_fills/`: rows from the foia.gov API for what the yearly zips leave out (see below).
 
 ## Where the data comes from
 1. **foia.gov yearly CSV zips** ("Download the full YYYY All Agency Data set" on https://www.foia.gov/foia-dataset-download.html). These give most of the data.
-2. **Single-table downloads** from https://www.foia.gov/data.html (all agencies, one data type, one year), in `../supplement/<year>/`. Used where the table in the yearly zip has a problem (13 files; `merge_report.csv` lists them too):
+2. **Single-table downloads** from https://www.foia.gov/data.html (all agencies, one data type, one year), read from `../raw_agency_level/<year>/`. Used only where the table in the yearly zip has a problem (13 files, listed in `GAP_FILLS` in the script; `merge_report.csv` lists them too):
 
 | Year | No. | Data type | Problem with the table in the yearly zip |
 |---|---|---|---|
@@ -32,7 +32,7 @@ Agency-level FOIA data, FY2008-2025: foia.gov's 32 annual tables merged into one
 | FY2020 | 25 | Proactive Disclosures | blank |
 
 The FY2016 zip also holds a second copy of table 01 (`... (1).csv`) whose rows are FY2018 data; the script checks the fiscal year and skips it.
-3. **foia.gov API**, for what the zips leave out:
+3. **foia.gov API**, for what the zips leave out (in `api_fills/`):
    - `agency_years_from_api.csv`: 2 annual reports that are not in the zips at all (U.S. Agency for Global Media FY2022, Council of the Inspectors General on Integrity and Efficiency FY2025).
    - `exemption_statutes_from_api.csv`: 06 statute rows for 56 agency-years the zips leave out; they replace the zip's rows for those agencies.
 
@@ -55,6 +55,6 @@ The FY2016 zip also holds a second copy of table 01 (`... (1).csv`) whose rows a
    pip install pandas
    python fa26/scripts/merge_by_year.py --data <parent folder>
    ```
-   `--supplement` (default `fa26/dataset/supplement/`) and `--out` (default `fa26/dataset/agency_level/`) can also be set.
+   `--raw` (default `fa26/dataset/raw_agency_level/`), `--api-fills` (default `fa26/dataset/agency_level/api_fills/`) and `--out` (default `fa26/dataset/agency_level/`) can also be set.
 
    Note: in the FY2017 zip, one file is named `foia-received-processed-and-pending-administrative-appeals.csv.crdownload`. That is how foia.gov packed it; the script reads it like the other files.

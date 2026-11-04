@@ -74,7 +74,15 @@ def load_year(folder, year):
 
 # The yearly "all agencies" zips from foia.gov miss some tables (e.g. FY2013 tables 31-32) or hold
 # all-blank copies (e.g. FY2020 table 25). Per-table downloads from foia.gov's data page
-# (files named 01_...csv to 32_...csv, one folder per year) fill those gaps.
+# (raw_agency_level/<year>/01_...csv to 32_...csv) fill those gaps.
+# Only the tables listed here are used: the other per-table downloads would replace zip tables that are fine.
+GAP_FILLS = {
+    2009: ["24", "25"],
+    2012: ["04", "05", "10", "11", "12"],
+    2013: ["31", "32"],
+    2016: ["32"],
+    2020: ["10", "11", "25"],
+}
 # The per-table files use the agency's current name, so rename it back to the name used in the zips.
 NAME_FIX = {"U.S. Chemical Safety and Hazard Investigation Board": "Chemical Safety and Hazard Investigation Board"}
 
@@ -84,11 +92,22 @@ def is_blank(d):
     return not (d[data] != "").to_numpy().any()
 
 
-def fill_from_supplement(tables, folder, year, number_to_table):
+def gap_fill_files(raw, year):
+    """The per-table downloads in GAP_FILLS for one year, from raw_agency_level/<year>/."""
+    files = []
+    for no in GAP_FILLS.get(year, []):
+        found = sorted((raw / str(year)).glob(f"{no}_*.csv"))
+        if len(found) != 1:
+            raise FileNotFoundError(f"FY{year} table {no}: expected one {no}_*.csv in {raw / str(year)}, found {len(found)}")
+        files += found
+    return files
+
+
+def fill_gaps(tables, files, year, number_to_table):
     """Use a per-table download when the zip has no file for a table, an all-blank one,
     or one whose columns belong to a different table (FY2020 zip: table 10's file holds table 11)."""
     used = []
-    for f in sorted(folder.glob("*.csv")) if folder.is_dir() else []:
+    for f in files:
         t = number_to_table.get(f.name[:2])
         if t is None:
             continue
@@ -133,23 +152,25 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", required=True,
                         help="folder that contains csv_2008/ ... csv_2025/")
-    parser.add_argument("--supplement", default=str(DATASET / "supplement"),
+    parser.add_argument("--raw", default=str(DATASET / "raw_agency_level"),
                         help="folder with per-table downloads, one subfolder per year (2013/31_...csv)")
+    parser.add_argument("--api-fills", default=str(DATASET / "agency_level" / "api_fills"),
+                        help="folder with agency_years_from_api.csv and exemption_statutes_from_api.csv")
     parser.add_argument("--out", default=str(DATASET / "agency_level"))
     args = parser.parse_args()
     data, out = Path(args.data).expanduser(), Path(args.out)
-    supplement = Path(args.supplement).expanduser()
+    raw, api_fills = Path(args.raw).expanduser(), Path(args.api_fills).expanduser()
     out.mkdir(parents=True, exist_ok=True)
     number_to_table = {r["No."]: r["Official file name (foia-*.csv)"]
                        for r in pd.read_csv(DATASET / "data_type_map.csv", dtype=str).to_dict("records")}
 
     report, statutes, years = [], [], []
-    api_years = pd.read_csv(supplement / "agency_years_from_api.csv", dtype=str, keep_default_na=False)
-    api_statutes = pd.read_csv(supplement / "exemption_statutes_from_api.csv", dtype=str, keep_default_na=False)
+    api_years = pd.read_csv(api_fills / "agency_years_from_api.csv", dtype=str, keep_default_na=False)
+    api_statutes = pd.read_csv(api_fills / "exemption_statutes_from_api.csv", dtype=str, keep_default_na=False)
     for year in YEARS:
         tables, notes = load_year(data / f"csv_{year}", year)
         req_agencies = set(tables["received-processed-and-pending-foia-requests"]["Agency"])
-        filled = fill_from_supplement(tables, supplement / str(year), year, number_to_table)
+        filled = fill_gaps(tables, gap_fill_files(raw, year), year, number_to_table)
         for t in tables:
             assert set(tables[t]["Agency"]) <= req_agencies, f"FY{year} {t}: agencies not in the requests table"
         notes += filled
@@ -175,7 +196,7 @@ def main():
             statutes.append(tables["exemption-statutes"])
 
         missing = [SHORT[t] for t in SHORT if t not in tables]
-        # all-years file: a table still missing after the supplement stays blank, never 0
+        # all-years file: a table still missing after the gap fills stays blank, never 0
         years.append(merged.reset_index().assign(**{"missing tables": "; ".join(missing)}))
         report.append({"Fiscal Year": year, "tables found": len(tables), "agencies": len(merged),
                        "columns": merged.shape[1], "missing tables": "; ".join(missing),

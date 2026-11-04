@@ -15,8 +15,7 @@ fa26/
 └── dataset/
     ├── data_type_map.csv     the 32 data types: number, foia.gov name, file name, column prefix
     ├── raw_agency_level/     raw downloads: <year>/NN_<data type>.csv, agency totals only (no components)
-    ├── supplement/           files used to fill gaps in foia.gov's yearly zips
-    ├── agency_level/         cleaned: one row per agency per year (start here)
+    ├── agency_level/         cleaned: one row per agency per year (start here); api_fills/ holds API rows the zips lack
     └── component_level/      cleaned: one row per agency office (component) per year
 ```
 
@@ -38,7 +37,7 @@ All data is public and comes from foia.gov in four ways:
 
 1. **Report page, by browser automation** (`scripts/foia_downloader.py` → `dataset/raw_agency_level/`). The script uses Playwright to drive Chromium on foia.gov's "Create an Annual Report" page. For each year and data type it selects all agencies, clicks View Report, waits for the page to finish loading its data from api.foia.gov, then clicks Download CSV.
 2. **Yearly bulk zips** (input to `scripts/merge_by_year.py` → `dataset/agency_level/`). These are the "All Agency Data set" CSV zips from https://www.foia.gov/foia-dataset-download.html. They are downloaded by hand and not stored in this repo.
-3. **Gap fills** (`dataset/supplement/`). Thirteen tables in the zips are blank, incomplete or mislabeled. These were replaced with single-table downloads from the report page (method 1). Agency-years missing from the zips were taken from the foia.gov API.
+3. **Gap fills.** Thirteen tables in the zips are blank, incomplete or mislabeled. `merge_by_year.py` replaces them with the matching single-table downloads in `dataset/raw_agency_level/` (method 1). Agency-years missing from the zips were taken from the foia.gov API (`dataset/agency_level/api_fills/`).
 4. **foia.gov API** (→ `dataset/component_level/`). The component-level tables are built from the API's annual reports (api.foia.gov, the data behind foia.gov's report pages), downloaded October 18-19, 2026. The build script for these tables is not in the repo yet.
 
 ## Setup
