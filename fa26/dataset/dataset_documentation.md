@@ -9,7 +9,7 @@ This folder holds U.S. federal FOIA (Freedom of Information Act) Annual Report d
 
 Use the **agency-level** files for quick per-agency or government-wide numbers on a single topic. Use the **component-level** tables when you need office-level detail (e.g. FBI inside DOJ), a single wide table across all data types, or the Exemption 3 statute and "Other" reason details.
 
-The same agency totals are also merged into one table per year (and one for all years) in `agency_level/`, built from foia.gov's yearly zips with gaps filled from `supplement/`. See `agency_level/README.md`.
+The same agency totals are also merged into one table per year (and one for all years) in `agency_level/`, built from foia.gov's yearly zips with gaps filled from `raw_agency_level/` and `agency_level/api_fills/`. See `agency_level/README.md`.
 
 ## 1. Background: what is in a FOIA Annual Report?
 
