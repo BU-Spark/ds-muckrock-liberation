@@ -205,6 +205,8 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 - **Agencies reporting** = the number of Agency Overall rows that year.
 - **Agencies with components** = agencies that also have one or more component rows. All other agencies have **only** the Agency Overall row.
 - **Component rows** = rows with `Row Type = component` that year.
+- **Data types** = the files foia.gov publishes each year. Data types 24 and 25 are almost entirely blank before FY2017.
+- **Agencies added / removed** = whether foia.gov has a report for that agency that year, not whether the agency was created or closed.
 
 ### ID columns (first 8 columns of all three files)
 
@@ -213,8 +215,8 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 | `Fiscal Year` | 2008–2025 |
 | `Agency` | Agency name, spelled as in the agency-level data |
 | `Agency Abbreviation` | As on foia.gov (e.g. `DOJ`, `CSB`) |
-| `Component` | Component abbreviation in foia.gov's **current** form, the same in every year (e.g. Army = `DA`). `Agency Overall` for the agency total |
-| `Component Name` | Full component name. Use `Component` + `Component Name` together as the key, because two components can share an abbreviation |
+| `Component` | Component abbreviation in foia.gov's **current** form (e.g. Army = `DA`). Most offices keep one abbreviation in every year, but 7 component names appear under two (e.g. Interior's `OSM` became `OSMRE` in FY2020), so check `Component Name` when following one office over time. `Agency Overall` for the agency total |
+| `Component Name` | Full component name. In the master table, use `Component` + `Component Name` + `Row Type` as the key within an agency-year, because two components can share an abbreviation and a `second_entry` row repeats the abbreviation and name of the office's first entry |
 | `Row Type` | `agency_overall`, `component`, `second_entry`, or `no_component` (below) |
 | `Exclude From Component Sum` | `yes` = leave this row out when summing components |
 | `Exclude Reason` | Why the row is excluded |
@@ -263,17 +265,26 @@ ID columns + `Statute`, `Type of Information Withheld`, `Case Citation`, `Number
 - The same statute is written in many different ways (e.g. 30 variants of 26 U.S.C. § 6103), so group statute names before ranking them.
 
 ### How to aggregate correctly
-- **Use either the `agency_overall` row or the other rows, never both.** Summing all rows doubles the total (e.g. DHS FY2024 backlog: components = 141,420, Agency Overall = 141,420, all rows = 282,840).
+- **In the master table and the 06 table, use either the `agency_overall` row or the other rows, never both.** Summing all rows doubles the total (e.g. DHS FY2024 backlog: components = 141,420, Agency Overall = 141,420, all rows = 282,840). The 03/11 table has no such overlap: an agency-year has either `agency_overall` rows or other rows, not both.
 - When summing components, include `component`, `second_entry` and `no_component` rows, and **leave out rows where `Exclude From Component Sum == "yes"`**.
 - Only counts, dollars and FTE can be summed. Medians, averages, days and dates cannot.
 
 ```python
 import pandas as pd
-m = pd.read_csv("fa26/dataset/component_level/component_master_no_03_06_11.csv", dtype=str)
+m = pd.read_csv("fa26/dataset/component_level/component_master_no_03_06_11.csv", dtype=str, keep_default_na=False)
 
 overall = m[m["Row Type"] == "agency_overall"]
 parts = m[(m["Row Type"] != "agency_overall") & (m["Exclude From Component Sum"] != "yes")]
 ```
+
+### What 0, N/A and blank mean
+
+| Value | Meaning |
+|---|---|
+| `0` | In count columns, the agency reported zero. In days columns and the ten-oldest columns, it usually means there were no such cases, not 0 days (e.g. all 100 rows with an expedited median of 0 have 0 expedited requests). |
+| `N/A` | Not applicable, or nothing to calculate (e.g. 4,579 of the 4,801 rows with an N/A expedited median have 0 expedited requests). |
+| blank | Usually the component is not in that data type's table, so the whole table is blank for that row (e.g. 31 of DOJ's 32 components in the FY2025 appeals tables, because all its appeals are reported under OIP). Data types 24 and 25 are also almost entirely blank before FY2017. |
+| `<1` | Less than one day. |
 
 ### Known issues (from `component_level/README.md`)
 These problems are in foia.gov's own data. The numbers are kept as reported.
@@ -285,10 +296,10 @@ These problems are in foia.gov's own data. The numbers are kept as reported.
 - **Shared abbreviations:** USPS FY2019–2024 has two `PS` components (`HQ Postal Service` and `USPS Field Office`).
 - **Some components are named oddly on foia.gov** and are kept as they are (e.g. EPA FY2013 and FY2015 `EPA OLD DO NOT USE`).
 - **Value formats:**
-  - N/A is spelled several ways (`N/A`, `n/a`, `N/a`, `NA`, `N\A`, `N.A`).
+  - N/A is spelled several ways (`N/A`, `n/a`, `N/a`, `NA`, `na`, `N\A`, `N.A`, `N./A`, `N/`). One cell reads `N/S` (CPPBSD FY2025, average days to decide appeals).
   - `<1` means less than one day.
   - Some decimals have no leading 0 (`.5`).
-  - 4 counts are negative: Labor FY2023 OIG; Treasury FY2019 Fiscal Service; HHS FY2025 ARPA-H.
+  - 4 counts are negative: Labor FY2023 OIG (2); Treasury FY2019 Fiscal Service; HHS FY2025 ARPA-H.
   - One date is written `09-15-2025` instead of `2025-09-15` (CPSC FY2025, third oldest pending appeal).
 
 ### How the tables were checked
