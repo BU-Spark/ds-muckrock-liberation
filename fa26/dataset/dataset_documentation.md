@@ -215,8 +215,8 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 | `Fiscal Year` | 2008–2025 |
 | `Agency` | Agency name, spelled as in the agency-level data |
 | `Agency Abbreviation` | As on foia.gov (e.g. `DOJ`, `CSB`) |
-| `Component` | Component abbreviation in foia.gov's **current** form (e.g. Army = `DA`). Most offices keep one abbreviation in every year, but 7 component names appear under two (e.g. Interior's `OSM` became `OSMRE` in FY2020), so check `Component Name` when following one office over time. `Agency Overall` for the agency total |
-| `Component Name` | Full component name. In the master table, use `Component` + `Component Name` + `Row Type` as the key within an agency-year, because two components can share an abbreviation and a `second_entry` row repeats the abbreviation and name of the office's first entry |
+| `Component` | Component abbreviation in foia.gov's **current** form (e.g. Army = `DA`). Most offices keep one abbreviation in every year, but some appear under two (e.g. Interior's `OSM` became `OSMRE` in FY2020), so check `Component Name` when following one office over time. `Agency Overall` for the agency total |
+| `Component Name` | Full component name. In the master table, use `Component` + `Component Name` + `Row Type` as the key within an agency-year, because two components can share an abbreviation and a `second_entry` row repeats the abbreviation and name of its first entry |
 | `Row Type` | `agency_overall`, `component`, `second_entry`, or `no_component` (below) |
 | `Exclude From Component Sum` | `yes` = leave this row out when summing components |
 | `Exclude Reason` | Why the row is excluded |
