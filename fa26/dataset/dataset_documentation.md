@@ -164,7 +164,7 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 - **8,139 rows**: agency totals + components, per year.
 - **244 data columns**, grouped by data type.
 - Split out into their own tables: the "Other" reasons (03, 11) and the Exemption 3 statutes (06).
-- The agency totals match the agency-level table (foia.gov CSV export).
+- The agency totals match the agency-level table (foia.gov CSV exports, with a few gaps filled from the API).
 
 ### Files
 
@@ -227,7 +227,7 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 |---|---|---:|
 | `agency_overall` | Agency total, one per agency-year. For an agency without components, this is the only row | 1,923 |
 | `component` | One office inside the agency | 6,191 |
-| `second_entry` | A second entry for the same office in one table; foia.gov counts both in the total | 10 |
+| `second_entry` | A second entry in a table; foia.gov counts both in the total | 10 |
 | `no_component` | Numbers foia.gov doesn't tie to any office | 15 |
 
 **`Exclude From Component Sum`** is `yes` only for Commerce FY2025 "DOC" (Departmental Offices). That row is a copy of a total, not a real office, so adding it to the other components doubles Commerce's numbers.
@@ -293,6 +293,7 @@ These problems are in foia.gov's own data. The numbers are kept as reported.
 - **Components that don't add up to the agency total** (13 agency-years): Veterans Affairs FY2025 (47 columns), GSA FY2016 (20), EPA FY2011 (8), Defense FY2025 (3), Commerce FY2025 (2), Agriculture, Labor and EEOC FY2025 (1 each), and USPS FY2010, 2013, 2014, 2016, 2017 (appeals pending at end of year).
 - **FY2025, data type 11:** 8 agencies report component values but have a blank Agency Overall cell: Justice 1,045, Veterans Affairs 192, EEOC 76, Labor 52, Energy 45, Defense 14, Agriculture 4, Commerce 1. Add up the components.
 - **Energy FY2025 HQ, data type 11:** the reasons add up to 49, but the total column says 45.
+- **FY2022, All agencies:** foia.gov's CSV export leaves out USAGM, so its All agencies row shows 928,261 requests received. Adding the Agency Overall rows gives 928,353, because the API includes USAGM's 92 requests.
 - **Shared abbreviations:** USPS FY2019–2024 has two `PS` components (`HQ Postal Service` and `USPS Field Office`).
 - **Some components are named oddly on foia.gov** and are kept as they are (e.g. EPA FY2013 and FY2015 `EPA OLD DO NOT USE`).
 - **Value formats:**
@@ -304,9 +305,9 @@ These problems are in foia.gov's own data. The numbers are kept as reported.
 
 ### How the tables were checked
 - Every cell was checked against the API reports a second time, by separate code: no differences.
-- The Agency Overall rows were compared with the agency-level table across all 244 columns: 469,204 cells match. 8 cells differ, where foia.gov's CSV export is blank but the API has a value: SBA FY2021 fee waiver median/average days; CEQ FY2023 pending requests median/average days.
+- The Agency Overall rows were compared with the agency-level table across all 244 columns: 469,204 cells match. 8 cells differ, where foia.gov's CSV export is blank but the API has an entry: SBA FY2021 fee waiver median/average days; CEQ FY2023 pending requests median/average days.
 - FY2024 components were compared with foia.gov's component-level CSV export (23 data types): 36,466 cells, all match.
-- The 06 Agency Overall rows were compared with the agency-level statute files: all 1,919 agency-years with statutes match.
+- The 06 Agency Overall rows were compared with the agency-level statute table: all 1,919 agency-years with statutes match.
 
 ---
 

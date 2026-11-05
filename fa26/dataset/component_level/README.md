@@ -78,14 +78,14 @@ The text columns (`Reason` in the 03/11 file; `Statute`, `Type of Information Wi
 |---|---|---:|
 | `agency_overall` | The whole agency's total (one row per agency per year). | 1,923 |
 | `component` | One office inside the agency. | 6,191 |
-| `second_entry` | A second entry the agency reported for the same office in one table. foia.gov keeps both, and its agency total counts both (e.g. Peace Corps FY2022 costs: OIG 310,000 + second entry 86,900 = Agency Overall 396,900). Only that table's columns are filled. | 10 |
+| `second_entry` | A second entry the agency reported in a table. foia.gov keeps both, and its agency total counts both (e.g. Peace Corps FY2022 costs: OIG 310,000 + second entry 86,900 = Agency Overall 396,900). Only the tables with a second entry are filled. | 10 |
 | `no_component` | Numbers foia.gov does not link to any office (e.g. Commerce FY2014, Legal Services Corporation FY2016-2018). | 15 |
 
 **In the master table and the 06 table, use the Agency Overall row or the other rows, never both.** The 03/11 table has no such overlap: an agency-year has either Agency Overall rows or other rows, not both. In the master table, for counts, dollar amounts and FTE, the `component`, `second_entry` and `no_component` rows (without the Exclude row) add up to the Agency Overall row, except in the 13 agency-years listed below. Medians, averages and days cannot be added up. Example, DHS FY2024 backlog: the 15 components add up to 141,420, and the Agency Overall row is also 141,420. Adding all 16 rows would give 282,840, twice the real number.
 
-**Agencies reported as one organization** have only the Agency Overall row: 1,441 of the 1,923 agency-years. These are reports with no component, or with one component that never shares a table with numbers linked to no component. Usually that one component is the agency itself; in 24 agency-years it has its own name (e.g. OPM FY2020-2025 "OPM Central Office", GSA FY2008-2015 "Headquarters"), and its numbers are the Agency Overall row. 482 agency-years (32 agencies) have component rows.
+**Agencies reported as one organization** have only the Agency Overall row: 1,441 of the 1,923 agency-years. These are reports with no component, or with one component that never shares a table with numbers linked to no component. Usually that one component is the agency itself; sometimes it has its own name (e.g. OPM FY2020-2025 "OPM Central Office"), and its numbers are the Agency Overall row. 482 agency-years (32 agencies) have component rows.
 
-**The Agency Overall row** is foia.gov's agency total. Where foia.gov has no total for a one-organization agency, its own entry is used. These totals match the agency-level table except 8 cells where foia.gov's CSV export (which the agency-level table comes from) is blank and the API has the number: Small Business Administration FY2021 fee waiver median and average days (13, 7.98), Council on Environmental Quality FY2023 pending requests median and average days (6 cells).
+**The Agency Overall row** is foia.gov's agency total. Where foia.gov has no total for a one-organization agency, its own entry is used. These totals match the agency-level table except 8 cells where foia.gov's CSV export (the main source of the agency-level table, with a few gaps filled from the API) is blank and the API has an entry: Small Business Administration FY2021 fee waiver median and average days (13, 7.98), Council on Environmental Quality FY2023 pending requests median and average days (6 cells).
 
 ### `Exclude From Component Sum`: skip this row when adding up components
 
@@ -109,11 +109,12 @@ These are in foia.gov's own data; the numbers are kept as reported.
 - **Components that do not add up to the agency total** (13 agency-years): Veterans Affairs FY2025 (47 columns, e.g. requests pending at the end of the year), General Services Administration FY2016 (20), Environmental Protection Agency FY2011 (8), Defense FY2025 (3), Commerce FY2025 (2), Agriculture, Labor and EEOC FY2025 (1 each), USPS FY2010, 2013, 2014, 2016 and 2017 (appeals pending at the end of the year).
 - **FY2025, 11 (appeals "Other" reasons): no agency total for 8 agencies whose components report values.** Justice 1,045, Veterans Affairs 192, EEOC 76, Labor 52, Energy 45, Defense 14, Agriculture 4, Commerce 1. The Agency Overall cell is blank; add up the components.
 - **Energy FY2025, HQ, 11 reasons**: the reasons add up to 49, the total column says 45.
+- **FY2022, All agencies**: foia.gov's CSV export leaves out USAGM, so its All agencies row shows 928,261 requests received. Adding the Agency Overall rows gives 928,353, because the API includes USAGM's 92 requests.
 - **How values are written in the source**: N/A is spelled several ways (`N/A`, `n/a`, `N/a`, `NA`, `na`, `N\A`, `N.A`, `N./A`, `N/`), and one cell reads `N/S` (CPPBSD FY2025, average days to decide appeals); `<1` means less than one day; some decimals have no leading 0 (`.5`). 4 counts are negative (Labor FY2023 OIG, simple requests 21-40 and 41-60 days: -2 and -1; Treasury FY2019 Fiscal Service, complex requests 141-160 days: -1; HHS FY2025 ARPA-H, backlog last year: -2). One date is written `09-15-2025` instead of `2025-09-15` (Consumer Product Safety Commission FY2025, third oldest pending appeal).
 
 ## How the tables were checked
 - Every cell of every row against the API reports, read a second time by separate code: no differences.
-- Agency Overall rows against the agency-level table (`agency_level/FOIA_agency_FY2008-2025.csv`, from foia.gov's CSV export), all 244 columns: 469,204 cells the same, 8 different (listed above).
+- Agency Overall rows against the agency-level table (`agency_level/FOIA_agency_FY2008-2025.csv`, from foia.gov's CSV exports with a few gaps filled from the API), all 244 columns: 469,204 cells the same, 8 different (listed above).
 - FY2024 components against foia.gov's component-level CSV export (23 of the 31 data types in the master table; the other 8 were not downloaded): 36,466 cells, all the same.
 - 06 Agency Overall rows against the agency-level statute table: all 1,919 agency-years with statutes the same.
 
