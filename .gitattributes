@@ -1,0 +1,2 @@
+# Collapse FA26 data files in GitHub PR diffs so code and docs are easier to review
+fa26/dataset/**/*.csv linguist-generated=true
