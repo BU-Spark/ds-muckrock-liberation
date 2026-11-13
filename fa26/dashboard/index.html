@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOIA Annual Report Explorer · prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* MuckRock data-viz palette: steel blue scale (600 = MuckRock blue), red, gold, green, purple */
+:root{
+  --b50:#f2f7fc; --b100:#e1eef8; --b200:#c9e2f4; --b300:#a4d0ec; --b400:#78b7e2; --b500:#589bd9;
+  --b600:#4582cc; --b700:#3a6ebb; --b800:#355a98; --b900:#2f4c79; --b950:#21304a;
+  --red:#bc5046; --gold:#d4a92c; --green:#0d8e50; --purple:#a849b0;
+  --ink:#21304a; --muted:#5b6676; --line:#e1eef8; --bg:#f2f7fc;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px}
+header{background:#fff;border-bottom:3px solid var(--b600);padding:12px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header .logo{width:30px;height:30px;border-radius:7px;background:var(--b600);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px}
+header h1{font-size:21px;margin:0;font-weight:700;color:var(--b950)}
+header .sub{color:var(--muted);font-size:13px}
+header .tag{margin-left:auto;border:1.5px solid var(--b600);color:var(--b700);font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px}
+.wrap{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 60px)}
+aside{background:#fff;border-right:1px solid var(--b100);padding:18px 16px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto}
+aside label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--b800);margin:16px 0 6px}
+aside label:first-child{margin-top:0}
+select{width:100%;padding:9px 10px;border:1px solid var(--b200);border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+select:focus{outline:2px solid var(--b400)}
+select:disabled{background:var(--b50);color:#9aa3ae}
+.hint{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.35}
+nav button{width:100%;text-align:left;border:0;background:none;font:inherit;font-weight:600;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;justify-content:space-between;margin-bottom:2px}
+nav button:hover{background:var(--b50)}
+nav button.on{background:var(--b600);color:#fff}
+nav button span{font-weight:400;opacity:.8;font-size:13px}
+.fb{margin-top:18px;background:var(--b50);border:1px solid var(--b100);border-radius:10px;padding:12px 12px 6px;font-size:13px}
+.fb h3{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--b800)}
+.fb ol{margin:0;padding-left:18px}.fb li{margin-bottom:7px}
+main{padding:18px 24px 40px;min-width:0}
+.panel{background:#fff;border:1px solid var(--b100);border-radius:12px;padding:14px 18px}
+/* period */
+.tl-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.tl-head .t{font-weight:700;font-size:17px}
+.presets{display:flex;gap:6px;flex-wrap:wrap}
+.presets button{border:1px solid var(--b200);background:#fff;color:var(--b800);font:inherit;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;cursor:pointer}
+.presets button:hover,.presets button.on{background:var(--b600);border-color:var(--b600);color:#fff}
+.track{position:relative;display:flex;justify-content:space-between;margin:16px 4px 2px}
+.track .rail{position:absolute;left:10px;right:10px;top:9px;height:4px;background:var(--b100);border-radius:2px}
+.track .fill{position:absolute;top:9px;height:4px;background:var(--b600);border-radius:2px}
+.yr{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;background:none;border:0;font:inherit;padding:0;color:var(--muted);min-width:0;z-index:1}
+.yr .dot{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--b300)}
+.yr.in .dot{border-color:var(--b600);background:var(--b200)}
+.yr.end .dot{background:var(--b600);border-color:var(--b600);box-shadow:0 0 0 4px var(--b100)}
+.yr.in,.yr.end{color:var(--ink)} .yr.end{font-weight:700}
+.yr.na .dot{border-style:dashed}
+.yr span{font-size:12px}
+.yr:hover .dot{transform:scale(1.12)}
+.tl-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted);margin-top:6px}
+.ctx{margin:16px 2px 10px;font-size:14px;color:var(--muted)}
+.ctx b{color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#fff;border:1px solid var(--b100);border-radius:12px;padding:12px 14px}
+.kpi .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.kpi .v{font-size:28px;font-weight:700;margin-top:2px;color:var(--b950)}
+.kpi .d{font-size:13px;color:var(--muted)}
+.up{color:var(--red);font-weight:700}.down{color:var(--green);font-weight:700}
+.sec-title{display:flex;align-items:baseline;gap:10px;margin:22px 2px 10px;flex-wrap:wrap}
+.sec-title h2{margin:0;font-size:22px;color:var(--b950)}
+.sec-title span{color:var(--muted);font-size:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chip{border:1px solid var(--b200);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink);display:flex;gap:6px;align-items:center}
+.chip b{color:var(--b700);font-size:12px}
+.chip:hover{border-color:var(--b600)}
+.chip.on{background:var(--b600);border-color:var(--b600);color:#fff}.chip.on b{color:var(--b100)}
+.main-card{background:#fff;border:1px solid var(--b100);border-radius:12px;padding:16px 18px}
+.mc-head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.mc-head h3{margin:0;font-size:19px;color:var(--b950)}
+.mc-head .s{font-size:14px;color:var(--muted);margin-top:2px}
+.badge{background:var(--b600);color:#fff;font-weight:700;font-size:13px;border-radius:6px;padding:2px 7px;margin-right:8px}
+.mc-head select{width:auto;min-width:210px}
+.chartbox{position:relative;height:380px;margin-top:12px}
+.takeaway{margin-top:12px;background:var(--b50);border-radius:8px;padding:10px 12px;font-size:14px}
+.empty{display:flex;align-items:center;justify-content:center;height:100%;color:#9aa3ae;font-size:15px;text-align:center;padding:0 20px}
+.comps{margin-top:12px}
+.comps h3{margin:0;font-size:16px;color:var(--b950)} .comps .s{font-size:13px;color:var(--muted);margin:2px 0 6px}
+.stat-list{list-style:none;margin:6px 0 0;padding:0}
+.stat-list li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--b100);padding:9px 2px;font-size:15px}
+.stat-list li span:last-child{font-weight:700;white-space:nowrap}
+footer{font-size:12px;color:var(--muted);margin-top:24px;line-height:1.5}
+#loading{padding:40px;color:var(--muted)}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr}
+  aside{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--b100)}
+  main{padding:16px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .yr span{font-size:10px;writing-mode:vertical-rl;transform:rotate(180deg)}
+  .yr .dot{width:14px;height:14px;border-width:2px}
+  .track .rail,.track .fill{top:6px}
+  .chartbox{height:300px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">★</div>
+  <h1>FOIA Annual Report Explorer</h1>
+  <div class="sub">Prototype for MuckRock's Data Liberation Project · BU Spark! DS701 · foia.gov annual reports FY2008–2025</div>
+  <div class="tag">PROTOTYPE · FOR FEEDBACK</div>
+</header>
+<div class="wrap">
+<aside>
+  <label for="ag">1 · Agency</label>
+  <select id="ag"></select>
+  <div class="hint" id="agHint"></div>
+  <label for="cp">2 · Component</label>
+  <select id="cp"></select>
+  <div class="hint" id="cpHint"></div>
+  <label>3 · Topic (32 data types in 6 topics)</label>
+  <nav id="nav"></nav>
+</aside>
+<main>
+  <div id="loading">Loading data…</div>
+  <div id="app" hidden>
+    <div class="panel">
+      <div class="tl-head">
+        <div class="t" id="tlTitle"></div>
+        <div class="presets" id="presets"></div>
+      </div>
+      <div class="track" id="track"></div>
+      <div class="tl-foot"><span id="tlHelp">Click a start year, then an end year</span><span id="tlCov"></span></div>
+    </div>
+    <div class="ctx" id="ctx"></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="sec-title"><h2 id="secName"></h2><span id="secDesc"></span></div>
+    <div class="chips" id="chips"></div>
+    <div class="main-card">
+      <div class="mc-head">
+        <div><h3 id="mcTitle"></h3><div class="s" id="mcSub"></div></div>
+        <select id="measure" hidden></select>
+      </div>
+      <div class="chartbox" id="chartbox"><canvas id="mainChart"></canvas></div>
+      <div class="takeaway" id="takeaway"></div>
+    </div>
+    <div class="panel comps" id="compsBox" hidden>
+      <h3 id="compsTitle"></h3><div class="s" id="compsSub"></div>
+      <div style="position:relative;height:260px"><canvas id="compsChart"></canvas></div>
+    </div>
+    <footer>
+      Source: foia.gov annual reports (API and CSV exports), FY2008–2025, compiled by the BU Spark! team (component master table), served from a Supabase database.
+      Totals add up agencies; medians and days show the median across agencies. Blank or N/A values are shown as missing, never as zero.
+      "Top 10" is a placeholder list until MuckRock chooses its priority agencies. Student prototype for discussion, not an official MuckRock or DOJ product.
+    </footer>
+  </div>
+</main>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
