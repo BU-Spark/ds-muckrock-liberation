@@ -164,7 +164,7 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 - **8,139 rows**: agency totals + components, per year.
 - **244 data columns**, grouped by data type.
 - Split out into their own tables: the "Other" reasons (03, 11) and the Exemption 3 statutes (06).
-- The agency totals match the agency-level table (foia.gov CSV export).
+- The agency totals match the agency-level table (foia.gov CSV exports, with a few gaps filled from the API).
 
 ### Files
 
@@ -205,6 +205,8 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 - **Agencies reporting** = the number of Agency Overall rows that year.
 - **Agencies with components** = agencies that also have one or more component rows. All other agencies have **only** the Agency Overall row.
 - **Component rows** = rows with `Row Type = component` that year.
+- **Data types** = the files foia.gov publishes each year. Data types 24 and 25 are almost entirely blank before FY2017.
+- **Agencies added / removed** = whether foia.gov has a report for that agency that year, not whether the agency was created or closed.
 
 ### ID columns (first 8 columns of all three files)
 
@@ -213,8 +215,8 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 | `Fiscal Year` | 2008–2025 |
 | `Agency` | Agency name, spelled as in the agency-level data |
 | `Agency Abbreviation` | As on foia.gov (e.g. `DOJ`, `CSB`) |
-| `Component` | Component abbreviation in foia.gov's **current** form, the same in every year (e.g. Army = `DA`). `Agency Overall` for the agency total |
-| `Component Name` | Full component name. Use `Component` + `Component Name` together as the key, because two components can share an abbreviation |
+| `Component` | Component abbreviation in foia.gov's **current** form (e.g. Army = `DA`). Most offices keep one abbreviation in every year, but some appear under two (e.g. Interior's `OSM` became `OSMRE` in FY2020), so check `Component Name` when following one office over time. `Agency Overall` for the agency total |
+| `Component Name` | Full component name. In the master table, use `Component` + `Component Name` + `Row Type` as the key within an agency-year, because two components can share an abbreviation and a `second_entry` row repeats the abbreviation and name of its first entry |
 | `Row Type` | `agency_overall`, `component`, `second_entry`, or `no_component` (below) |
 | `Exclude From Component Sum` | `yes` = leave this row out when summing components |
 | `Exclude Reason` | Why the row is excluded |
@@ -225,7 +227,7 @@ Built from the **foia.gov API annual reports** (the data behind foia.gov), downl
 |---|---|---:|
 | `agency_overall` | Agency total, one per agency-year. For an agency without components, this is the only row | 1,923 |
 | `component` | One office inside the agency | 6,191 |
-| `second_entry` | A second entry for the same office in one table; foia.gov counts both in the total | 10 |
+| `second_entry` | A second entry in a table; foia.gov counts both in the total | 10 |
 | `no_component` | Numbers foia.gov doesn't tie to any office | 15 |
 
 **`Exclude From Component Sum`** is `yes` only for Commerce FY2025 "DOC" (Departmental Offices). That row is a copy of a total, not a real office, so adding it to the other components doubles Commerce's numbers.
@@ -263,17 +265,26 @@ ID columns + `Statute`, `Type of Information Withheld`, `Case Citation`, `Number
 - The same statute is written in many different ways (e.g. 30 variants of 26 U.S.C. § 6103), so group statute names before ranking them.
 
 ### How to aggregate correctly
-- **Use either the `agency_overall` row or the other rows, never both.** Summing all rows doubles the total (e.g. DHS FY2024 backlog: components = 141,420, Agency Overall = 141,420, all rows = 282,840).
+- **In the master table and the 06 table, use either the `agency_overall` row or the other rows, never both.** Summing all rows doubles the total (e.g. DHS FY2024 backlog: components = 141,420, Agency Overall = 141,420, all rows = 282,840). The 03/11 table has no such overlap: an agency-year has either `agency_overall` rows or other rows, not both.
 - When summing components, include `component`, `second_entry` and `no_component` rows, and **leave out rows where `Exclude From Component Sum == "yes"`**.
 - Only counts, dollars and FTE can be summed. Medians, averages, days and dates cannot.
 
 ```python
 import pandas as pd
-m = pd.read_csv("fa26/dataset/component_level/component_master_no_03_06_11.csv", dtype=str)
+m = pd.read_csv("fa26/dataset/component_level/component_master_no_03_06_11.csv", dtype=str, keep_default_na=False)
 
 overall = m[m["Row Type"] == "agency_overall"]
 parts = m[(m["Row Type"] != "agency_overall") & (m["Exclude From Component Sum"] != "yes")]
 ```
+
+### What 0, N/A and blank mean
+
+| Value | Meaning |
+|---|---|
+| `0` | In count columns, the agency reported zero. In days columns and the ten-oldest columns, it usually means there were no such cases, not 0 days (e.g. all 100 rows with an expedited median of 0 have 0 expedited requests). |
+| `N/A` | Not applicable, or nothing to calculate (e.g. 4,579 of the 4,801 rows with an N/A expedited median have 0 expedited requests). |
+| blank | Usually the component is not in that data type's table, so the whole table is blank for that row (e.g. 31 of DOJ's 32 components in the FY2025 appeals tables, because all its appeals are reported under OIP). Data types 24 and 25 are also almost entirely blank before FY2017. |
+| `<1` | Less than one day. |
 
 ### Known issues (from `component_level/README.md`)
 These problems are in foia.gov's own data. The numbers are kept as reported.
@@ -282,20 +293,21 @@ These problems are in foia.gov's own data. The numbers are kept as reported.
 - **Components that don't add up to the agency total** (13 agency-years): Veterans Affairs FY2025 (47 columns), GSA FY2016 (20), EPA FY2011 (8), Defense FY2025 (3), Commerce FY2025 (2), Agriculture, Labor and EEOC FY2025 (1 each), and USPS FY2010, 2013, 2014, 2016, 2017 (appeals pending at end of year).
 - **FY2025, data type 11:** 8 agencies report component values but have a blank Agency Overall cell: Justice 1,045, Veterans Affairs 192, EEOC 76, Labor 52, Energy 45, Defense 14, Agriculture 4, Commerce 1. Add up the components.
 - **Energy FY2025 HQ, data type 11:** the reasons add up to 49, but the total column says 45.
+- **FY2022, All agencies:** foia.gov's CSV export leaves out USAGM, so its All agencies row shows 928,261 requests received. Adding the Agency Overall rows gives 928,353, because the API includes USAGM's 92 requests.
 - **Shared abbreviations:** USPS FY2019–2024 has two `PS` components (`HQ Postal Service` and `USPS Field Office`).
 - **Some components are named oddly on foia.gov** and are kept as they are (e.g. EPA FY2013 and FY2015 `EPA OLD DO NOT USE`).
 - **Value formats:**
-  - N/A is spelled several ways (`N/A`, `n/a`, `N/a`, `NA`, `N\A`, `N.A`).
+  - N/A is spelled several ways (`N/A`, `n/a`, `N/a`, `NA`, `na`, `N\A`, `N.A`, `N./A`, `N/`). One cell reads `N/S` (CPPBSD FY2025, average days to decide appeals).
   - `<1` means less than one day.
   - Some decimals have no leading 0 (`.5`).
-  - 4 counts are negative: Labor FY2023 OIG; Treasury FY2019 Fiscal Service; HHS FY2025 ARPA-H.
+  - 4 counts are negative: Labor FY2023 OIG (2); Treasury FY2019 Fiscal Service; HHS FY2025 ARPA-H.
   - One date is written `09-15-2025` instead of `2025-09-15` (CPSC FY2025, third oldest pending appeal).
 
 ### How the tables were checked
 - Every cell was checked against the API reports a second time, by separate code: no differences.
-- The Agency Overall rows were compared with the agency-level table across all 244 columns: 469,204 cells match. 8 cells differ, where foia.gov's CSV export is blank but the API has a value: SBA FY2021 fee waiver median/average days; CEQ FY2023 pending requests median/average days.
+- The Agency Overall rows were compared with the agency-level table across all 244 columns: 469,204 cells match. 8 cells differ, where foia.gov's CSV export is blank but the API has an entry: SBA FY2021 fee waiver median/average days; CEQ FY2023 pending requests median/average days.
 - FY2024 components were compared with foia.gov's component-level CSV export (23 data types): 36,466 cells, all match.
-- The 06 Agency Overall rows were compared with the agency-level statute files: all 1,919 agency-years with statutes match.
+- The 06 Agency Overall rows were compared with the agency-level statute table: all 1,919 agency-years with statutes match.
 
 ---
 
