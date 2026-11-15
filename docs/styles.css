@@ -1,0 +1,85 @@
+/* value-box numbers written as text (formatted with commas or %) get the same size as plain numbers */
+div.value-box-area span.vb { font-size: 2.4rem; line-height: 1.2; font-family: var(--bs-body-font-family); }
+/* multi-select on Q1: keep 4 rows visible instead of being squeezed to one line */
+select[multiple] { min-height: 5.6em; flex: none; }
+/* "How the comparison is made" cards: slightly smaller text so the whole note fits */
+.how .card-body { font-size: 0.85rem; }
+.how .card-body ul { margin-bottom: 0.4rem; }
+/* v2 (one page, sidebar): question header, two charts side by side, notes */
+.qhead { font-size: 1.05rem; line-height: 1.35; }
+.qhead .qnum { font-weight: 600; margin-right: 0.4em; }
+.qhead .sel { color: #6c6b66; font-size: 0.85rem; margin-top: 0.2rem; }
+.pair { display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start; }
+.pair figure { margin: 0; }
+.pair h6 { margin: 0 0 6px; font-weight: 600; font-size: 0.92rem; }
+.side-note { font-size: 0.78rem; color: #6c6b66; margin-top: 0.5rem; }
+div.how { font-size: 0.9rem; max-width: 900px; }
+/* notes tab: start at the top instead of vertically centred */
+.cell-output-display:has(div.how), .card-body:has(div.how) { justify-content: flex-start !important; }
+.html-fill-container:has(> .observablehq > div.how) { justify-content: flex-start !important; }
+.observablehq:has(> div.how) { margin: 0 !important; flex: 0 0 auto !important; }
+/* hidden OJS source blocks still take space in a card; remove them */
+.card-body > .code-copy-outer-scaffold { display: none !important; }
+/* MuckRock blue for the title bar */
+.navbar { background-color: #4582CC !important; }
+/* question list: click to choose, click again to clear */
+.qpick { display: flex; flex-direction: column; gap: 2px; margin-bottom: 0.6rem; }
+.qpick-title { font-size: 0.8rem; font-weight: 600; color: #6c6b66; margin: 0.4rem 0 0.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.qbtn { display: flex; gap: 0.5em; align-items: baseline; text-align: left; border: 0; border-left: 3px solid transparent;
+        background: transparent; padding: 0.35rem 0.5rem; border-radius: 4px; font-size: 0.9rem; color: inherit; cursor: pointer; }
+.qbtn:hover { background: #eef3fa; }
+.qbtn.on { background: #e3edf9; border-left-color: #4582CC; font-weight: 600; }
+.qbtn .qno { min-width: 1em; color: #4582CC; font-weight: 600; }
+/* nothing chosen: blank panel (a start image can go in --start-image later) */
+body.noq .card .nav-tabs { visibility: hidden; }
+/* start page: the MuckRock logotype as a faint watermark */
+.empty-state { width: 100%; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.empty-state .watermark { width: min(55%, 620px); opacity: 0.09; user-select: none; pointer-events: none; }
+.empty-state .wm-text { margin-top: 1.2rem; color: #333C47; opacity: 0.35; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+.chart-note { padding: 1.5rem 1rem; color: #6c6b66; max-width: 420px; }
+.qbtn, .qbtn:hover, .qbtn:focus, .qbtn:active { color: #212529 !important; outline: none; }
+/* component list before an agency is chosen */
+select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed; }
+/* Tables tab: three views */
+.tview { display: inline-flex; border: 1px solid #c9d6ea; border-radius: 6px; overflow: hidden; margin-bottom: 0.8rem; }
+.tvbtn { border: 0; background: #fff; padding: 0.3rem 0.9rem; font-size: 0.88rem; color: #212529; cursor: pointer; }
+.tvbtn + .tvbtn { border-left: 1px solid #c9d6ea; }
+.tvbtn.on { background: #4582CC; color: #fff; }
+.tcap { margin-bottom: 1.2rem; }
+.tcap h6 { font-weight: 600; font-size: 0.92rem; margin: 0 0 0.4rem; }
+/* row checkboxes of Inputs.table: selecting rows does nothing here, so hide that column
+   (the bundled Inputs version ignores select: false) */
+.tab-pane table th:has(> input[type=checkbox]), .tab-pane table td:has(> input[type=checkbox]) { display: none; }
+/* Compare with: name box and removable chips */
+.cmp { margin: 0.2rem 0 0.8rem; }
+.cmp-label { font-size: 0.9rem; margin-bottom: 0.25rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; background: #e3edf9; border-radius: 10px; padding: 1px 4px 1px 8px; font-size: 0.78rem; }
+.chip button { border: 0; background: transparent; color: #4582CC; font-weight: 700; cursor: pointer; padding: 0 2px; }
+/* overview: tiles and small charts */
+.tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
+.tile { border: 1px solid #e3e7ee; border-radius: 6px; padding: 8px 10px; }
+.tlabel { font-size: 0.75rem; color: #6c6b66; line-height: 1.2; min-height: 2.2em; }
+.tval { font-size: 1.35rem; font-weight: 600; }
+.tchg { font-size: 0.75rem; color: #6c6b66; }
+.grid3 { display: grid; grid-template-columns: repeat(3, auto); gap: 6px 24px; justify-content: start; }
+.qhead .warn { color: #a15c00; }
+/* nothing chosen / overview: no empty tab strip above the content */
+body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
+.qhead .glance { margin-top: 0.3rem; font-size: 0.9rem; color: #1f3d66; background: #eef3fa; border-radius: 4px; padding: 0.15rem 0.5rem; display: inline-block; }
+/* fiscal years: [from] to [to] on one row */
+.years { margin: 0.2rem 0 0.8rem; }
+.yrow { display: flex; align-items: center; gap: 6px; }
+.yrow select { width: auto; flex: 1; }
+/* narrower windows: tiles and small charts wrap instead of squeezing */
+@media (max-width: 1200px) {
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid3 { grid-template-columns: repeat(2, auto); }
+}
+/* Compare with: search results under the box */
+.cmp-list { border: 1px solid #c9d6ea; border-radius: 4px; margin-top: 2px; max-height: 260px; overflow-y: auto; background: #fff; }
+.cmp-item { padding: 4px 8px; font-size: 0.8rem; line-height: 1.25; cursor: pointer; border-bottom: 1px solid #f0f2f5; }
+.cmp-item.on, .cmp-item:hover { background: #e3edf9; }
+.cmp-empty { padding: 4px 8px; font-size: 0.8rem; color: #6c6b66; }
+/* Compare with: agency, then component */
+.cmp select { margin-bottom: 4px; }

@@ -1,0 +1,245 @@
+table,csv_col,xml_col,equal,pairs,rate
+foia-backlogs-of-foia-requests-and-administrative-appeals,Number of Backlogged Requests as of End of Fiscal Year,BackloggedRequestQuantity,1911,1911,1.0
+foia-backlogs-of-foia-requests-and-administrative-appeals,Number of Backlogged Appeals as of End of Fiscal Year,BackloggedAppealQuantity,1904,1911,0.9963
+foia-comparison-of-backlogged-administrative-appeals-from-previous-year-and-current-year-annual-report,Number of Backlogged Appeals as of End of the Fiscal Year from Previous Annual Report,BacklogLastYearQuantity,1696,1696,1.0
+foia-comparison-of-backlogged-administrative-appeals-from-previous-year-and-current-year-annual-report,Number of Backlogged Appeals as of End of the Fiscal Year from Current Annual Report,BacklogCurrentYearQuantity,1696,1696,1.0
+foia-comparison-of-backlogged-requests-from-previous-year-and-current-year-annual-report,Number of Backlogged Requests as of End of the Fiscal Year from Previous Annual Report,BacklogLastYearQuantity,1910,1911,0.9995
+foia-comparison-of-backlogged-requests-from-previous-year-and-current-year-annual-report,Number of Backlogged Requests as of End of the Fiscal Year from Current Annual Report,BacklogCurrentYearQuantity,1911,1911,1.0
+foia-comparison-of-numbers-of-administrative-appeals-from-previous-year-and-current-year-annual-report,Number Received During Fiscal Year from Last Year's Annual Report,ItemsReceivedLastYearQuantity,1798,1801,0.9983
+foia-comparison-of-numbers-of-administrative-appeals-from-previous-year-and-current-year-annual-report,Number Received During Fiscal Year from Current Annual Report,ItemsReceivedCurrentYearQuantity,1798,1801,0.9983
+foia-comparison-of-numbers-of-administrative-appeals-from-previous-year-and-current-year-annual-report,Number Processed During Fiscal Year from Last Year's Annual Report,ItemsProcessedLastYearQuantity,1798,1801,0.9983
+foia-comparison-of-numbers-of-administrative-appeals-from-previous-year-and-current-year-annual-report,Number Processed During Fiscal Year from Current Annual Report,ItemsProcessedCurrentYearQuantity,1798,1801,0.9983
+foia-comparison-of-numbers-of-requests-from-previous-year-and-current-year-annual-report,Number Received During Fiscal Year from Last Year's Annual Report,ItemsReceivedLastYearQuantity,1908,1910,0.999
+foia-comparison-of-numbers-of-requests-from-previous-year-and-current-year-annual-report,Number Received During Fiscal Year from Current Annual Report,ItemsReceivedCurrentYearQuantity,1908,1910,0.999
+foia-comparison-of-numbers-of-requests-from-previous-year-and-current-year-annual-report,Number Processed During Fiscal Year from Last Year's Annual Report,ItemsProcessedLastYearQuantity,1908,1910,0.999
+foia-comparison-of-numbers-of-requests-from-previous-year-and-current-year-annual-report,Number Processed During Fiscal Year from Current Annual Report,ItemsProcessedCurrentYearQuantity,1908,1910,0.999
+foia-consultations-on-foia-requests-received-processed-and-pending-consultations,Number of Consultations Received from Other Agencies that were Pending at the Agency as of Start of the Fiscal Year,ProcessingStatisticsPendingAtStartQuantity,1911,1911,1.0
+foia-consultations-on-foia-requests-received-processed-and-pending-consultations,Number of Consultations Received from Other Agencies During the Fiscal Year,ProcessingStatisticsReceivedQuantity,1911,1911,1.0
+foia-consultations-on-foia-requests-received-processed-and-pending-consultations,Number of Consultations Received from Other Agencies that were Processed by the Agency During the Fiscal Year,ProcessingStatisticsProcessedQuantity,1911,1911,1.0
+foia-consultations-on-foia-requests-received-processed-and-pending-consultations,Number of Consultations Received from Other Agencies that were Pending at the Agency as of End of the Fiscal Year,ProcessingStatisticsPendingAtEndQuantity,1911,1911,1.0
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date,OldItem10.OldItemReceiptDate,206,1888,0.1091
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,10th Oldest Number of Days Pending,OldItem10.OldItemPendingDaysQuantity,208,1888,0.1102
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#2,OldItem9.OldItemReceiptDate,212,1888,0.1123
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,9th Oldest Number of Days Pending,OldItem9.OldItemPendingDaysQuantity,214,1888,0.1133
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#3,OldItem8.OldItemReceiptDate,220,1888,0.1165
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,8th Oldest Number of Days Pending,OldItem8.OldItemPendingDaysQuantity,222,1888,0.1176
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#4,OldItem7.OldItemReceiptDate,236,1888,0.125
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,7th Oldest Number of Days Pending,OldItem7.OldItemPendingDaysQuantity,238,1888,0.1261
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#5,OldItem6.OldItemReceiptDate,248,1888,0.1314
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,6th Oldest Number of Days Pending,OldItem6.OldItemPendingDaysQuantity,249,1888,0.1319
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#6,OldItem5.OldItemReceiptDate,268,1888,0.1419
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,5th Oldest Number of Days Pending,OldItem5.OldItemPendingDaysQuantity,270,1888,0.143
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#7,OldItem4.OldItemReceiptDate,287,1888,0.152
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,4th Oldest Number of Days Pending,OldItem4.OldItemPendingDaysQuantity,289,1888,0.1531
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#8,OldItem3.OldItemReceiptDate,324,1888,0.1716
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,3rd Oldest Number of Days Pending,OldItem3.OldItemPendingDaysQuantity,326,1888,0.1727
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#9,OldItem2.OldItemReceiptDate,367,1888,0.1944
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,2nd Oldest Number of Days Pending,OldItem2.OldItemPendingDaysQuantity,370,1888,0.196
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Date#10,OldItem1.OldItemReceiptDate,492,1888,0.2606
+foia-consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,Oldest Number of Days Pending,OldItem1.OldItemPendingDaysQuantity,496,1888,0.2627
+foia-disposition-of-administrative-appeals-all-processed-appeals,Number Affirmed on Appeal,AppealDispositionAffirmedQuantity,1911,1911,1.0
+foia-disposition-of-administrative-appeals-all-processed-appeals,Number Partially Affirmed & Partially Reversed/Remanded on Appeal,AppealDispositionPartialQuantity,1911,1911,1.0
+foia-disposition-of-administrative-appeals-all-processed-appeals,Number Completely Reversed/Remanded on Appeal,AppealDispositionReversedQuantity,1911,1911,1.0
+foia-disposition-of-administrative-appeals-all-processed-appeals,Number of Appeals Closed for Other Reasons,AppealDispositionOtherQuantity,1911,1911,1.0
+foia-disposition-of-administrative-appeals-all-processed-appeals,Total,AppealDispositionTotalQuantity,1911,1911,1.0
+foia-disposition-of-foia-requests-all-processed-requests,Number of Full Grants,RequestDispositionFullGrantQuantity,1911,1911,1.0
+foia-disposition-of-foia-requests-all-processed-requests,Number of Partial Grants/Partial Denials,RequestDispositionPartialGrantQuantity,1911,1911,1.0
+foia-disposition-of-foia-requests-all-processed-requests,Number of Full Denials Based on Exemptions,RequestDispositionFullExemptionDenialQuantity,1911,1911,1.0
+foia-disposition-of-foia-requests-all-processed-requests,No Records,NonExemptionDenialQuantity[NoRecords],1766,1911,0.9241
+foia-disposition-of-foia-requests-all-processed-requests,All Records Referred to Another Component or Agency,NonExemptionDenialQuantity[Referred],946,1911,0.495
+foia-disposition-of-foia-requests-all-processed-requests,Request Withdrawn,NonExemptionDenialQuantity[Withdrawn],1317,1911,0.6892
+foia-disposition-of-foia-requests-all-processed-requests,Fee-Related Reason,NonExemptionDenialQuantity[FeeRelated],780,1911,0.4082
+foia-disposition-of-foia-requests-all-processed-requests,Records Not Reasonably Described,NonExemptionDenialQuantity[NotDescribed],1063,1911,0.5563
+foia-disposition-of-foia-requests-all-processed-requests,Improper FOIA Request for Other Reason,NonExemptionDenialQuantity[ImproperRequest],944,1911,0.494
+foia-disposition-of-foia-requests-all-processed-requests,Not Agency Record,NonExemptionDenialQuantity[NotAgency],929,1911,0.4861
+foia-disposition-of-foia-requests-all-processed-requests,Duplicate Request,NonExemptionDenialQuantity[Duplicate],859,1911,0.4495
+foia-disposition-of-foia-requests-all-processed-requests,Other*,NonExemptionDenialQuantity[Other],623,1911,0.326
+foia-disposition-of-foia-requests-all-processed-requests,Total,RequestDispositionTotalQuantity,1426,1911,0.7462
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 1,AppliedExemptionQuantity[Ex. 1],336,1881,0.1786
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 2,AppliedExemptionQuantity[Ex. 2],806,1881,0.4285
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 3,AppliedExemptionQuantity[Ex. 3],948,1881,0.504
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 4,AppliedExemptionQuantity[Ex. 4],1219,1881,0.6481
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 5,AppliedExemptionQuantity[Ex. 5],1460,1881,0.7762
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 6,AppliedExemptionQuantity[Ex. 6],1526,1881,0.8113
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 7(A),AppliedExemptionQuantity[Ex. 7(A)],865,1881,0.4599
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 7(B),AppliedExemptionQuantity[Ex. 7(B)],364,1881,0.1935
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 7(C),AppliedExemptionQuantity[Ex. 7(C)],963,1881,0.512
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 7(D),AppliedExemptionQuantity[Ex. 7(D)],636,1881,0.3381
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 7(E),AppliedExemptionQuantity[Ex. 7(E)],812,1881,0.4317
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 7(F),AppliedExemptionQuantity[Ex. 7(F)],502,1881,0.2669
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 8,AppliedExemptionQuantity[Ex. 8],234,1881,0.1244
+foia-disposition-of-foia-requests-number-of-times-exemptions-applied,Ex. 9,AppliedExemptionQuantity[Ex. 9],124,1881,0.0659
+foia-disposition-of-foia-requests-other-reasons,Total,ComponentOtherDenialReasonQuantity,1911,1911,1.0
+foia-foia-costs-and-fees-collected-for-processing-requests,Processing Costs,ProcessingCostAmount,1911,1911,1.0
+foia-foia-costs-and-fees-collected-for-processing-requests,Litigation-Related Costs,LitigationCostAmount,1911,1911,1.0
+foia-foia-costs-and-fees-collected-for-processing-requests,Total Costs,TotalCostAmount,1911,1911,1.0
+foia-foia-costs-and-fees-collected-for-processing-requests,Total Amount of Fees Collected,FeesCollectedAmount,1911,1911,1.0
+foia-foia-costs-and-fees-collected-for-processing-requests,Percentage of Total Costs,FeesCollectedCostPercent,1900,1911,0.9942
+foia-foia-personnel,"Number of ""Full-Time FOIA Employees""",FullTimeEmployeeQuantity,1910,1911,0.9995
+foia-foia-personnel,"Number of ""Equivalent Full-Time FOIA Employees""",EquivalentFullTimeEmployeeQuantity,1910,1911,0.9995
+foia-foia-personnel,"Total Number of ""Full-Time FOIA Staff""",TotalFullTimeStaffQuantity,1911,1911,1.0
+foia-number-of-subsection-a-postings,Number of Records Posted by the FOIA Office,PostedbyFOIAQuantity,949,1342,0.7072
+foia-number-of-subsection-a-postings,Number of Records Posted by Program Offices,PostedbyProgramQuantity,949,1342,0.7072
+foia-number-of-times-subsection-c-used,Number of Times Subsection Used,TimesUsedQuantity,1068,1342,0.7958
+foia-pending-requests-all-pending-perfected-requests,Simple - Number Pending,SimplePendingRequestStatistics.PendingRequestQuantity,1909,1909,1.0
+foia-pending-requests-all-pending-perfected-requests,Simple - Median Number of Days,SimplePendingRequestStatistics.PendingRequestMedianDaysValue,1321,1909,0.692
+foia-pending-requests-all-pending-perfected-requests,Simple - Average Number of Days,SimplePendingRequestStatistics.PendingRequestAverageDaysValue,1331,1909,0.6972
+foia-pending-requests-all-pending-perfected-requests,Complex - Number Pending,ComplexPendingRequestStatistics.PendingRequestQuantity,1906,1909,0.9984
+foia-pending-requests-all-pending-perfected-requests,Complex - Median Number of Days,ComplexPendingRequestStatistics.PendingRequestMedianDaysValue,1131,1909,0.5925
+foia-pending-requests-all-pending-perfected-requests,Complex - Average Number of Days,ComplexPendingRequestStatistics.PendingRequestAverageDaysValue,1133,1909,0.5935
+foia-pending-requests-all-pending-perfected-requests,Expedited Processing - Number Pending,ExpeditedPendingRequestStatistics.PendingRequestQuantity,1905,1909,0.9979
+foia-pending-requests-all-pending-perfected-requests,Expedited Processing - Median Number of Days,ExpeditedPendingRequestStatistics.PendingRequestMedianDaysValue,518,1909,0.2713
+foia-pending-requests-all-pending-perfected-requests,Expedited Processing - Average Number of Days,ExpeditedPendingRequestStatistics.PendingRequestAverageDaysValue,530,1909,0.2776
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date,OldItem10.OldItemReceiptDate,1095,1899,0.5766
+foia-pending-requests-ten-oldest-pending-perfected-requests,10th Oldest Number of Days Pending,OldItem10.OldItemPendingDaysQuantity,1094,1899,0.5761
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#2,OldItem9.OldItemReceiptDate,1114,1899,0.5866
+foia-pending-requests-ten-oldest-pending-perfected-requests,9th Oldest Number of Days Pending,OldItem9.OldItemPendingDaysQuantity,1111,1899,0.585
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#3,OldItem8.OldItemReceiptDate,1133,1899,0.5966
+foia-pending-requests-ten-oldest-pending-perfected-requests,8th Oldest Number of Days Pending,OldItem8.OldItemPendingDaysQuantity,1133,1899,0.5966
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#4,OldItem7.OldItemReceiptDate,1155,1899,0.6082
+foia-pending-requests-ten-oldest-pending-perfected-requests,7th Oldest Number of Days Pending,OldItem7.OldItemPendingDaysQuantity,1153,1899,0.6072
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#5,OldItem6.OldItemReceiptDate,1180,1899,0.6214
+foia-pending-requests-ten-oldest-pending-perfected-requests,6th Oldest Number of Days Pending,OldItem6.OldItemPendingDaysQuantity,1180,1899,0.6214
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#6,OldItem5.OldItemReceiptDate,1223,1899,0.644
+foia-pending-requests-ten-oldest-pending-perfected-requests,5th Oldest Number of Days Pending,OldItem5.OldItemPendingDaysQuantity,1220,1899,0.6424
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#7,OldItem4.OldItemReceiptDate,1262,1899,0.6646
+foia-pending-requests-ten-oldest-pending-perfected-requests,4th Oldest Number of Days Pending,OldItem4.OldItemPendingDaysQuantity,1258,1899,0.6625
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#8,OldItem3.OldItemReceiptDate,1321,1899,0.6956
+foia-pending-requests-ten-oldest-pending-perfected-requests,3rd Oldest Number of Days Pending,OldItem3.OldItemPendingDaysQuantity,1318,1899,0.694
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#9,OldItem2.OldItemReceiptDate,1389,1899,0.7314
+foia-pending-requests-ten-oldest-pending-perfected-requests,2nd Oldest Number of Days Pending,OldItem2.OldItemPendingDaysQuantity,1387,1899,0.7304
+foia-pending-requests-ten-oldest-pending-perfected-requests,Date#10,OldItem1.OldItemReceiptDate,1504,1899,0.792
+foia-pending-requests-ten-oldest-pending-perfected-requests,Oldest Number of Days Pending,OldItem1.OldItemPendingDaysQuantity,1500,1899,0.7899
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Simple - Median Number of Days,SimpleResponseTime.ResponseTimeMedianDaysValue,1826,1911,0.9555
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Simple - Average Number of Days,SimpleResponseTime.ResponseTimeAverageDaysValue,1827,1911,0.956
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Simple - Lowest Number of Days,SimpleResponseTime.ResponseTimeLowestDaysValue,1770,1911,0.9262
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Simple - Highest Number of Days,SimpleResponseTime.ResponseTimeHighestDaysValue,1827,1911,0.956
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Complex - Median Number of Days,ComplexResponseTime.ResponseTimeMedianDaysValue,1259,1911,0.6588
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Complex - Average Number of Days,ComplexResponseTime.ResponseTimeAverageDaysValue,1265,1911,0.662
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Complex - Lowest Number of Days,ComplexResponseTime.ResponseTimeLowestDaysValue,1234,1911,0.6457
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Complex - Highest Number of Days,ComplexResponseTime.ResponseTimeHighestDaysValue,1258,1911,0.6583
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Expedited Processing - Median Number of Days,ExpeditedResponseTime.ResponseTimeMedianDaysValue,875,1911,0.4579
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Expedited Processing - Average Number of Days,ExpeditedResponseTime.ResponseTimeAverageDaysValue,883,1911,0.4621
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Expedited Processing - Lowest Number of Days,ExpeditedResponseTime.ResponseTimeLowestDaysValue,862,1911,0.4511
+foia-processed-requests-response-time-for-all-processed-perfected-requests,Expedited Processing - Highest Number of Days,ExpeditedResponseTime.ResponseTimeHighestDaysValue,870,1911,0.4553
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Simple - Median Number of Days,SimpleResponseTime.ResponseTimeMedianDaysValue,1797,1911,0.9403
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Simple - Average Number of Days,SimpleResponseTime.ResponseTimeAverageDaysValue,1784,1911,0.9335
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Simple - Lowest Number of Days,SimpleResponseTime.ResponseTimeLowestDaysValue,1744,1911,0.9126
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Simple - Highest Number of Days,SimpleResponseTime.ResponseTimeHighestDaysValue,1796,1911,0.9398
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Complex - Median Number of Days,ComplexResponseTime.ResponseTimeMedianDaysValue,1241,1911,0.6494
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Complex - Average Number of Days,ComplexResponseTime.ResponseTimeAverageDaysValue,1239,1911,0.6484
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Complex - Lowest Number of Days,ComplexResponseTime.ResponseTimeLowestDaysValue,1220,1911,0.6384
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Complex - Highest Number of Days,ComplexResponseTime.ResponseTimeHighestDaysValue,1237,1911,0.6473
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Expedited Processing - Median Number of Days,ExpeditedResponseTime.ResponseTimeMedianDaysValue,784,1911,0.4103
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Expedited Processing - Average Number of Days,ExpeditedResponseTime.ResponseTimeAverageDaysValue,792,1911,0.4144
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Expedited Processing - Lowest Number of Days,ExpeditedResponseTime.ResponseTimeLowestDaysValue,760,1911,0.3977
+foia-processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,Expedited Processing - Highest Number of Days,ExpeditedResponseTime.ResponseTimeHighestDaysValue,772,1911,0.404
+foia-processed-requests-response-time-in-day-increments-complex-requests,<1-20 Days,TimeIncrementProcessedQuantity[1-20],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,21-40 Days,TimeIncrementProcessedQuantity[21-40],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,41-60 Days,TimeIncrementProcessedQuantity[41-60],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,61-80 Days,TimeIncrementProcessedQuantity[61-80],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,81-100 Days,TimeIncrementProcessedQuantity[81-100],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,101-120 Days,TimeIncrementProcessedQuantity[101-120],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,121-140 Days,TimeIncrementProcessedQuantity[121-140],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,141-160 Days,TimeIncrementProcessedQuantity[141-160],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,161-180 Days,TimeIncrementProcessedQuantity[161-180],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,181-200 Days,TimeIncrementProcessedQuantity[181-200],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,201-300 Days,TimeIncrementProcessedQuantity[201-300],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,301-400 Days,TimeIncrementProcessedQuantity[301-400],1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-complex-requests,401+ Days,TimeIncrementProcessedQuantity[401+],1906,1910,0.9979
+foia-processed-requests-response-time-in-day-increments-complex-requests,Total,TimeIncrementTotalQuantity,1910,1910,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,<1-20 Days,TimeIncrementProcessedQuantity[1-20],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,21-40 Days,TimeIncrementProcessedQuantity[21-40],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,41-60 Days,TimeIncrementProcessedQuantity[41-60],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,61-80 Days,TimeIncrementProcessedQuantity[61-80],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,81-100 Days,TimeIncrementProcessedQuantity[81-100],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,101-120 Days,TimeIncrementProcessedQuantity[101-120],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,121-140 Days,TimeIncrementProcessedQuantity[121-140],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,141-160 Days,TimeIncrementProcessedQuantity[141-160],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,161-180 Days,TimeIncrementProcessedQuantity[161-180],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,181-200 Days,TimeIncrementProcessedQuantity[181-200],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,201-300 Days,TimeIncrementProcessedQuantity[201-300],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,301-400 Days,TimeIncrementProcessedQuantity[301-400],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,401+ Days,TimeIncrementProcessedQuantity[401+],1909,1911,0.999
+foia-processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,Total,TimeIncrementTotalQuantity,1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,<1-20 Days,TimeIncrementProcessedQuantity[1-20],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,21-40 Days,TimeIncrementProcessedQuantity[21-40],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,41-60 Days,TimeIncrementProcessedQuantity[41-60],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,61-80 Days,TimeIncrementProcessedQuantity[61-80],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,81-100 Days,TimeIncrementProcessedQuantity[81-100],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,101-120 Days,TimeIncrementProcessedQuantity[101-120],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,121-140 Days,TimeIncrementProcessedQuantity[121-140],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,141-160 Days,TimeIncrementProcessedQuantity[141-160],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,161-180 Days,TimeIncrementProcessedQuantity[161-180],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,181-200 Days,TimeIncrementProcessedQuantity[181-200],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,201-300 Days,TimeIncrementProcessedQuantity[201-300],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,301-400 Days,TimeIncrementProcessedQuantity[301-400],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,401+ Days,TimeIncrementProcessedQuantity[401+],1911,1911,1.0
+foia-processed-requests-response-time-in-day-increments-simple-requests,Total,TimeIncrementTotalQuantity,1911,1911,1.0
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 1,AppliedExemptionQuantity[Ex. 1],151,1907,0.0792
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 2,AppliedExemptionQuantity[Ex. 2],271,1907,0.1421
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 3,AppliedExemptionQuantity[Ex. 3],473,1907,0.248
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 4,AppliedExemptionQuantity[Ex. 4],632,1907,0.3314
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 5,AppliedExemptionQuantity[Ex. 5],912,1907,0.4782
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 6,AppliedExemptionQuantity[Ex. 6],889,1907,0.4662
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 7(A),AppliedExemptionQuantity[Ex. 7(A)],454,1907,0.2381
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 7(B),AppliedExemptionQuantity[Ex. 7(B)],71,1907,0.0372
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 7(C),AppliedExemptionQuantity[Ex. 7(C)],548,1907,0.2874
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 7(D),AppliedExemptionQuantity[Ex. 7(D)],253,1907,0.1327
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 7(E),AppliedExemptionQuantity[Ex. 7(E)],359,1907,0.1883
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 7(F),AppliedExemptionQuantity[Ex. 7(F)],181,1907,0.0949
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 8,AppliedExemptionQuantity[Ex. 8],118,1907,0.0619
+foia-reasons-for-denial-on-appeal-number-of-times-exemptions-applied,Ex. 9,AppliedExemptionQuantity[Ex. 9],8,1907,0.0042
+foia-reasons-for-denial-on-appeal-other-reasons,Total,ComponentOtherDenialReasonQuantity,1661,1707,0.9731
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,No Records,NonExemptionDenialQuantity[NoRecords],627,1707,0.3673
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Records Referred at Initial Request Level,NonExemptionDenialQuantity[Referred],217,1707,0.1271
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Request Withdrawn,NonExemptionDenialQuantity[Withdrawn],470,1707,0.2753
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Fee-Related Reason,NonExemptionDenialQuantity[FeeRelated],299,1707,0.1752
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Records Not Reasonably Described,NonExemptionDenialQuantity[NotDescribed],215,1707,0.126
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Improper Request for Other Reason,NonExemptionDenialQuantity[ImproperRequest],365,1707,0.2138
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Not Agency Record,NonExemptionDenialQuantity[NotAgency],228,1707,0.1336
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Duplicate Request or Appeal,NonExemptionDenialQuantity[Duplicate],283,1707,0.1658
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Request in Litigation,NonExemptionDenialQuantity[InLitigation],221,1707,0.1295
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Appeal Based Solely on Denial of Request for Expedited Processing,NonExemptionDenialQuantity[ExpeditedDenial],231,1707,0.1353
+foia-reasons-for-denial-on-appeal-reasons-other-than-exemptions,Other*,NonExemptionDenialQuantity[Other],429,1707,0.2513
+foia-received-processed-and-pending-administrative-appeals,Number of Appeals Pending as of Start of Fiscal Year,ProcessingStatisticsPendingAtStartQuantity,1911,1911,1.0
+foia-received-processed-and-pending-administrative-appeals,Number of Appeals Received in Fiscal Year,ProcessingStatisticsReceivedQuantity,1911,1911,1.0
+foia-received-processed-and-pending-administrative-appeals,Number of Appeals Processed in Fiscal Year,ProcessingStatisticsProcessedQuantity,1911,1911,1.0
+foia-received-processed-and-pending-administrative-appeals,Number of Appeals Pending as of End of Fiscal Year,ProcessingStatisticsPendingAtEndQuantity,1911,1911,1.0
+foia-received-processed-and-pending-foia-requests,Number of Requests Pending as of Start of Fiscal Year,ProcessingStatisticsPendingAtStartQuantity,1911,1911,1.0
+foia-received-processed-and-pending-foia-requests,Number of Requests Received in Fiscal Year,ProcessingStatisticsReceivedQuantity,1911,1911,1.0
+foia-received-processed-and-pending-foia-requests,Number of Requests Processed in Fiscal Year,ProcessingStatisticsProcessedQuantity,1911,1911,1.0
+foia-received-processed-and-pending-foia-requests,Number of Requests Pending as of End of Fiscal Year,ProcessingStatisticsPendingAtEndQuantity,1911,1911,1.0
+foia-requests-for-expedited-processing,Number Granted,RequestGrantedQuantity,1847,1881,0.9819
+foia-requests-for-expedited-processing,Number Denied,RequestDeniedQuantity,1847,1881,0.9819
+foia-requests-for-expedited-processing,Median Number of Days to Adjudicate,AdjudicationMedianDaysValue,1534,1881,0.8155
+foia-requests-for-expedited-processing,Average Number of Days to Adjudicate,AdjudicationAverageDaysValue,1533,1881,0.815
+foia-requests-for-expedited-processing,Number Adjudicated Within Ten Calendar Days,AdjudicationWithinTenDaysQuantity,1839,1881,0.9777
+foia-requests-for-fee-waiver,Number Granted,RequestGrantedQuantity,1911,1911,1.0
+foia-requests-for-fee-waiver,Number Denied,RequestDeniedQuantity,1911,1911,1.0
+foia-requests-for-fee-waiver,Median Number of Days to Adjudicate,AdjudicationMedianDaysValue,1045,1911,0.5468
+foia-requests-for-fee-waiver,Average Number of Days to Adjudicate,AdjudicationAverageDaysValue,1088,1911,0.5693
+foia-response-time-for-administrative-appeals,Median Number of Days,ResponseTimeMedianDaysValue,1238,1826,0.678
+foia-response-time-for-administrative-appeals,Average Number of Days,ResponseTimeAverageDaysValue,1245,1826,0.6818
+foia-response-time-for-administrative-appeals,Lowest Number of Days,ResponseTimeLowestDaysValue,1199,1826,0.6566
+foia-response-time-for-administrative-appeals,Highest Number of Days,ResponseTimeHighestDaysValue,1223,1826,0.6698
+foia-ten-oldest-administrative-appeals,Date,OldItem10.OldItemReceiptDate,417,1890,0.2206
+foia-ten-oldest-administrative-appeals,10th Oldest Number of Days Pending,OldItem10.OldItemPendingDaysQuantity,420,1890,0.2222
+foia-ten-oldest-administrative-appeals,Date#2,OldItem9.OldItemReceiptDate,431,1890,0.228
+foia-ten-oldest-administrative-appeals,9th Oldest Number of Days Pending,OldItem9.OldItemPendingDaysQuantity,432,1890,0.2286
+foia-ten-oldest-administrative-appeals,Date#3,OldItem8.OldItemReceiptDate,443,1890,0.2344
+foia-ten-oldest-administrative-appeals,8th Oldest Number of Days Pending,OldItem8.OldItemPendingDaysQuantity,445,1890,0.2354
+foia-ten-oldest-administrative-appeals,Date#4,OldItem7.OldItemReceiptDate,455,1890,0.2407
+foia-ten-oldest-administrative-appeals,7th Oldest Number of Days Pending,OldItem7.OldItemPendingDaysQuantity,458,1890,0.2423
+foia-ten-oldest-administrative-appeals,Date#5,OldItem6.OldItemReceiptDate,477,1890,0.2524
+foia-ten-oldest-administrative-appeals,6th Oldest Number of Days Pending,OldItem6.OldItemPendingDaysQuantity,480,1890,0.254
+foia-ten-oldest-administrative-appeals,Date#6,OldItem5.OldItemReceiptDate,498,1890,0.2635
+foia-ten-oldest-administrative-appeals,5th Oldest Number of Days Pending,OldItem5.OldItemPendingDaysQuantity,500,1890,0.2646
+foia-ten-oldest-administrative-appeals,Date#7,OldItem4.OldItemReceiptDate,531,1890,0.281
+foia-ten-oldest-administrative-appeals,4th Oldest Number of Days Pending,OldItem4.OldItemPendingDaysQuantity,532,1890,0.2815
+foia-ten-oldest-administrative-appeals,Date#8,OldItem3.OldItemReceiptDate,582,1890,0.3079
+foia-ten-oldest-administrative-appeals,3rd Oldest Number of Days Pending,OldItem3.OldItemPendingDaysQuantity,583,1890,0.3085
+foia-ten-oldest-administrative-appeals,Date#9,OldItem2.OldItemReceiptDate,649,1890,0.3434
+foia-ten-oldest-administrative-appeals,2nd Oldest Number of Days Pending,OldItem2.OldItemPendingDaysQuantity,649,1890,0.3434
+foia-ten-oldest-administrative-appeals,Date#10,OldItem1.OldItemReceiptDate,785,1890,0.4153
+foia-ten-oldest-administrative-appeals,Oldest Number of Days Pending,OldItem1.OldItemPendingDaysQuantity,783,1890,0.4143
