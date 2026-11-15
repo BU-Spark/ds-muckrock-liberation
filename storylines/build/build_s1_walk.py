@@ -1,15 +1,14 @@
-"""Build the data for the S1 walkthrough sample (cover + steps 1-3) on the dashboard branch exploring-storyline-display.
+"""Build the Outcomes (S1) storyline: the cover and steps 1-3 (steps 4-10 come from s1_steps_4_10.py).
 
-Numbers come from the same code as the S1 notebook (storyline_lib.py next to the final notebooks). Every number quoted in
-the text is computed here and asserted against the final S1 notebook / statement (11/12) before anything is written.
-Wording follows the notebook's sections 1-2 (markdown cells 0-23).
+Numbers come from the notebook's own code (storyline_lib.py). Every number in the text is computed here and asserted
+against the S1 notebook before anything is written; the text follows the notebook's sections 1-2.
 
 usage: MPLBACKEND=Agg python storylines/build/build_s1_walk.py <out.json>
 """
 import json, sys
 from pathlib import Path
 
-LIB = Path(__file__).resolve().parent.parent / "notebooks"   # final S1 notebook + storyline_lib.py (11/12)
+LIB = Path(__file__).resolve().parent.parent / "notebooks"   # the S1 notebook and storyline_lib.py
 sys.path.insert(0, str(LIB))
 from storyline_lib import G, c02, FG, PG, NR, FD, YR, series, tot, isD, noD, noDN  # noqa: E402
 import s1_steps_4_10  # noqa: E402  (steps 4-10, notebook sections 3-8)
@@ -76,7 +75,7 @@ O, W_, D = list(parts)
 
 data = {
     "built": "2026-11-14",
-    "source": "S1 notebook code (storyline_lib.py, 11/12) on component_master_no_03_06_11.csv (API, 11/06)",
+    "source": "storyline_lib.py on data/component_master_no_03_06_11.csv",
     "years": YR,
     "cover": {"series": cover},
     "steps": [

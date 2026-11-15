@@ -33,14 +33,14 @@ from pathlib import Path
 
 import pandas as pd
 
+from foia_fields import summable  # counts, dollars and staff add up; days, medians, averages and percents do not
+
 HERE = Path(__file__).parent
 DATA_COL = re.compile(r"\d\d_")  # data columns start with the data type number; the ID columns come first
 MISSING = {"", "N/A", "NA", "N.A", "N\\A", "N/A/", "0N/A", "INVALID DATE ENTERED"}  # compared in upper case
 SEEN_MISSING = {}  # text read as missing, reported at the end
-NOT_ADDABLE = re.compile(r"Days|Median|Average|Highest|Lowest|Percent|OldItem")
-# renamed agencies -> one name for every year. Without this, a report filed under the new name would split the agency
-# in two: it would drop out of the agencies that reported every year (cohort), lose the next year's restated backlog,
-# and its components would not match across the change. The page shows "Department of War (Department of Defense)".
+# renamed agencies: one name for every year, so a rename does not split an agency in two (cohort, restated backlog,
+# component matching). The page shows "Department of War (Department of Defense)".
 RENAMED = {"Department of War": "Department of Defense"}
 
 
@@ -79,7 +79,7 @@ def merge_second_entries(c, data_cols):
             if not v:
                 continue
             first = keep.at[i, col].strip()
-            if NOT_ADDABLE.search(col.split("__", 1)[1]):
+            if not summable(col):
                 if not first:
                     keep.at[i, col] = v
             elif as_num(v) is not None:
@@ -93,7 +93,7 @@ def merge_second_entries(c, data_cols):
 
 
 def label(field):
-    """XML field name -> words, e.g. ProcessingStatisticsReceivedQuantity -> Processing Statistics Received Quantity."""
+    """Field name -> words, e.g. ProcessingStatisticsReceivedQuantity -> Processing Statistics Received Quantity."""
     return re.sub(r"(?<=[a-z])(?=[A-Z])", " ", field.replace(".", " · "))
 
 
@@ -122,16 +122,16 @@ def main(components_csv, types_csv, mapping_csv, out):
         if field.endswith("ReceiptDate"):
             continue
         t = by_no[no]
-        hit = mapping[(mapping.table == "foia-" + t["Official file name (foia-*.csv)"]) & (mapping.xml_col == field)]
+        hit = mapping[(mapping.table == "foia-" + t["Official file name (foia-*.csv)"]) & (mapping.field == field)]
         if len(hit) != 1:
             raise ValueError(f"no single foia.gov CSV column name for {col}: {list(hit.csv_col)}")
         a_lt1, c_lt1 = [], []
         values[col] = parse(agency[col], col, a_lt1) + parse(comp[col], col, c_lt1)
         if a_lt1 or c_lt1:
             lt1[col] = a_lt1 + [n_a + i for i in c_lt1]
-        # label: foia.gov's own CSV column name (e.g. "Number of Requests Received in Fiscal Year"); field: the XML name
+        # label: foia.gov's own CSV column name (e.g. "Number of Requests Received in Fiscal Year"); field: the field name in words
         columns.append({"key": col, "no": no, "type": t["foia.gov data type"], "label": hit.csv_col.iloc[0],
-                        "field": label(field), "addable": not NOT_ADDABLE.search(field)})
+                        "field": label(field), "addable": summable(col)})
 
     fy = [int(x) for x in agency["Fiscal Year"]] + [int(x) for x in comp["Fiscal Year"]]
     ag = list(agency["Agency"]) + list(comp["Agency"])

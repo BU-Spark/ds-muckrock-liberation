@@ -1,6 +1,5 @@
-"""Steps 4-10 of the S1 walkthrough (notebook sections 3-8). Imported by build_s1_walk.py.
-Every number quoted in the text is computed here with the notebook's code and definitions and asserted against the
-final S1 notebook (11/12) before it is used."""
+"""Steps 4-10 of the Outcomes (S1) storyline (notebook sections 3-8), used by build_s1_walk.py.
+Every number in the text is computed with the notebook's code and asserted against the notebook before it is used."""
 from collections import defaultdict
 from storyline_lib import G, c02, FG, PG, NR, FD, YR, tot, bykey, paired, AGK, COK, isD, noD, noDN, vba
 from storyline_lib import series as _series

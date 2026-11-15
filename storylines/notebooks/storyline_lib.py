@@ -1,7 +1,7 @@
 import csv, re
 from collections import defaultdict
 import os
-P = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "component_master_no_03_06_11.csv")  # the repo's data/ folder
+P = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "component_master_no_03_06_11.csv")  # data/ in this repository
 rows = list(csv.DictReader(open(P, encoding="utf-8-sig")))
 H = list(rows[0].keys())
 def col(no, part):
@@ -15,7 +15,7 @@ def num(s):
     try: return float(s)
     except ValueError: return None
 has_comp = {(r["Fiscal Year"], r["Agency Abbreviation"]) for r in rows if r["Row Type"] in ("component", "no_component")}
-def in_gov(r):  # 0.3 definition
+def in_gov(r):  # government total: components and unlinked records, plus agency totals of agencies without components
     if r["Exclude From Component Sum"].strip().lower() == "yes" or r["Row Type"] == "second_entry": return False
     if r["Row Type"] in ("component", "no_component"): return True
     return r["Row Type"] == "agency_overall" and (r["Fiscal Year"], r["Agency Abbreviation"]) not in has_comp
@@ -68,8 +68,8 @@ def paired(numc, denc, base):
     return out
 def test(name, res, cond, desc):
     fails = [(u, {y: round(v, 1) for y, v in s.items() if y in (2008, 2017, 2019, 2020, 2023, 2024, 2025)}) for u, s in res.items() if not cond(s)]
-    print(f"{name}：{desc} —— 去掉任一单位（{len(res)-1} 种）后{'全部成立' if not fails else f'有 {len(fails)} 种不成立'}")
-    for f in fails[:5]: print("     不成立：", f)
+    print(f"{name}: {desc} - leaving out any one unit ({len(res)-1} cases): {'holds in all' if not fails else f'fails in {len(fails)}'}")
+    for f in fails[:5]: print("     fails:", f)
     return fails
 
 import pandas as pd

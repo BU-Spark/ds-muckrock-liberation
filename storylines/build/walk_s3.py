@@ -1,5 +1,5 @@
-"""Storyline 3 (appeals) walkthrough, from the final notebook S3-appeals-en (11/12). Series recomputed with storyline_lib and
-anchored to the notebook's assertions; every number in the text is checked against the notebook text."""
+"""Appeals (S3) storyline, from the notebook S3-appeals-en. Series are recomputed with storyline_lib and anchored to
+the notebook's assertions; every number in the text is checked against the notebook text."""
 from collections import defaultdict
 from storyline_lib import G, YR, AR, PRO, RV, PA, T8, OT, col, tot, series as _series, isD, noD, AGK, num
 from walk_common import check_numbers
@@ -41,7 +41,7 @@ def build():
                    "colors": {"DHS": "#8c3a91", "Outside DHS": "#4582cc"}}
     walk = {"id": "s3", "name": "Appeals",
       "cover": {"kicker": "Appeals", "title": "Appeals are rare, outcomes vary by agency, and DHS increasingly dominates",
-        "body": "Fewer than 2 requests in 100 lead to an appeal. Outside DHS about one quarter of closed appeals are reversed or remanded, from single digits to about 60% across agencies. DHS received 3.4 times as many appeals in FY2025 as two years earlier, and most of the added closures had no decision on the merits.",
+        "body": "Appeals received each year equal fewer than 2 per 100 requests processed. Outside DHS about one quarter of closed appeals are reversed or remanded, from single digits to about 60% across agencies. DHS received 3.4 times as many appeals in FY2025 as two years earlier, and most of the added closures had no decision on the merits.",
         "foot": "Reversed or remanded includes sending the request back for more work; it does not mean the requester received records.", "chart": cover_chart},
       "steps": [
         {"kicker": "All agencies", "title": "Fewer than 2 appeals for every 100 requests processed",

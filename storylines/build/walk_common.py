@@ -1,5 +1,5 @@
-"""Shared helpers for the storyline walkthroughs (S0, S3, S4). Text check: every number written in a card must appear,
-as written, in the final notebook's own text (11/12), where the notebook checks it with an assertion."""
+"""Shared helpers for the S0, S3 and S4 storylines. Text check: every number written in a card must appear, as written,
+in the notebook's own text, where the notebook checks it with an assertion."""
 import json, re
 from pathlib import Path
 NB_DIR = Path(__file__).resolve().parent.parent / "notebooks"

@@ -3,7 +3,7 @@
 Reads the foia.gov API reports again with its own code (not the build script's), and also uses sources that do
 not come through the API:
   - the agency-level table (foia.gov's yearly CSV export) for the Agency Overall rows,
-  - foia.gov's component CSV export for FY2024 (foia_downloader_components.py),
+  - foia.gov's component CSV export for FY2024,
   - the agency-level statute table (foia.gov's CSV export) for the 06 Agency Overall rows.
 
 Checks:
@@ -32,10 +32,8 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import api_to_component_rows as conv  # noqa: E402  (SEG, NESTED, val, ws, load_maps only)
-from build_component_master import SECTIONS  # noqa: E402
-from clean_text_03_06_11 import clean_text  # noqa: E402
-from foia_component import summable  # noqa: E402
+import foia_fields as ff  # noqa: E402
+from foia_fields import SECTIONS, clean_text, summable  # noqa: E402
 
 csv.field_size_limit(10**9)
 COMP, AGD, API_DIR, FMAP, DMAP, TYPES, MAPPING, CSV24, OUT = sys.argv[1:10]
@@ -76,7 +74,7 @@ master = read(os.path.join(COMP, "component_master_no_03_06_11.csv"))
 reasons = read(os.path.join(COMP, "other_reasons_03_11.csv"))
 statutes = read(os.path.join(COMP, "exemption_statutes_06.csv"))
 MCOLS = [c for c in master[0] if re.match(r"\d\d_", c)]  # data columns
-fmap, overall = conv.load_maps(FMAP, DMAP)
+fmap, overall = ff.load_maps(FMAP, DMAP)
 # two agency totals the site's data map lists under other field names than its records use (see the build script)
 overall.update({("AppealNonExemptionDenialSection", "NonExemptionDenialQuantity[NotAgency]"): "field_overall_vic2_not_agency_re",
                 ("AppealNonExemptionDenialSection", "NonExemptionDenialQuantity[NotDescribed]"): "field_overall_vic2_rec_not_desc"})
@@ -129,9 +127,9 @@ def site(path):
     d = json.load(gzip.open(path, "rt", encoding="utf-8"))
     rep, inc = d["data"], {x["id"]: x for x in d.get("included", [])}
     node = lambda rel: (((rel or {}).get("data") or {}).get("id"))
-    name = lambda cid: (conv.ws(inc[cid]["attributes"].get("abbreviation")), conv.ws(inc[cid]["attributes"].get("title"))) if cid in inc else ("", "")
+    name = lambda cid: (ff.ws(inc[cid]["attributes"].get("abbreviation")), ff.ws(inc[cid]["attributes"].get("title"))) if cid in inc else ("", "")
     recs, sts = defaultdict(list), []
-    for seg, sec in conv.SEG.items():
+    for seg, sec in ff.SEG.items():
         rel = (rep["relationships"].get(seg) or {}).get("data") or []
         for i, p in enumerate(rel if isinstance(rel, list) else [rel]):
             para = inc.get(p["id"])
@@ -139,23 +137,23 @@ def site(path):
                 continue
             at = para["attributes"]
             if seg == "field_statute_iv":
-                text = tuple(clean_text(conv.val(at.get(f))) for f in ("field_statute", "field_type_of_info_withheld", "field_case_citation"))
-                sts.append((i, "TOTAL", *text, conv.val(at.get("field_total_num_relied_by_agency"))))
+                text = tuple(clean_text(ff.val(at.get(f))) for f in ("field_statute", "field_type_of_info_withheld", "field_case_citation"))
+                sts.append((i, "TOTAL", *text, ff.val(at.get("field_total_num_relied_by_agency"))))
                 for q in (para["relationships"].get("field_agency_component_inf") or {}).get("data") or []:
                     det = inc.get(q["id"])
                     if det:
                         c = node(det["relationships"].get("field_agency_component"))
-                        sts.append((i, name(c) if c in inc else None, *text, conv.val(det["attributes"].get("field_num_relied_by_agency_comp"))))
+                        sts.append((i, name(c) if c in inc else None, *text, ff.val(det["attributes"].get("field_num_relied_by_agency_comp"))))
                 continue
             c = node(para["relationships"].get("field_agency_component"))
-            vals = {fmap[(sec, k)]: conv.val(v) for k, v in at.items() if (sec, k) in fmap and conv.val(v) != ""}
+            vals = {fmap[(sec, k)]: ff.val(v) for k, v in at.items() if (sec, k) in fmap and ff.val(v) != ""}
             rs = []
-            for q in (para["relationships"].get(conv.NESTED.get(seg, "")) or {}).get("data") or []:
+            for q in (para["relationships"].get(ff.NESTED.get(seg, "")) or {}).get("data") or []:
                 det = inc.get(q["id"])
                 if det:
                     x = det["attributes"]
-                    rs.append((clean_text(conv.val(x.get("field_desc_oth_reasons"))),
-                               next((conv.val(v) for k, v in x.items() if k.startswith("field_num")), "")))
+                    rs.append((clean_text(ff.val(x.get("field_desc_oth_reasons"))),
+                               next((ff.val(v) for k, v in x.items() if k.startswith("field_num")), "")))
             recs[sec].append((name(c) if c in inc else None, vals, rs))
     return rep, recs, sts
 
@@ -200,8 +198,8 @@ for path in glob.glob(os.path.join(API_DIR, "*", "*.json.gz")):
         sec, f = COL_SF[c]
         of = overall.get((sec, f))
         vals = [v.get(f, "") for _, v, _ in recs.get(sec, []) if v.get(f, "") != ""]
-        if of and conv.val(at.get(of)) != "":
-            ref, how = conv.val(at.get(of)), "site total"
+        if of and ff.val(at.get(of)) != "":
+            ref, how = ff.val(at.get(of)), "site total"
         elif one:
             ref, how = (vals[0] if len(vals) == 1 else (repr(sum(num(v) for v in vals)) if vals and summable(f) and all(num(v) is not None for v in vals) else (vals[0] if vals else ""))), "one-organization record"
         elif of:
@@ -252,7 +250,7 @@ AG_COL = {}
 for no, t in types.items():
     for m in read(MAPPING):
         if m["table"] == "foia-" + t["Official file name (foia-*.csv)"] and no != "06":
-            f = m["xml_col"]
+            f = m["field"]
             hit = [s for s in SEC_OF_NO[no] if (s, f) in HAS]
             col = [c for c in MCOLS if COL_SF[c] == (hit[0], f)] if hit else []
             name = t["Column prefix in FOIA_agency_FY2008-2025.csv"] + m["csv_col"]
@@ -299,7 +297,7 @@ maps = read(MAPPING)
 for p in sorted(glob.glob(os.path.join(CSV24, "*.csv"))):
     no = os.path.basename(p)[:2]
     t = types[no]
-    lab = {m["csv_col"]: m["xml_col"] for m in maps if m["table"] == "foia-" + t["Official file name (foia-*.csv)"]}
+    lab = {m["csv_col"]: m["field"] for m in maps if m["table"] == "foia-" + t["Official file name (foia-*.csv)"]}
     for r in read(p):
         if r["Fiscal Year"] != "2024":
             continue

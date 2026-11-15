@@ -1,4 +1,4 @@
-"""Build data/walk_s0.json, walk_s1.json, walk_s3.json, walk_s4.json for the dashboard (branch exploring-storyline-display).
+"""Build docs/data/walk_s0|s1|s3|s4.json: the four storyline cards and their steps.
 usage: MPLBACKEND=Agg python storylines/build/build_walks.py docs/data"""
 import json, subprocess, sys, tempfile
 from pathlib import Path
@@ -21,7 +21,7 @@ walks = {"s1": {"id": "s1", "name": "Outcomes", "years": s1["years"], "steps": s
       "chart": {"title": "Share of closed requests, outside DHS and NARA", "series": s1_cover_series}}}}
 for mod in (walk_s0, walk_s3, walk_s4):
     w = mod.build(); w["years"] = s1["years"]; walks[w["id"]] = w
-# renamed agencies: current name first, former name in brackets (DOJ's FY2025 summary says Department of War); run once, so no double brackets
+# renamed agencies: current name first, former name in brackets (applied once, so no double brackets)
 import re
 RENAME = [(re.compile(r"\bDepartment of Defense\b(?! *\))"), "Department of War (Department of Defense)"), (re.compile(r"(?<!\()\bDoD\b(?!\))"), "DoW (DoD)")]
 def renamed(x):

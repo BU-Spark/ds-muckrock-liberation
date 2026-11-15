@@ -44,12 +44,12 @@ The page itself never calls the API: it reads `docs/data/foia.json` and the four
 
 | Folder | What is in it |
 |---|---|
-| `docs/` | The page (served by GitHub Pages): `index.html`, `stories.js` / `stories.css` (storylines, guide, year buttons, lists, links), `data/`, and the notebooks as HTML |
+| `docs/` | The page (served by GitHub Pages): `index.html` (the dashboard; its code is inside the file, see "The page's code"), `stories.js` / `stories.css` (storylines, guide, year buttons, lists, links), `data/`, and the notebooks as HTML |
 | `data/` | The three component-level tables built from the API (download of 2026-11-02; a second download on 11-06 gave identical tables), the agency-level table, and the data type map |
-| `pipeline/` | API download, table build, checks, and `prep.py` with `column_mapping.csv` (foia.gov's own column names) |
+| `pipeline/` | API download, table build, checks (`foia_fields.py` holds the definitions they share), and `prep.py` with `column_mapping.csv` (foia.gov's own column names) |
 | `storylines/notebooks/` | The four storyline notebooks (English) and `storyline_lib.py` |
 | `storylines/build/` | Turns the notebooks into the storyline cards; stops if a number in a card's text is not in the notebook |
-| `tools/serve.py` | A local preview server without browser caching |
+| `tools/` | `serve.py`: a local preview server without browser caching. `page_code.py`: writes out the dashboard code inside `docs/index.html`, and puts it back |
 
 ## Rebuild
 
@@ -81,10 +81,32 @@ python tools/serve.py 8000 docs      # then open http://127.0.0.1:8000/
 Steps 4 and 5 on the files in this repository give exactly the `docs/data` files that are here (apart from the
 build date in `foia.json`).
 
+## The page's code
+
+`docs/index.html` was rendered once with Quarto and has been edited in place since; there is no separate source
+file. The dashboard code that runs is in one `<script type="ojs-module-contents">` block of that file, encoded
+(base64). To read or change it:
+
+```bash
+python tools/page_code.py unpack cells     # one file per cell: cells/c01.js ... c38.js
+python tools/page_code.py pack cells       # write the edited cells back into docs/index.html
+```
+
+The storylines, the guide, the year buttons and the links are plain files: `docs/stories.js`, `docs/stories.css`.
+
 ## Notes
 
 - **Missing is not zero.** Blank and "N/A" are kept as missing; "<1" (less than a day) is kept as "<1".
-- **No double counting.** Government totals add agency totals only; components are never added on top of their agency.
+- **Missing is not zero in rates either.** A rate with a missing part (for example backlog ÷ requests received where
+  no backlog is reported) is left blank.
+- **No double counting.** On the question pages, government totals add agency totals only; components are never
+  added on top of their agency.
+- **Two ways to a government total.** The storylines add up components instead (plus numbers not assigned to a
+  component, and the totals of agencies without components), so that single units such as USCIS can be told apart.
+  The two totals differ slightly where an agency's total and its components disagree: FY2025 requests received
+  are 1,707,434 on the question pages and 1,707,413 in the storylines; the 21 are at Veterans Affairs.
+- **Storyline cards and question pages show different things.** "Open Question …" on a card opens that question
+  for all agencies: the general view, not the storyline's own grouping or measure.
 - **Department of War (Department of Defense).** DOJ's FY2025 summary uses the new name; foia.gov's data still says
   Department of Defense. The page shows the current name first and the former one in brackets, and `prep.py` keeps
   both spellings as one agency, so a later rename in the data does not split it in two.

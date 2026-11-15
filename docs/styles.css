@@ -1,11 +1,4 @@
-/* value-box numbers written as text (formatted with commas or %) get the same size as plain numbers */
-div.value-box-area span.vb { font-size: 2.4rem; line-height: 1.2; font-family: var(--bs-body-font-family); }
-/* multi-select on Q1: keep 4 rows visible instead of being squeezed to one line */
-select[multiple] { min-height: 5.6em; flex: none; }
-/* "How the comparison is made" cards: slightly smaller text so the whole note fits */
-.how .card-body { font-size: 0.85rem; }
-.how .card-body ul { margin-bottom: 0.4rem; }
-/* v2 (one page, sidebar): question header, two charts side by side, notes */
+/* question header and two charts side by side */
 .qhead { font-size: 1.05rem; line-height: 1.35; }
 .qhead .qnum { font-weight: 600; margin-right: 0.4em; }
 .qhead .sel { color: #6c6b66; font-size: 0.85rem; margin-top: 0.2rem; }
@@ -13,12 +6,7 @@ select[multiple] { min-height: 5.6em; flex: none; }
 .pair figure { margin: 0; }
 .pair h6 { margin: 0 0 6px; font-weight: 600; font-size: 0.92rem; }
 .side-note { font-size: 0.78rem; color: #6c6b66; margin-top: 0.5rem; }
-div.how { font-size: 0.9rem; max-width: 900px; }
-/* notes tab: start at the top instead of vertically centred */
-.cell-output-display:has(div.how), .card-body:has(div.how) { justify-content: flex-start !important; }
-.html-fill-container:has(> .observablehq > div.how) { justify-content: flex-start !important; }
-.observablehq:has(> div.how) { margin: 0 !important; flex: 0 0 auto !important; }
-/* hidden OJS source blocks still take space in a card; remove them */
+/* hidden code blocks still take space in a card */
 .card-body > .code-copy-outer-scaffold { display: none !important; }
 /* MuckRock blue for the title bar */
 .navbar { background-color: #4582CC !important; }
@@ -30,9 +18,9 @@ div.how { font-size: 0.9rem; max-width: 900px; }
 .qbtn:hover { background: #eef3fa; }
 .qbtn.on { background: #e3edf9; border-left-color: #4582CC; font-weight: 600; }
 .qbtn .qno { min-width: 1em; color: #4582CC; font-weight: 600; }
-/* nothing chosen: blank panel (a start image can go in --start-image later) */
+/* nothing chosen: no tab strip */
 body.noq .card .nav-tabs { visibility: hidden; }
-/* start page: the MuckRock logotype as a faint watermark */
+/* start page, before the storylines load: the MuckRock logotype as a faint watermark */
 .empty-state { width: 100%; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .empty-state .watermark { width: min(55%, 620px); opacity: 0.09; user-select: none; pointer-events: none; }
 .empty-state .wm-text { margin-top: 1.2rem; color: #333C47; opacity: 0.35; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
@@ -40,7 +28,7 @@ body.noq .card .nav-tabs { visibility: hidden; }
 .qbtn, .qbtn:hover, .qbtn:focus, .qbtn:active { color: #212529 !important; outline: none; }
 /* component list before an agency is chosen */
 select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed; }
-/* Tables tab: three views */
+/* Tables tab: the three views */
 .tview { display: inline-flex; border: 1px solid #c9d6ea; border-radius: 6px; overflow: hidden; margin-bottom: 0.8rem; }
 .tvbtn { border: 0; background: #fff; padding: 0.3rem 0.9rem; font-size: 0.88rem; color: #212529; cursor: pointer; }
 .tvbtn + .tvbtn { border-left: 1px solid #c9d6ea; }
@@ -76,10 +64,5 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
   .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid3 { grid-template-columns: repeat(2, auto); }
 }
-/* Compare with: search results under the box */
-.cmp-list { border: 1px solid #c9d6ea; border-radius: 4px; margin-top: 2px; max-height: 260px; overflow-y: auto; background: #fff; }
-.cmp-item { padding: 4px 8px; font-size: 0.8rem; line-height: 1.25; cursor: pointer; border-bottom: 1px solid #f0f2f5; }
-.cmp-item.on, .cmp-item:hover { background: #e3edf9; }
-.cmp-empty { padding: 4px 8px; font-size: 0.8rem; color: #6c6b66; }
 /* Compare with: agency, then component */
 .cmp select { margin-bottom: 4px; }

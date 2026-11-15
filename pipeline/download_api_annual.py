@@ -1,10 +1,10 @@
-"""从 foia.gov API（网站数据库）下载每份年报的全部 32 张表（含部门），用于和 XML 转换结果做外部对照。
+"""Download every annual report (all 32 tables, with components) from the foia.gov API.
 
-密钥从 ~/.foia_api_key 读（api.data.gov 免费申请），不写进任何文件。
-每份年报存一个 gzip JSON：<输出目录>/<年>/<机构缩写>_<年>_<id前8位>.json.gz；已下载的跳过，可断点续跑。
+The key is read from ~/.foia_api_key (free from api.data.gov) and never written to a file.
+One gzip JSON per report: <out dir>/<year>/<agency>_<year>_<first 8 characters of the id>.json.gz.
+Reports already downloaded are skipped, so the script can be stopped and run again.
 
-用法：
-    python download_api_annual.py <report_data_map.json> <输出目录>
+Usage: python download_api_annual.py <report_data_map.json> <out dir>
 """
 import gzip
 import json
@@ -18,14 +18,14 @@ import urllib.request
 
 BASE = "https://api.foia.gov/api"
 KEY = open(os.path.expanduser("~/.foia_api_key")).read().strip()
-PAUSE = 3.7  # 两次请求"开始"之间至少隔 3.7 秒：每小时最多约 970 次，低于 1,000 次的限额
-WORKERS = 3  # 单次请求要等几秒，几个并行才能用满限额
+PAUSE = 3.7  # seconds between request starts: about 970 an hour, under the limit of 1,000
+WORKERS = 3  # a request takes a few seconds, so a few run at once to use the limit
 _lock = threading.Lock()
 _next = [0.0]
 
 
 def pace():
-    """全局节流：所有线程共用一个"下一次可以发请求的时间"。"""
+    """One rate limit for all threads: wait for the shared next start time."""
     with _lock:
         now = time.time()
         wait = max(0.0, _next[0] - now)
@@ -40,7 +40,7 @@ def get(url):
             req = urllib.request.Request(url, headers={"X-API-Key": KEY})
             with urllib.request.urlopen(req, timeout=300) as r:
                 return json.loads(r.read())
-        except Exception as e:  # 网络抖动或限流：等一会儿重试
+        except Exception as e:  # network error or rate limit: wait and try again
             print("  retry", attempt + 1, type(e).__name__, e, flush=True)
             time.sleep(60 * (attempt + 1))
     raise RuntimeError(f"failed: {url}")
@@ -55,7 +55,7 @@ def main(map_path, outdir):
                 inc.append(x)
     include = ",".join(["field_agency"] + inc)
 
-    # 1. 年报清单
+    # 1. list of reports
     index_path = os.path.join(outdir, "_index.json")
     if os.path.exists(index_path):
         index = json.load(open(index_path))
@@ -77,7 +77,7 @@ def main(map_path, outdir):
             print("index", len(index), flush=True)
         json.dump(index, open(index_path, "w"), indent=1)
 
-    # 2. 逐份下载
+    # 2. download each report
     todo = [r for r in index if 2008 <= int(r["year"] or 0) <= 2025]
 
     def fetch(item):

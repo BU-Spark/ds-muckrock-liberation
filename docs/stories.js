@@ -1,11 +1,10 @@
-// renamed agencies: the current name first, the former one in brackets (same rule as the dashboard's own code)
+// renamed agencies: current name first, former name in brackets (as in the dashboard's own code)
 function fdAgency(a) { return a === "Department of Defense" || a === "Department of War" ? "Department of War (Department of Defense)" : a }
-/* Start page: four findings that were checked.
-   Text and numbers come from data/walk_<id>.json (built by storylines/build/build_walks.py). */
-// a grey, blurred card that holds a storyline's place; no old text or numbers are kept in it
+/* Start page: the four storyline cards, filled from data/walk_<id>.json (built by storylines/build/build_walks.py). */
+// a grey card that holds a storyline's place while it loads
 function storyPlaceholder(kicker) {
   const el = document.createElement("article"); el.className = "story placeholder";
-  el.setAttribute("aria-label", `${kicker}: storyline in progress`);
+  el.setAttribute("aria-label", `${kicker}: loading`);
   el.innerHTML = `<div class="kicker">${kicker}</div>
     <div class="veil-wrap">
       <div class="veil" aria-hidden="true">
@@ -16,96 +15,11 @@ function storyPlaceholder(kicker) {
           <path d="M34,58 L80,66 L126,58 L172,74 L218,82 L264,96 L310,92 L356,110 L392,118" fill="none" stroke="#b8bec7" stroke-width="3"/></svg>
         <div class="sk w85"></div><div class="sk w60"></div>
       </div>
-      <div class="veil-label"><b>Storyline in progress</b><span>Still being checked. It will appear here when it is ready.</span></div>
+      <div class="veil-label"><b>Loading</b><span>The storyline appears here in a moment.</span></div>
     </div>`;
   return el;
 }
 (function () {
-  const YEARS = Array.from({length: 18}, (_, i) => 2008 + i);
-  const C = {blue: "#4582cc", purple: "#8c3a91", gold: "#d4a92c", ink: "#333C47", muted: "#6c6b66", grid: "#e9ecf1"};
-
-  const STORIES = [
-    {placeholder: "Requests"},
-    {
-      kicker: "Outcomes", q: 4, qlabel: "Outcomes & exemptions", walk: true,
-      title: "A shrinking share of requests is released in full",
-      body: "Outside DHS and NARA, the share of processed requests released in full fell from 50.0% in FY2008 to 21.4% in FY2025. The fall holds with any single agency or component left out, and it comes mostly from agencies' own shares falling.",
-      foot: "Share of all processed requests. Why DHS and NARA are left out, and what lies behind the fall, is in the 10 steps.",
-      yMax: 60, unit: "%",
-      series: [
-        {name: "Released in full", color: C.blue, v: [50.0,45.5,47.0,47.1,47.3,47.3,42.0,39.7,39.3,38.0,40.1,37.1,36.8,32.9,30.2,29.7,24.3,21.4]},
-        {name: "Partly released", color: C.purple, v: [10.2,13.5,16.0,18.9,18.2,17.9,21.2,22.7,23.0,23.3,23.0,24.4,22.8,23.8,23.1,27.9,31.7,32.3]},
-        {name: "No records found", color: C.gold, v: [14.7,14.2,11.9,12.0,12.5,11.7,12.5,13.4,12.7,13.6,13.6,13.5,13.1,13.5,14.9,13.9,13.2,13.5]}]
-    },
-    {placeholder: "Appeals"},
-    {placeholder: "Backlog"}
-  ];
-
-  const W = 520, H = 180, M = {l: 34, r: 128, t: 10, b: 22};
-  const x = yr => M.l + (yr - 2008) / 17 * (W - M.l - M.r);
-  const svgEl = (tag, attrs) => { const e = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
-
-  function chart(s) {
-    const box = document.createElement("div"); box.className = "chart";
-    const y = v => M.t + (1 - v / s.yMax) * (H - M.t - M.b);
-    const svg = svgEl("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": s.title});
-    [0, s.yMax / 2, s.yMax].forEach(t => {
-      svg.appendChild(svgEl("line", {x1: M.l, x2: W - M.r, y1: y(t), y2: y(t), stroke: C.grid, "stroke-width": 1}));
-      const lab = svgEl("text", {x: M.l - 6, y: y(t) + 3.5, "text-anchor": "end", "font-size": 10, fill: C.muted}); lab.textContent = t + s.unit; svg.appendChild(lab);
-    });
-    [2008, 2012, 2016, 2020, 2025].forEach(yr => {
-      const lab = svgEl("text", {x: x(yr), y: H - 6, "text-anchor": "middle", "font-size": 10, fill: C.muted}); lab.textContent = yr; svg.appendChild(lab);
-    });
-    (s.avgs || []).forEach(a => {
-      const vals = s.series[0].v.slice(a.from - 2008, a.to - 2008 + 1); const m = vals.reduce((p, c) => p + c, 0) / vals.length;
-      svg.appendChild(svgEl("line", {x1: x(a.from), x2: x(a.to), y1: y(m), y2: y(m), stroke: C.muted, "stroke-width": 1.5, "stroke-dasharray": "4 3"}));
-    });
-    s.series.forEach(se => {
-      const d = se.v.map((v, i) => `${i ? "L" : "M"}${x(YEARS[i]).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-      svg.appendChild(svgEl("path", {d, fill: "none", stroke: se.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round"}));
-    });
-    // end labels (text in ink, colored dot carries identity), nudged apart
-    const ends = s.series.map(se => ({se, yy: y(se.v[17])})).sort((a, b) => a.yy - b.yy);
-    for (let i = 1; i < ends.length; i++) if (ends[i].yy - ends[i - 1].yy < 13) ends[i].yy = ends[i - 1].yy + 13;
-    ends.forEach(({se, yy}) => {
-      svg.appendChild(svgEl("circle", {cx: x(2025), cy: y(se.v[17]), r: 3, fill: se.color}));
-      const t = svgEl("text", {x: x(2025) + 8, y: yy + 3.5, "font-size": 10.5, fill: C.ink});
-      t.textContent = `${se.v[17]}${s.unit} ${s.series.length > 1 ? short(se.name) : ""}`; svg.appendChild(t);
-    });
-    // hover: crosshair + tooltip
-    const cross = svgEl("line", {y1: M.t, y2: H - M.b, stroke: "#9aa3ae", "stroke-width": 1, visibility: "hidden"}); svg.appendChild(cross);
-    const hit = svgEl("rect", {x: M.l, y: 0, width: W - M.l - M.r, height: H, fill: "transparent"}); svg.appendChild(hit);
-    const tip = document.createElement("div"); tip.className = "tip";
-    hit.addEventListener("mousemove", ev => {
-      const r = svg.getBoundingClientRect(); const px = (ev.clientX - r.left) / r.width * W;
-      const i = Math.max(0, Math.min(17, Math.round((px - M.l) / (W - M.l - M.r) * 17)));
-      cross.setAttribute("x1", x(YEARS[i])); cross.setAttribute("x2", x(YEARS[i])); cross.setAttribute("visibility", "visible");
-      tip.innerHTML = `<b>FY${YEARS[i]}</b><br>` + s.series.map(se => `<i style="background:${se.color}"></i>${se.name}: ${se.v[i]}${s.unit}`).join("<br>")
-        + (s.extra ? `<br>${s.extra.name}: ${s.extra.fmt(s.extra.v[i])}` : "");
-      tip.style.display = "block";
-      const left = x(YEARS[i]) / W * r.width; tip.style.left = (left > r.width * 0.55 ? left - tip.offsetWidth - 10 : left + 10) + "px"; tip.style.top = "6px";
-    });
-    hit.addEventListener("mouseleave", () => { cross.setAttribute("visibility", "hidden"); tip.style.display = "none"; });
-    box.appendChild(svg); box.appendChild(tip);
-    return box;
-  }
-  const short = n => ({"Released in full": "in full", "Partly released": "partly", "No records found": "no records",
-    "Privacy share of exemption citations": "privacy", "Full denials (of partly released + fully denied)": "full denials",
-    "Agencies other than DHS": "not DHS", "DHS": "DHS"})[n] || n;
-
-  function card(s) {
-    const el = document.createElement("article"); el.className = "story";
-    el.innerHTML = `<div class="kicker">${s.kicker}</div><h3>${s.title}</h3><p class="body">${s.body}</p>`;
-    if (s.series.length > 1) el.insertAdjacentHTML("beforeend", `<div class="legend">${s.series.map(se => `<span><i style="background:${se.color}"></i>${se.name}</span>`).join("")}</div>`);
-    el.appendChild(chart(s));
-    const rows = YEARS.map((yr, i) => `<tr><td>FY${yr}</td>${s.series.map(se => `<td>${se.v[i]}${s.unit}</td>`).join("")}${s.extra ? `<td>${s.extra.fmt(s.extra.v[i])}</td>` : ""}</tr>`).join("");
-    el.insertAdjacentHTML("beforeend", `<p class="foot">${s.foot}</p><div class="actions">${s.walk ? `<button type="button" class="walk">How we got here · 10 steps →</button>` : ""}<button type="button" class="go" data-q="${s.q}">Explore: ${s.qlabel} →</button>
-      <details><summary>Numbers</summary><table><tr><th>Year</th>${s.series.map(se => `<th>${se.name}</th>`).join("")}${s.extra ? `<th>${s.extra.name}</th>` : ""}</tr>${rows}</table></details></div>`);
-    el.querySelector(".go").addEventListener("click", () => { const b = document.querySelector(`.qbtn[data-id="${s.q}"]`); if (b) b.click(); });
-    const wb = el.querySelector(".walk"); if (wb) wb.addEventListener("click", () => window.openS1Walk && window.openS1Walk(wb));
-    return el;
-  }
-
   function fill(es) {
     es.dataset.stories = "1"; es.classList.add("stories"); es.innerHTML = "";
     es.insertAdjacentHTML("beforeend", `<div class="stories-head"><h2>What the annual reports show</h2>
@@ -113,16 +27,15 @@ function storyPlaceholder(kicker) {
     const grid = document.createElement("div"); grid.className = "story-grid"; [["s0", "Requests"], ["s1", "Outcomes"], ["s3", "Appeals"], ["s4", "Backlog"]].forEach(([id, name]) => {
       const ph = storyPlaceholder(name); grid.appendChild(ph);
       if (window.storyCover) window.storyCover(id).then(el => { if (el && ph.isConnected) ph.replaceWith(el) }) }); es.appendChild(grid);
-    es.insertAdjacentHTML("beforeend", `<p class="stories-method">How these were counted: government totals add up each agency's reported total (its components plus anything not assigned to one) and match foia.gov's government-wide totals. The reports are filled in by the agencies themselves. They show what changed, not why.</p>`);
+    es.insertAdjacentHTML("beforeend", `<p class="stories-method">How these were counted: the storylines add up components, numbers not assigned to a component, and the totals of agencies without components, so that single units such as USCIS can be told apart. Questions 1–6 add up agency totals instead, so a government total can differ slightly where an agency's total and its components disagree: FY2025 requests received are 1,707,413 here and 1,707,434 in Question 1 (the 21 are at Veterans Affairs). “Open Question …” on a card opens that question for all agencies: the general view, not the storyline's own grouping or measure, so its numbers differ from the card's. The reports are filled in by the agencies themselves. They show what changed, not why.</p>`);
   }
   const scan = () => document.querySelectorAll(".empty-state:not([data-stories])").forEach(fill);
   new MutationObserver(scan).observe(document.documentElement, {childList: true, subtree: true});
   document.addEventListener("DOMContentLoaded", scan);
 })();
 
-/* ---------- Storyline walkthroughs (2026-11-14): a cover card per storyline on the start page and a dialog of step cards.
-   Text and numbers: data/walk_<id>.json, built by storylines/build/build_walks.py from the final
-   storyline notebooks; every number is asserted there. ---------- */
+/* ---------- Storylines: a card per storyline on the start page and a dialog of step cards. Text and numbers come from
+   data/walk_<id>.json, built from the storyline notebooks, where every number is asserted. ---------- */
 (function () {
   const C = {blue: "#4582cc", purple: "#8c3a91", gold: "#d4a92c", green: "#0b5a36", navy: "#21304a", ink: "#333C47", muted: "#6c6b66", grid: "#e9ecf1"};
   const PAL = [C.blue, C.purple, C.gold, C.green, C.navy, "#7d8590"];
@@ -345,7 +258,7 @@ function storyPlaceholder(kicker) {
     const names = Object.keys(c.chart.series), F = unitFmt(c.chart);
     const rows = w.years.map((yr, i) => `<tr><td>FY${yr}</td>${names.map(k => `<td>${ok(c.chart.series[k][i]) ? F.tip(c.chart.series[k][i]) : "–"}</td>`).join("")}</tr>`).join("");
     el.insertAdjacentHTML("beforeend", `<p class="foot">${esc(c.foot || "")}</p><div class="actions"><button type="button" class="walk">How we got here · ${w.steps.length} steps →</button>
-      <button type="button" class="go">Explore: ${esc(w.explore.label)} →</button>
+      <button type="button" class="go" title="Opens Question ${w.explore.q} for all agencies: the general view, not this storyline's own grouping">Open Question ${w.explore.q}: ${esc(w.explore.label)} →</button>
       <details><summary>Numbers</summary><table><tr><th>Year</th>${names.map(k => `<th>${esc(k)}</th>`).join("")}</tr>${rows}</table></details></div>`);
     const wb = el.querySelector(".walk"); wb.addEventListener("click", () => open(id, wb));
     el.querySelector(".go").addEventListener("click", () => { const b = document.querySelector(`.qbtn[data-id="${w.explore.q}"]`); if (b) b.click() });
@@ -355,9 +268,8 @@ function storyPlaceholder(kicker) {
   window.storyCover = id => cover(id).catch(err => { console.error(`storyline card ${id}:`, err); return null });
 })();
 
-/* ---------- Start-page header and the user guide (sample, branch exploring-storyline-display, 2026-11-14) ----------
-   The header card's text is rewritten on the start page, with a third line that opens the guide. The guide sits in the same
-   card, outside the part the dashboard redraws, and shows only when the card is expanded (Quarto's full-screen card). */
+/* ---------- Header and user guide. On the start page the header card gets a line that opens the guide; the guide sits in
+   the same card, outside the part the dashboard redraws, and shows when the card is expanded. ---------- */
 (function () {
   const GUIDE = `<div class="fd-guide" role="region" aria-label="How to use this dashboard">
     <h2>How to use this dashboard</h2>
@@ -424,15 +336,15 @@ function storyPlaceholder(kicker) {
   document.addEventListener("DOMContentLoaded", scan);
 })();
 
-/* ---------- From v6 (2026-11-14): fiscal-year buttons replace the two year dropdowns, and the agency and component lists
-   start with the largest ones. Only the controls change: the dashboard's own inputs stay in charge. The year buttons set
-   the hidden "Fiscal years" dropdowns; the lists keep their options and values and are only regrouped. ---------- */
+/* ---------- Fiscal-year buttons in place of the two year dropdowns, and agency and component lists that start with the
+   largest ones. The buttons set the hidden dropdowns and the lists are only regrouped, so the dashboard's own inputs stay
+   in charge. ---------- */
 (function () {
   const DATA = (window.__foiaJson = window.__foiaJson || fetch("data/foia.json").then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(D => { D.ids.Agency = D.ids.Agency.map(fdAgency); return D }));
   const ev = el => el.dispatchEvent(new Event("change", {bubbles: true}));
 
-  // ---- fiscal years: presets and one button per year, as in v6. Click a year, then another; the same year twice = one year
+  // ---- fiscal years: presets and one button per year. Click a year, then another; the same year twice = one year
   const yearBox = () => document.querySelector(".years");
   const yearSel = () => { const w = yearBox(); return w ? [...w.querySelectorAll("select")] : [] };
   function buildYears(card) {
@@ -461,7 +373,7 @@ function storyPlaceholder(kicker) {
   }
 
   // ---- lists: the 10 agencies with the most requests in the latest year, and an agency's 5 largest components in the last
-  // year chosen (only when it has more than 6), both A-Z inside their group, as in v6. A shorter list, not a ranking.
+  // year chosen (only when it has more than 6), A-Z inside each group. A shorter list, not a ranking.
   function regroup(sel, groups) {
     const keep = sel.value, frag = document.createDocumentFragment();
     for (const [label, opts] of groups) { if (!opts.length) continue;
@@ -521,7 +433,7 @@ function storyPlaceholder(kicker) {
       regroup(sel, [[null, head], [`Largest 5 (FY${hi})`, rest.filter(o => big.includes(o))], ["All other components", rest.filter(o => !big.includes(o))]]);
     });
   }
-  function fixNote() {   // the sidebar note named the hidden "To FY" dropdown
+  function fixNote() {   // the sidebar note names the hidden "To FY" dropdown: say "the last year chosen"
     document.querySelectorAll(".sidebar p, .sidebar .side-note, p").forEach(el => {
       if (el.dataset.fdNote || !el.textContent.includes('"To FY" year')) return;
       const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
@@ -541,8 +453,8 @@ function storyPlaceholder(kicker) {
   document.addEventListener("DOMContentLoaded", scan);
 })();
 
-/* ---------- "Clear all" for the agency and component choices (2026-11-14): resets Agency, Component and Compare with to how the
-   page opens, in one step. Years, the question and "Agencies added up in the total" are not touched. ---------- */
+/* ---------- "Clear all": resets Agency, Component and Compare with to how the page opens, in one step. Years, the question
+   and "Agencies added up in the total" are not touched. ---------- */
 (function () {
   const formSel = lab => { const l = [...document.querySelectorAll("label")].find(x => x.textContent.trim() === lab); const f = l && l.closest("form"); return f && f.querySelector("select") };
   const fire = (el, ...types) => types.forEach(t => el.dispatchEvent(new Event(t, {bubbles: true})));
@@ -579,9 +491,9 @@ function storyPlaceholder(kicker) {
   document.addEventListener("click", () => setTimeout(update, 0), true);   // the × on a compare chip
 })();
 
-/* ---------- The view in the page address, and "Copy link to this view" (from v3, 2026-11-14). The address records the question,
-   agency, component, years, compare list, the two radio choices and the Explore measure; opening such a link sets the same
-   controls again, in order, the way a user would. The dashboard's own code is not changed. ---------- */
+/* ---------- The view in the page address, and "Copy link to this view". The address records the question, agency, component,
+   years, compare list, the two radio choices and the Explore measure; opening such a link sets the same controls again, in
+   order, the way a user would. ---------- */
 (function () {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const waitFor = async (f, ms = 8000) => { for (let t = 0; t < ms; t += 100) { const v = f(); if (v) return v; await sleep(100) } return null };
@@ -602,7 +514,9 @@ function storyPlaceholder(kicker) {
       if (lo !== all[0] || hi !== all[all.length - 1]) { p.set("from", lo); p.set("to", hi) } }
     const cmp = document.querySelector("div.cmp"); if (cmp && Array.isArray(cmp.value) && cmp.value.length) p.set("with", cmp.value.join("~"));
     if ((checkedText("Agencies added up in the total") || "").startsWith("Only")) p.set("scope", "same");
-    if (q === 5 && checkedText("Reversal rate out of") === "All processed appeals") p.set("base", "all");
+    // the reversal-rate base also sets the overview's appeals tile and "Compare with"; pages other than Question 5 hide its control,
+    // so there the choice is read from where the dashboard keeps it
+    if ((q === 5 ? checkedText("Reversal rate out of") : (window.__memo || {}).base5) === "All processed appeals") p.set("base", "all");
     if (q === 7) { const ty = selOf("Data type"), me = selOf("Measure");
       if (ty) p.set("type", ty.selectedOptions[0].textContent.trim().slice(0, 2)); if (me) p.set("m", me.selectedOptions[0].textContent.trim()) }
     return p;
@@ -645,7 +559,7 @@ function storyPlaceholder(kicker) {
       await sleep(600);
     } finally { restoring = false; sync() }
   }
-  function button() {   // under the year buttons, as in v3
+  function button() {   // under the year buttons
     const tl = document.querySelector(".fd-tl"); if (!tl || tl.querySelector(".fd-copy")) return;
     const b = document.createElement("button"); b.type = "button"; b.className = "fd-copy"; b.textContent = "Copy link to this view";
     b.addEventListener("click", async () => { sync();
@@ -655,5 +569,7 @@ function storyPlaceholder(kicker) {
   }
   new MutationObserver(button).observe(document.documentElement, {childList: true, subtree: true});
   const start = new URLSearchParams(location.search);
+  // set before the dashboard builds its inputs (this file runs first), so the base holds on every page, not only on Question 5
+  if (start.get("base") === "all") window.__memo = Object.assign(window.__memo || {}, {base5: "All processed appeals"});
   if ([...start.keys()].length) restore(start);
 })();

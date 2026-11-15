@@ -1,26 +1,23 @@
-"""Build the three component-level tables from the foia.gov API annual reports only (the site's database).
+"""Build the three component-level tables from the foia.gov API annual reports.
 
-  component_master_no_03_06_11.csv  one row per fiscal year x agency x component (+ one Agency Overall row);
-                                    8 ID columns and the same 244 data columns as before
-  other_reasons_03_11.csv           03 / 11 "Other" reasons, one row per component per reason
+  component_master_no_03_06_11.csv  one row per fiscal year x agency x component, plus one Agency Overall row;
+                                    8 ID columns and 244 data columns
+  other_reasons_03_11.csv           03 / 11 "other" reasons, one row per component per reason
   exemption_statutes_06.csv         06 Exemption 3 statutes, one row per component per statute
 
-Values are copied from the API as they are (blank, 0, N/A and "<1" not changed); the text columns of the 03/11 and
-06 files get clean_text() (formatting only). Field names: field_map.csv (API field -> column), the same mapping
-checked against the XML on 10/19.
+Values are copied as the API gives them (blank, 0, N/A and "<1" kept); the 03/11 and 06 text gets clean_text()
+(formatting only). Column names come from field_map.csv (API field -> column).
 
-Rows:
-- Agency Overall: the report's agency totals (field_overall_*; two of them are linked by hand, see OVERALL_EXTRA). A report of one organization (no component, or
-  one component and no table where it sits next to records linked to no component) gets no component rows:
-  where a total is blank, its record is used.
-- component: every component that has a record in the report (code and name as on the site now), including a
-  component that appears only in the 06 statutes (its row in the master table is then blank).
-- second_entry: the second record the site has for the same component in one table (both count on the site).
-- no_component: a record the site does not link to any component.
-- Commerce FY2025 "DOC" is flagged in Exclude From Component Sum (it repeats the agency total).
+Row types:
+- agency_overall: the report's agency totals (field_overall_*; two are linked by hand, see OVERALL_EXTRA). A report
+  for a single organization gets no component rows; where a total is blank, its own record is used.
+- component: every component with a record in the report, including one that appears only in the 06 statutes.
+- second_entry: a second record for the same component in one table (foia.gov counts both).
+- no_component: a record foia.gov links to no component.
+- Commerce FY2025 "DOC" repeats the agency total and is marked Exclude From Component Sum.
 
 Usage: python build_component_tables_from_api.py <api dir> <field_map.csv> <report_data_map.json>
-       <agency table FOIA_agency_FY2008-2025.csv> <component_master_no_03_06_11.csv (old, for the column list)>
+       <FOIA_agency_FY2008-2025.csv> <component_master_no_03_06_11.csv (existing, for the column list)>
        <data_type_map.csv> <out dir>
 """
 import csv
@@ -33,10 +30,8 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import api_to_component_rows as conv  # noqa: E402
-from build_component_master import SECTIONS  # noqa: E402
-from clean_text_03_06_11 import clean_text  # noqa: E402
-from foia_component import summable  # noqa: E402
+import foia_fields as ff  # noqa: E402
+from foia_fields import SECTIONS, clean_text, summable  # noqa: E402
 
 csv.field_size_limit(10**9)
 API_DIR, FMAP, DMAP, AGENCY, OLD_MASTER, TYPES, OUT = sys.argv[1:8]
@@ -65,7 +60,7 @@ def fmt(x):
 # ---------- columns ----------
 MCOLS = [c for c in next(csv.reader(open(OLD_MASTER, newline="", encoding="utf-8"))) if re.match(r"\d\d_", c)]  # data columns
 assert len(MCOLS) == 244, len(MCOLS)
-fmap, overall = conv.load_maps(FMAP, DMAP)
+fmap, overall = ff.load_maps(FMAP, DMAP)
 # the site's data map names these two record fields field_not_agency_rec / field_rec_not_reasonably_desc, but the
 # records use field_not_agency_record / field_rec_not_desc, so load_maps() cannot link their agency totals
 OVERALL_EXTRA = {("AppealNonExemptionDenialSection", "NonExemptionDenialQuantity[NotAgency]"): "field_overall_vic2_not_agency_re",
@@ -117,7 +112,7 @@ def report(path):
     comps = {}  # component node id -> (code, name)
     recs = defaultdict(list)  # section -> [(node id or None, {column: value}, {reason: qty})]
     statutes = []  # (statute no., node id or None or "TOTAL", statute, info, case, qty); "TOTAL" = the agency total
-    for seg, sec in conv.SEG.items():
+    for seg, sec in ff.SEG.items():
         rel = (rep["relationships"].get(seg) or {}).get("data") or []
         for pi, p in enumerate(rel if isinstance(rel, list) else [rel]):
             para = inc.get(p["id"])
@@ -125,41 +120,41 @@ def report(path):
                 continue
             a = para["attributes"]
             if seg == "field_statute_iv":
-                text = (conv.val(a.get("field_statute")), conv.val(a.get("field_type_of_info_withheld")),
-                        conv.val(a.get("field_case_citation")))
-                statutes.append((pi, "TOTAL", *text, conv.val(a.get("field_total_num_relied_by_agency"))))
+                text = (ff.val(a.get("field_statute")), ff.val(a.get("field_type_of_info_withheld")),
+                        ff.val(a.get("field_case_citation")))
+                statutes.append((pi, "TOTAL", *text, ff.val(a.get("field_total_num_relied_by_agency"))))
                 for q in (para["relationships"].get("field_agency_component_inf") or {}).get("data") or []:
                     det = inc.get(q["id"])
                     if det:
                         cid = comp_of(det["relationships"].get("field_agency_component"))
                         if cid in inc:
-                            comps[cid] = (conv.ws(inc[cid]["attributes"].get("abbreviation")), conv.ws(inc[cid]["attributes"].get("title")))
+                            comps[cid] = (ff.ws(inc[cid]["attributes"].get("abbreviation")), ff.ws(inc[cid]["attributes"].get("title")))
                         statutes.append((pi, cid if cid in inc else None, *text,
-                                         conv.val(det["attributes"].get("field_num_relied_by_agency_comp"))))
+                                         ff.val(det["attributes"].get("field_num_relied_by_agency_comp"))))
                 continue
             cid = comp_of(para["relationships"].get("field_agency_component"))
             if cid in inc:
-                comps[cid] = (conv.ws(inc[cid]["attributes"].get("abbreviation")), conv.ws(inc[cid]["attributes"].get("title")))
+                comps[cid] = (ff.ws(inc[cid]["attributes"].get("abbreviation")), ff.ws(inc[cid]["attributes"].get("title")))
             vals = {}
             for k, v in a.items():
                 col = fmap.get((sec, k))
-                if col and conv.val(v) != "":
-                    vals[col] = conv.val(v)
+                if col and ff.val(v) != "":
+                    vals[col] = ff.val(v)
             reasons = []
-            for q in (para["relationships"].get(conv.NESTED.get(seg, "")) or {}).get("data") or []:
+            for q in (para["relationships"].get(ff.NESTED.get(seg, "")) or {}).get("data") or []:
                 det = inc.get(q["id"])
                 if det:
                     x = det["attributes"]
-                    reasons.append((conv.val(x.get("field_desc_oth_reasons")),
-                                    next((conv.val(v) for k, v in x.items() if k.startswith("field_num")), "")))
+                    reasons.append((ff.val(x.get("field_desc_oth_reasons")),
+                                    next((ff.val(v) for k, v in x.items() if k.startswith("field_num")), "")))
             recs[sec].append((cid if cid in inc else None, vals, reasons))
-    return fy, agency, conv.ws(ag.get("abbreviation")), at, comps, recs, statutes
+    return fy, agency, ff.ws(ag.get("abbreviation")), at, comps, recs, statutes
 
 
 def agency_total(at, recs, one_org, sec, field):
     of = overall.get((sec, field))
-    if of and conv.val(at.get(of)) != "":
-        return conv.val(at.get(of))
+    if of and ff.val(at.get(of)) != "":
+        return ff.val(at.get(of))
     rows = [v.get(field, "") for _, v, _ in recs.get(sec, [])]
     rows = [v for v in rows if v != ""]
     if one_org:

@@ -1,5 +1,5 @@
-"""Storyline 4 (backlog) walkthrough, from the final notebook S4-backlog-outside-immigration-en (11/12). Series recomputed with
-storyline_lib and anchored to the notebook's assertions; every number in the text is checked against the notebook text."""
+"""Backlog (S4) storyline, from the notebook S4-backlog-outside-immigration-en. Series are recomputed with storyline_lib and anchored to
+the notebook's assertions; every number in the text is checked against the notebook text."""
 from collections import defaultdict
 from storyline_lib import G, YR, REC, PRO, BLR, col, tot, bykey, series as _series, ni, vba, AGK, backlog_revisions
 from walk_common import check_numbers
@@ -107,17 +107,17 @@ def build():
              "Receipts fell from 452,915 to 375,203 (−17.2%) while backlog rose from 84,549 to 103,458 (+22.4%). Of the 77,712 drop in receipts, NARA accounts for 41,728 and DHS PRIV for 18,903, 78% together; the rise in backlog is spread out (DHS's other components +4,247, DoD +2,802, DOS +2,692, DOJ +2,607)."]},
            {"h": "The FY2023–24 dip", "p": [
              "VBA and PRIV received many more requests while carrying little backlog, which enlarged the denominator. Without these two units the ratio is 27.6% or higher in every year from FY2020, with no dip; the FY2020–25 average is 14.1 points above FY2014–19."]},
-           {"h": "A sensitivity check only", "p": ["The main population does not change: choosing units to remove after seeing the results would be choosing data for the conclusion. The check shows that the 9.1 points is conservative."]}],
+           {"h": "A sensitivity check only", "p": ["The main population does not change: choosing units to remove after seeing the results would be choosing data for the conclusion. In this check the gap is larger than the 9.1 points, not smaller."]}],
          "method": "Same ratio, with units whose receipts swing sharply left out.",
          "charts": [{"title": "Backlog ÷ receipts, removing units with large swings in receipts", "series": {k: P(v) for k, v in alt.items()},
                      "colors": {"Outside the four units": "#4582cc", "Also without VBA and DHS PRIV": "#8c3a91", "Also without VBA, DHS PRIV, DOS and NARA": "#21304a"},
                      "short": {"Outside the four units": "outside", "Also without VBA and DHS PRIV": "w/o VBA, PRIV", "Also without VBA, DHS PRIV, DOS and NARA": "also w/o DOS, NARA"}}]},
-        {"kicker": "Outside the four units", "title": "A second measure agrees, and the backlog definition has not drifted",
+        {"kicker": "Outside the four units", "title": "A second measure moves the same way",
          "sections": [
            {"h": "What we looked at", "p": ["Requests pending at year end (Table 01) count every open request regardless of the deadline, so they avoid differences in how agencies apply deadlines."]},
            {"h": "What the chart shows", "p": [
-             "Pending at year end ÷ receipts moves the same way: 15.0% in FY2013, 25.1% in FY2019, 35.1% in FY2020 and 37.8% in FY2025. Backlog as a share of pending stays between 69.4% and 81.2% in all 18 years, so the rise is not a change in how backlog is counted.",
-             "On a denominator of perfected requests only, the increase is larger: 18.2% to 30.0%, 11.8 points. The 9.1 points is therefore conservative."]}],
+             "Pending at year end ÷ receipts moves the same way: 15.0% in FY2013, 25.1% in FY2019, 35.1% in FY2020 and 37.8% in FY2025. Backlog as a share of pending stays between 69.4% and 81.2% in all 18 years: the rise shows in both measures, not only in backlog. The reports cannot show whether agencies changed how they count.",
+             "On a denominator of perfected requests only, the increase is larger: 18.2% to 30.0%, 11.8 points. On this denominator the gap is larger than the 9.1 points: a check of the choice of denominator, not proof of a lower bound."]}],
          "method": "Perfected requests processed: Tables 16–18. Only perfected requests can be backlogged.",
          "charts": [{"title": "Outside the four units: four ratios", "series": {k: P(v) for k, v in second.items()},
                      "colors": {"Backlog ÷ receipts": "#4582cc", "Pending at year end ÷ receipts": "#8c3a91", "Backlog ÷ processed": "#d4a92c", "Backlog ÷ perfected processed": "#0b5a36"},
