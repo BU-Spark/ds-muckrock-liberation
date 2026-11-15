@@ -11,7 +11,7 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
         and for their components: offices inside an agency, such as ICE inside DHS.</p>
         <p>Data: foia.gov annual reports, built 2026-11-02.</p>
         <h3>Three ways in</h3>
-        <ol><li><b>Overview</b>, the start page: eight headline numbers, for all agencies or for the agency or component you pick. Click a card to read what its number means and what stands out in the years chosen; from there, open the question with the full view.</li>
+        <ol><li><b>Overview</b>, the start page: ten headline numbers, for all agencies or for the agency or component you pick. Click a card to read what its number means and what stands out in the years chosen; from there, open the question with the full view.</li>
           <li><b>Questions 1–6</b>, on the left: Requests received &amp; processed · Response time · Backlog, staff &amp; cost · Outcomes &amp; exemptions · Appeals · Backlog vs intake. Each opens a chart.</li>
           <li><b>Explore all data</b>: any measure in the reports. Choose a Data type, then a Measure.</li></ol>
         <p class="fd-small">Click a selected item again to clear it.</p></section>
