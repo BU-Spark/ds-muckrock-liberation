@@ -11,7 +11,7 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
         and for their components: offices inside an agency, such as ICE inside DHS.</p>
         <p>Data: foia.gov annual reports, built 2026-11-02.</p>
         <h3>Three ways in</h3>
-        <ol><li><b>Overview</b>, the start page: ten headline numbers, for all agencies or for the agency or component you pick. Click a card to read what its number means and what stands out in the years chosen; from there, open the question with the full view.</li>
+        <ol><li><b>Overview</b>, the start page: ten headline numbers, for all agencies or for the agency or component you pick. Click a card to open it: what its number means, what stands out in the years chosen, and a larger chart. The agency, component and years can still be changed while a card is open.</li>
           <li><b>Questions 1–6</b>, on the left: Requests received &amp; processed · Response time · Backlog, staff &amp; cost · Outcomes &amp; exemptions · Appeals · Backlog vs intake. Each opens a chart.</li>
           <li><b>Explore all data</b>: any measure in the reports. Choose a Data type, then a Measure.</li></ol>
         <p class="fd-small">“Home” in the top bar goes back to the overview; so does clicking a selected question again.</p></section>
@@ -245,6 +245,7 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
     // the reversal-rate base also sets the overview's appeals tile and "Compare with"; pages other than Question 5 hide its control,
     // so there the choice is read from where the dashboard keeps it
     if ((q === 5 ? checkedText("Reversal rate out of") : (window.__memo || {}).base5) === "All processed appeals") p.set("base", "all");
+    const od = document.querySelector(".odetail:not([hidden])"); if (!q && od) p.set("card", od.dataset.i);   // the card opened on the overview
     if (q === 7) { const ty = selOf("Data type"), me = selOf("Measure");
       if (ty) p.set("type", ty.selectedOptions[0].textContent.trim().slice(0, 2)); if (me) p.set("m", me.selectedOptions[0].textContent.trim()) }
     return p;
@@ -299,15 +300,19 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
   const start = new URLSearchParams(location.search);
   // set before the dashboard builds its inputs (this file runs first), so the base holds on every page, not only on Question 5
   if (start.get("base") === "all") window.__memo = Object.assign(window.__memo || {}, {base5: "All processed appeals"});
+  if (!start.get("q") && +start.get("card") > 0) window.__openCard = +start.get("card") - 1;   // the overview opens this card when it is first drawn
   if ([...start.keys()].length) restore(start);
 })();
 
-/* ---------- "Home" in the top bar (and the dashboard's name): back to the overview. The agency, component, comparison and
-   years chosen stay as they are; "Clear all" resets those. ---------- */
+/* ---------- "Home" in the top bar (and the dashboard's name): back to the overview's cards. The agency, component,
+   comparison and years chosen stay as they are; "Clear all" resets those. ---------- */
 (function () {
-  const goHome = e => { if (e) e.preventDefault(); const on = document.querySelector(".qbtn.on"); if (on) on.click(); window.scrollTo(0, 0) };
+  const openPanel = () => document.querySelector(".odetail:not([hidden])");
+  const goHome = e => { if (e) e.preventDefault(); window.__openCard = null;
+    const c = openPanel(); if (c) c.querySelector(".od-close").click();
+    const on = document.querySelector(".qbtn.on"); if (on) on.click(); window.scrollTo(0, 0) };
   let btn = null;
-  const update = () => { if (btn) btn.classList.toggle("fd-at-home", !document.querySelector(".qbtn.on")) };
+  const update = () => { if (btn) btn.classList.toggle("fd-at-home", !document.querySelector(".qbtn.on") && !openPanel()) };
   function place() {
     const nav = document.querySelector("nav.navbar"); if (!nav || nav.querySelector(".fd-home")) return;
     btn = document.createElement("button"); btn.type = "button"; btn.className = "fd-home"; btn.title = "Back to the overview";
@@ -318,4 +323,10 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
   }
   document.addEventListener("DOMContentLoaded", place); place();
   document.addEventListener("click", () => setTimeout(update, 0), true);
+  // an opened card on the overview: Escape closes it, the arrow keys step through the cards
+  document.addEventListener("keydown", e => {
+    const d = openPanel(); if (!d || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName) || document.querySelector('.card[data-full-screen="true"]')) return;
+    const b = d.querySelector(e.key === "Escape" ? ".od-close" : e.key === "ArrowRight" ? ".od-next" : e.key === "ArrowLeft" ? ".od-prev" : "none");
+    if (b && !b.disabled) b.click();
+  });
 })();
