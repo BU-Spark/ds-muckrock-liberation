@@ -7803,7 +7803,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Storyline-0-(opening):-Requests-nearly-tripled-since-FY2008,-mostly-at-immigration-related-units">Storyline 0 (opening): Requests nearly tripled since FY2008, mostly at immigration-related units<a class="anchor-link" href="#Storyline-0-(opening):-Requests-nearly-tripled-since-FY2008,-mostly-at-immigration-related-units">¶</a></h1><p>The later storylines all separate DHS, or four immigration-related units, before drawing conclusions. This one explains why, and answers the project's first base question: <strong>how have federal FOIA request and processing volumes changed, and how does that vary by agency?</strong></p>
-<p><strong>The finding in one sentence (Section 6):</strong> government-wide FOIA requests received rose from 560,978 in FY2008 to 1,707,413 in FY2025, 3.04 times as many (2.86 times the FY2010 level, when the list of agencies is nearly complete); 74.3% of the increase is at four immigration-related units, USCIS, CBP, ICE and EOIR, whose share of all requests rose from 19.7% to 58.7% in FY2024. Requests at other units (without VBA and DHS's other components) were roughly flat for a decade, fell to a low in FY2020–22, recovered by FY2024, and were the highest of the 18 years only in FY2025.</p>
+<p><strong>The finding in one sentence (Section 6):</strong> government-wide FOIA requests received rose from 560,978 in FY2008 to 1,707,413 in FY2025, 3.04 times as many (2.86 times the FY2010 level, when the list of agencies is nearly complete); 74.3% of the increase is at four immigration-related units, USCIS, CBP, ICE and EOIR, whose share of all requests rose from 19.7% to 58.7% in FY2024 (56.4% in FY2025). Requests at other units rose 1.65 times (1.62 from FY2010); without VBA and DHS's other components they were roughly flat for a decade, fell to a low in FY2020–22, recovered by FY2024, and were the highest of the 18 years only in FY2025.</p>
 <p><strong>Roadmap:</strong></p>
 <table>
 <thead>
@@ -7827,7 +7827,7 @@ a.anchor-link {
 <tr>
 <td>3</td>
 <td>What about everyone else?</td>
-<td>Without VBA and DHS's other components: flat for a decade, a low in FY2020–22, recovered by FY2024, a new high only in FY2025; PRIV's FY2019 jump is a transfer from CISA</td>
+<td>Outside the four units 1.65 times as many; without VBA and DHS's other components: flat for a decade, a low in FY2020–22, recovered by FY2024, a new high only in FY2025; PRIV's FY2019 jump mirrors CISA's fall, consistent with a transfer</td>
 </tr>
 <tr>
 <td>4</td>
@@ -7837,7 +7837,7 @@ a.anchor-link {
 <tr>
 <td>5</td>
 <td>Is processing keeping up?</td>
-<td>Broadly at the four units; outside them, FY2025 processing was only 88.0% of receipts; a growing part of the counts is non-perfected requests</td>
+<td>Broadly at the four units; outside them, FY2025 processing was only 88.0% of receipts, more than half of the shortfall at PRIV; closures of non-perfected requests rose from 5.1%–5.9% of processed requests in FY2014–19 to 9.3%–10.0% in FY2023–25</td>
 </tr>
 <tr>
 <td>6</td>
@@ -7890,6 +7890,7 @@ a.anchor-link {
 <span class="k">assert</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">pro</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2008</span><span class="p">,</span><span class="mi">2025</span><span class="p">)]</span><span class="o">==</span><span class="p">[</span><span class="mi">578141</span><span class="p">,</span><span class="mi">1635171</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">pro</span><span class="o">/</span><span class="n">rec</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2023</span><span class="p">,</span><span class="mi">2025</span><span class="p">]]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mf">93.5</span><span class="p">,</span><span class="mf">95.8</span><span class="p">]</span>
 <span class="c1"># FY2008-09: agencies with no FY2008 rows</span>
 <span class="n">ag08</span><span class="o">=</span><span class="p">{</span><span class="n">AGK</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">'Fiscal Year'</span><span class="p">]</span><span class="o">==</span><span class="s1">'2008'</span><span class="p">};</span> <span class="n">late</span><span class="o">=</span><span class="p">{</span><span class="n">AGK</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">G</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">'Fiscal Year'</span><span class="p">]</span><span class="o">==</span><span class="s1">'2010'</span><span class="p">}</span><span class="o">-</span><span class="n">ag08</span><span class="p">;</span> <span class="n">in_late</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">AGK</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="n">late</span>
+<span class="n">ag09</span><span class="o">=</span><span class="p">{</span><span class="n">AGK</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">'Fiscal Year'</span><span class="p">]</span><span class="o">==</span><span class="s1">'2009'</span><span class="p">};</span> <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">late</span><span class="o">&amp;</span><span class="n">ag09</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">late</span><span class="o">-</span><span class="n">ag09</span><span class="p">)</span><span class="o">==</span><span class="mi">24</span>   <span class="c1"># 2 of the 26 appear in FY2009, 24 in FY2010</span>
 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">late</span><span class="p">)</span><span class="o">==</span><span class="mi">26</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">REC</span><span class="p">,</span><span class="mi">2010</span><span class="p">,</span><span class="n">in_late</span><span class="p">)</span><span class="o">/</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">REC</span><span class="p">,</span><span class="mi">2010</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">9.3</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">REC</span><span class="p">,</span><span class="mi">2010</span><span class="p">,</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">ni</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">in_late</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="o">/</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">REC</span><span class="p">,</span><span class="mi">2010</span><span class="p">,</span><span class="n">ni</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">12.1</span>
 </pre></div>
 </div>
@@ -8059,7 +8060,7 @@ a.anchor-link {
 <ul>
 <li>Requests received rose from 560,978 in FY2008 to 1,707,413 in FY2025, 3.04 times as many. The growth was uneven: 858,952 in FY2019 and 838,164 in FY2021, then 2.04 times as many four years later.</li>
 <li>Processing broadly kept pace (578,141 in FY2008, 1,635,171 in FY2025); processed ÷ received was 93.5% in FY2023 and 95.8% in FY2025 (Section 5 splits this).</li>
-<li><strong>Some agencies are missing in FY2008–09:</strong> 26 agencies have no FY2008 data and appear in FY2009–10; in FY2010 they account for 9.3% of government receipts and 12.1% outside the four units. The FY2008 starting level is therefore low and the 3.04 multiple somewhat overstated; from FY2010 it is 2.86, hence "nearly tripled" in the title.</li>
+<li><strong>Some agencies are missing in FY2008–09:</strong> 26 agencies have no FY2008 data and appear in FY2009–10 (2 in FY2009, the other 24 in FY2010); in FY2010 they account for 9.3% of government receipts and 12.1% outside the four units. The FY2008 starting level is therefore low and the 3.04 multiple somewhat overstated; from FY2010 it is 2.86, hence "nearly tripled" in the title.</li>
 </ul>
 <h2 id="2.-Where-is-the-growth?">2. Where is the growth?<a class="anchor-link" href="#2.-Where-is-the-growth?">¶</a></h2><p>The four immigration-related units and the rest, separately: requests received by each and the four units' share of the total; a check with FY2010 as the starting year; the four units one by one; then which units account for the requests added in FY2021–25.</p>
 </div>
@@ -8497,7 +8498,7 @@ a.anchor-link {
 <li>From FY2021 to FY2025 government receipts rose by 869,249, of which the four units account for 518,067 (59.6%), led by USCIS (+354,762). The five units adding the most (USCIS, CBP, PRIV, VBA and EOIR) account for 78.1%, but PRIV and VBA are not among the four units.</li>
 </ul>
 <p>Government-wide request volume therefore mainly reflects the four immigration-related units, which is why the later storylines separate them first.</p>
-<h2 id="3.-What-about-everyone-else?">3. What about everyone else?<a class="anchor-link" href="#3.-What-about-everyone-else?">¶</a></h2><p>First, requests received outside the four units. The largest recent changes are at VBA and DHS PRIV, and PRIV's jump is in fact a transfer between two DHS components (second point below). So a second line also removes VBA and DHS's other components: how DHS's components should be grouped, and whether PRIV belongs with the immigration-related units, are both undecided, and removing all of them is the cleanest choice. Finally, how broad the rise is by agency, each agency against its own FY2014–19 average.</p>
+<h2 id="3.-What-about-everyone-else?">3. What about everyone else?<a class="anchor-link" href="#3.-What-about-everyone-else?">¶</a></h2><p>First, requests received outside the four units. The largest recent changes are at VBA and DHS PRIV, and PRIV's jump mirrors a fall at another DHS component, CISA (second point below). So a second line also removes VBA and DHS's other components: how DHS's components should be grouped, and whether PRIV belongs with the immigration-related units, are both undecided, and removing all of them is the cleanest choice. Finally, how broad the rise is by agency, each agency against its own FY2014–19 average.</p>
 </div>
 </div>
 </div>
@@ -8523,7 +8524,7 @@ a.anchor-link {
 <span class="n">display</span><span class="p">(</span><span class="n">split</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">'Added requests received, FY2021 → FY2025'</span><span class="p">))</span>
 <span class="k">assert</span> <span class="n">split</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mi">100705</span><span class="p">,</span><span class="mi">89244</span><span class="p">,</span><span class="mi">161233</span><span class="p">,</span><span class="mi">351182</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">split</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">split</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">split</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">54.1</span>
 <span class="k">assert</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">vbar</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2022</span><span class="p">,</span><span class="mi">2023</span><span class="p">,</span><span class="mi">2025</span><span class="p">)]</span><span class="o">==</span><span class="p">[</span><span class="mi">5529</span><span class="p">,</span><span class="mi">61658</span><span class="p">,</span><span class="mi">100897</span><span class="p">]</span>
-<span class="c1"># CISA and PRIV: one stream of requests, reported under CISA through FY2018 and under PRIV from FY2019</span>
+<span class="c1"># CISA and PRIV: CISA's requests fall in FY2019 by about as much as PRIV's rise</span>
 <span class="k">assert</span> <span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2018</span><span class="p">,</span><span class="mi">2019</span><span class="p">],</span><span class="s1">'DHS CISA'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mi">37516</span><span class="p">,</span><span class="mi">353</span><span class="p">]</span> <span class="ow">and</span> <span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2018</span><span class="p">,</span><span class="mi">2019</span><span class="p">],</span><span class="s1">'DHS PRIV'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mi">1448</span><span class="p">,</span><span class="mi">43024</span><span class="p">]</span>
 <span class="k">assert</span> <span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2014</span><span class="p">,</span><span class="mi">2018</span><span class="p">,</span><span class="mi">2019</span><span class="p">,</span><span class="mi">2020</span><span class="p">,</span><span class="mi">2025</span><span class="p">],</span><span class="s1">'CISA + PRIV'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mi">8480</span><span class="p">,</span><span class="mi">38964</span><span class="p">,</span><span class="mi">43377</span><span class="p">,</span><span class="mi">24298</span><span class="p">,</span><span class="mi">148873</span><span class="p">]</span>
 <span class="k">assert</span> <span class="nb">round</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2025</span><span class="p">,</span><span class="s1">'CISA + PRIV'</span><span class="p">]</span><span class="o">/</span><span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2014</span><span class="p">,</span><span class="s1">'CISA + PRIV'</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">17.6</span> <span class="ow">and</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="mi">2026</span><span class="p">)</span> <span class="k">if</span> <span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="s1">'CISA + PRIV'</span><span class="p">]</span><span class="o">&lt;</span><span class="n">pc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">'CISA + PRIV'</span><span class="p">]]</span><span class="o">==</span><span class="p">[</span><span class="mi">2020</span><span class="p">]</span>
@@ -9003,7 +9004,7 @@ a.anchor-link {
 <p><strong>Section 3:</strong></p>
 <ul>
 <li><strong>Outside the four units, roughly flat for more than a decade:</strong> 450,590 in FY2008 and 452,915 in FY2019, 411,481–470,719 each year in FY2010–19; 394,065 in FY2021, 548,380 in FY2023, already above the earlier maximum, and 745,247 in FY2025. Of the 351,182 added from FY2021 to FY2025, DHS's other components account for +100,705 and VBA for +89,244, 54.1% together; all other units +161,233 (second table). This is why the second line removes them.</li>
-<li><strong>PRIV's FY2019 jump is a transfer from CISA (first and third tables):</strong> CISA received 37,516 requests in FY2018 and 353 in FY2019, while PRIV went from 1,448 to 43,024. Pending requests line up too: PRIV started FY2019 with 2,589 pending, against 586 at its own FY2018 year end; adding CISA's 2,102 gives 2,688, close to that. Together the two form an almost continuous series: 8,480 in FY2014, 38,964 in FY2018, 43,377 in FY2019 and 148,873 in FY2025, 17.6 times as many over FY2014–25, with one down year (24,298 in FY2020). These requests rose steadily for more than a decade rather than jumping in FY2019.</li>
+<li><strong>PRIV's FY2019 jump mirrors CISA's fall, consistent with a transfer (first and third tables):</strong> CISA received 37,516 requests in FY2018 and 353 in FY2019, while PRIV went from 1,448 to 43,024. Pending requests line up too: PRIV started FY2019 with 2,589 pending, against 586 at its own FY2018 year end; adding CISA's 2,102 gives 2,688, close to that. Together the two form an almost continuous series: 8,480 in FY2014, 38,964 in FY2018, 43,377 in FY2019 and 148,873 in FY2025, 17.6 times as many over FY2014–25, with one down year (24,298 in FY2020). Taken together, the two components' requests rose steadily for more than a decade rather than jumping in FY2019.</li>
 <li><strong>VBA:</strong> 5,529 in FY2022, 61,658 in FY2023 and 100,897 in FY2025 (the same change behind VBA in Storylines 1 and 4).</li>
 <li><strong>Without VBA and DHS's other components:</strong> 394,268–444,654 each year in FY2010–19. FY2020–22 is a low (340,350, 322,865 and 326,473); FY2023, at 392,710, is still just below the earlier range; FY2024, at 417,789, is back within it; FY2025, at 484,098, is the highest of the 18 years, 49.9% above FY2021, 21.5% above FY2019 and 8.9% above the FY2010–19 maximum. Through FY2024 this is a recovery; only FY2025 is a new high.</li>
 <li><strong>Not driven by one agency:</strong> this line rose by 85,708 from FY2019 to FY2025; after also removing any one agency, the rise is still at least 64,000 (removing DOS, 16.4% above FY2019).</li>
@@ -9031,6 +9032,7 @@ a.anchor-link {
 <span class="n">display</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">'FY2025 share of government (%)'</span><span class="p">:</span><span class="mi">100</span><span class="o">*</span><span class="n">top15</span><span class="o">/</span><span class="n">g25</span><span class="o">.</span><span class="n">sum</span><span class="p">()})</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">({</span><span class="s1">'FY2008'</span><span class="p">:</span><span class="s1">'</span><span class="si">{:,.0f}</span><span class="s1">'</span><span class="p">,</span><span class="s1">'FY2025'</span><span class="p">:</span><span class="s1">'</span><span class="si">{:,.0f}</span><span class="s1">'</span><span class="p">,</span><span class="s1">'FY2025 share of government (%)'</span><span class="p">:</span><span class="s1">'</span><span class="si">{:.1f}</span><span class="s1">'</span><span class="p">},</span><span class="n">na_rep</span><span class="o">=</span><span class="s1">'–'</span><span class="p">))</span>
 <span class="k">assert</span> <span class="nb">int</span><span class="p">((</span><span class="n">g25</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">==</span><span class="mi">117</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">g25</span><span class="p">[</span><span class="s1">'DHS'</span><span class="p">]</span><span class="o">/</span><span class="n">g25</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">59.7</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">g25</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">g25</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">84.1</span>
 <span class="k">assert</span> <span class="n">top15</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="s1">'DHS'</span><span class="p">,</span><span class="s1">'DOJ'</span><span class="p">,</span><span class="s1">'VA'</span><span class="p">,</span><span class="s1">'DoD'</span><span class="p">,</span><span class="s1">'HHS'</span><span class="p">]</span> <span class="ow">and</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">g25</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'DHS'</span><span class="p">,</span><span class="s1">'DOJ'</span><span class="p">,</span><span class="s1">'VA'</span><span class="p">)]</span><span class="o">==</span><span class="p">[</span><span class="mi">1019496</span><span class="p">,</span><span class="mi">159743</span><span class="p">,</span><span class="mi">124414</span><span class="p">]</span>
+<span class="k">assert</span> <span class="nb">round</span><span class="p">(</span><span class="n">g25</span><span class="p">[</span><span class="s1">'DHS'</span><span class="p">]</span><span class="o">/</span><span class="n">g25</span><span class="p">[</span><span class="s1">'DOJ'</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">6.4</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="n">g25</span><span class="p">[</span><span class="s1">'DHS'</span><span class="p">]</span><span class="o">/</span><span class="n">g25</span><span class="p">[</span><span class="s1">'VA'</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">8.2</span>
 <span class="k">assert</span> <span class="n">g08</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="s1">'DHS'</span><span class="p">,</span><span class="s1">'VA'</span><span class="p">,</span><span class="s1">'DoD'</span><span class="p">,</span><span class="s1">'DOJ'</span><span class="p">,</span><span class="s1">'HHS'</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">g08</span><span class="p">[</span><span class="s1">'DHS'</span><span class="p">]</span><span class="o">/</span><span class="n">g08</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">19.4</span>
 <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">comp</span><span class="p">[</span><span class="s1">'FY2008'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()])</span><span class="o">==</span><span class="p">{</span><span class="s1">'USDA'</span><span class="p">,</span><span class="s1">'EEOC'</span><span class="p">}</span>
 </pre></div>
@@ -9053,105 +9055,105 @@ a.anchor-link {
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
 </style>
-<table id="T_3d7f0">
+<table id="T_96580">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" id="T_3d7f0_level0_col0">FY2008</th>
-<th class="col_heading level0 col1" id="T_3d7f0_level0_col1">FY2025</th>
-<th class="col_heading level0 col2" id="T_3d7f0_level0_col2">FY2025 share of government (%)</th>
+<th class="col_heading level0 col0" id="T_96580_level0_col0">FY2008</th>
+<th class="col_heading level0 col1" id="T_96580_level0_col1">FY2025</th>
+<th class="col_heading level0 col2" id="T_96580_level0_col2">FY2025 share of government (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_3d7f0_level0_row0">DHS</th>
-<td class="data row0 col0" id="T_3d7f0_row0_col0">108,952</td>
-<td class="data row0 col1" id="T_3d7f0_row0_col1">1,019,496</td>
-<td class="data row0 col2" id="T_3d7f0_row0_col2">59.7</td>
+<th class="row_heading level0 row0" id="T_96580_level0_row0">DHS</th>
+<td class="data row0 col0" id="T_96580_row0_col0">108,952</td>
+<td class="data row0 col1" id="T_96580_row0_col1">1,019,496</td>
+<td class="data row0 col2" id="T_96580_row0_col2">59.7</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_3d7f0_level0_row1">DOJ</th>
-<td class="data row1 col0" id="T_3d7f0_row1_col0">59,615</td>
-<td class="data row1 col1" id="T_3d7f0_row1_col1">159,743</td>
-<td class="data row1 col2" id="T_3d7f0_row1_col2">9.4</td>
+<th class="row_heading level0 row1" id="T_96580_level0_row1">DOJ</th>
+<td class="data row1 col0" id="T_96580_row1_col0">59,615</td>
+<td class="data row1 col1" id="T_96580_row1_col1">159,743</td>
+<td class="data row1 col2" id="T_96580_row1_col2">9.4</td>
 </tr>
 <tr>
-<th class="row_heading level0 row2" id="T_3d7f0_level0_row2">VA</th>
-<td class="data row2 col0" id="T_3d7f0_row2_col0">99,333</td>
-<td class="data row2 col1" id="T_3d7f0_row2_col1">124,414</td>
-<td class="data row2 col2" id="T_3d7f0_row2_col2">7.3</td>
+<th class="row_heading level0 row2" id="T_96580_level0_row2">VA</th>
+<td class="data row2 col0" id="T_96580_row2_col0">99,333</td>
+<td class="data row2 col1" id="T_96580_row2_col1">124,414</td>
+<td class="data row2 col2" id="T_96580_row2_col2">7.3</td>
 </tr>
 <tr>
-<th class="row_heading level0 row3" id="T_3d7f0_level0_row3">DoD</th>
-<td class="data row3 col0" id="T_3d7f0_row3_col0">71,228</td>
-<td class="data row3 col1" id="T_3d7f0_row3_col1">77,423</td>
-<td class="data row3 col2" id="T_3d7f0_row3_col2">4.5</td>
+<th class="row_heading level0 row3" id="T_96580_level0_row3">DoD</th>
+<td class="data row3 col0" id="T_96580_row3_col0">71,228</td>
+<td class="data row3 col1" id="T_96580_row3_col1">77,423</td>
+<td class="data row3 col2" id="T_96580_row3_col2">4.5</td>
 </tr>
 <tr>
-<th class="row_heading level0 row4" id="T_3d7f0_level0_row4">HHS</th>
-<td class="data row4 col0" id="T_3d7f0_row4_col0">58,299</td>
-<td class="data row4 col1" id="T_3d7f0_row4_col1">55,006</td>
-<td class="data row4 col2" id="T_3d7f0_row4_col2">3.2</td>
+<th class="row_heading level0 row4" id="T_96580_level0_row4">HHS</th>
+<td class="data row4 col0" id="T_96580_row4_col0">58,299</td>
+<td class="data row4 col1" id="T_96580_row4_col1">55,006</td>
+<td class="data row4 col2" id="T_96580_row4_col2">3.2</td>
 </tr>
 <tr>
-<th class="row_heading level0 row5" id="T_3d7f0_level0_row5">DOS</th>
-<td class="data row5 col0" id="T_3d7f0_row5_col0">5,909</td>
-<td class="data row5 col1" id="T_3d7f0_row5_col1">30,297</td>
-<td class="data row5 col2" id="T_3d7f0_row5_col2">1.8</td>
+<th class="row_heading level0 row5" id="T_96580_level0_row5">DOS</th>
+<td class="data row5 col0" id="T_96580_row5_col0">5,909</td>
+<td class="data row5 col1" id="T_96580_row5_col1">30,297</td>
+<td class="data row5 col2" id="T_96580_row5_col2">1.8</td>
 </tr>
 <tr>
-<th class="row_heading level0 row6" id="T_3d7f0_level0_row6">NARA</th>
-<td class="data row6 col0" id="T_3d7f0_row6_col0">14,075</td>
-<td class="data row6 col1" id="T_3d7f0_row6_col1">27,797</td>
-<td class="data row6 col2" id="T_3d7f0_row6_col2">1.6</td>
+<th class="row_heading level0 row6" id="T_96580_level0_row6">NARA</th>
+<td class="data row6 col0" id="T_96580_row6_col0">14,075</td>
+<td class="data row6 col1" id="T_96580_row6_col1">27,797</td>
+<td class="data row6 col2" id="T_96580_row6_col2">1.6</td>
 </tr>
 <tr>
-<th class="row_heading level0 row7" id="T_3d7f0_level0_row7">USDA</th>
-<td class="data row7 col0" id="T_3d7f0_row7_col0">–</td>
-<td class="data row7 col1" id="T_3d7f0_row7_col1">22,523</td>
-<td class="data row7 col2" id="T_3d7f0_row7_col2">1.3</td>
+<th class="row_heading level0 row7" id="T_96580_level0_row7">USDA</th>
+<td class="data row7 col0" id="T_96580_row7_col0">–</td>
+<td class="data row7 col1" id="T_96580_row7_col1">22,523</td>
+<td class="data row7 col2" id="T_96580_row7_col2">1.3</td>
 </tr>
 <tr>
-<th class="row_heading level0 row8" id="T_3d7f0_level0_row8">DOT</th>
-<td class="data row8 col0" id="T_3d7f0_row8_col0">9,958</td>
-<td class="data row8 col1" id="T_3d7f0_row8_col1">20,475</td>
-<td class="data row8 col2" id="T_3d7f0_row8_col2">1.2</td>
+<th class="row_heading level0 row8" id="T_96580_level0_row8">DOT</th>
+<td class="data row8 col0" id="T_96580_row8_col0">9,958</td>
+<td class="data row8 col1" id="T_96580_row8_col1">20,475</td>
+<td class="data row8 col2" id="T_96580_row8_col2">1.2</td>
 </tr>
 <tr>
-<th class="row_heading level0 row9" id="T_3d7f0_level0_row9">EEOC</th>
-<td class="data row9 col0" id="T_3d7f0_row9_col0">–</td>
-<td class="data row9 col1" id="T_3d7f0_row9_col1">19,291</td>
-<td class="data row9 col2" id="T_3d7f0_row9_col2">1.1</td>
+<th class="row_heading level0 row9" id="T_96580_level0_row9">EEOC</th>
+<td class="data row9 col0" id="T_96580_row9_col0">–</td>
+<td class="data row9 col1" id="T_96580_row9_col1">19,291</td>
+<td class="data row9 col2" id="T_96580_row9_col2">1.1</td>
 </tr>
 <tr>
-<th class="row_heading level0 row10" id="T_3d7f0_level0_row10">DOL</th>
-<td class="data row10 col0" id="T_3d7f0_row10_col0">20,798</td>
-<td class="data row10 col1" id="T_3d7f0_row10_col1">17,994</td>
-<td class="data row10 col2" id="T_3d7f0_row10_col2">1.1</td>
+<th class="row_heading level0 row10" id="T_96580_level0_row10">DOL</th>
+<td class="data row10 col0" id="T_96580_row10_col0">20,798</td>
+<td class="data row10 col1" id="T_96580_row10_col1">17,994</td>
+<td class="data row10 col2" id="T_96580_row10_col2">1.1</td>
 </tr>
 <tr>
-<th class="row_heading level0 row11" id="T_3d7f0_level0_row11">Treasury</th>
-<td class="data row11 col0" id="T_3d7f0_row11_col0">20,943</td>
-<td class="data row11 col1" id="T_3d7f0_row11_col1">16,493</td>
-<td class="data row11 col2" id="T_3d7f0_row11_col2">1.0</td>
+<th class="row_heading level0 row11" id="T_96580_level0_row11">Treasury</th>
+<td class="data row11 col0" id="T_96580_row11_col0">20,943</td>
+<td class="data row11 col1" id="T_96580_row11_col1">16,493</td>
+<td class="data row11 col2" id="T_96580_row11_col2">1.0</td>
 </tr>
 <tr>
-<th class="row_heading level0 row12" id="T_3d7f0_level0_row12">SSA</th>
-<td class="data row12 col0" id="T_3d7f0_row12_col0">34,444</td>
-<td class="data row12 col1" id="T_3d7f0_row12_col1">14,067</td>
-<td class="data row12 col2" id="T_3d7f0_row12_col2">0.8</td>
+<th class="row_heading level0 row12" id="T_96580_level0_row12">SSA</th>
+<td class="data row12 col0" id="T_96580_row12_col0">34,444</td>
+<td class="data row12 col1" id="T_96580_row12_col1">14,067</td>
+<td class="data row12 col2" id="T_96580_row12_col2">0.8</td>
 </tr>
 <tr>
-<th class="row_heading level0 row13" id="T_3d7f0_level0_row13">SEC</th>
-<td class="data row13 col0" id="T_3d7f0_row13_col0">9,586</td>
-<td class="data row13 col1" id="T_3d7f0_row13_col1">13,254</td>
-<td class="data row13 col2" id="T_3d7f0_row13_col2">0.8</td>
+<th class="row_heading level0 row13" id="T_96580_level0_row13">SEC</th>
+<td class="data row13 col0" id="T_96580_row13_col0">9,586</td>
+<td class="data row13 col1" id="T_96580_row13_col1">13,254</td>
+<td class="data row13 col2" id="T_96580_row13_col2">0.8</td>
 </tr>
 <tr>
-<th class="row_heading level0 row14" id="T_3d7f0_level0_row14">DOI</th>
-<td class="data row14 col0" id="T_3d7f0_row14_col0">4,810</td>
-<td class="data row14 col1" id="T_3d7f0_row14_col1">9,713</td>
-<td class="data row14 col2" id="T_3d7f0_row14_col2">0.6</td>
+<th class="row_heading level0 row14" id="T_96580_level0_row14">DOI</th>
+<td class="data row14 col0" id="T_96580_row14_col0">4,810</td>
+<td class="data row14 col1" id="T_96580_row14_col1">9,713</td>
+<td class="data row14 col2" id="T_96580_row14_col2">0.6</td>
 </tr>
 </tbody>
 </table>
@@ -9170,10 +9172,10 @@ a.anchor-link {
 <ul>
 <li><strong>Highly concentrated:</strong> 117 agencies received requests in FY2025; DHS alone received 59.7% (1,019,496), and the top five (DHS, DOJ, VA, DoD and HHS) 84.1%.</li>
 <li>The top five in FY2008 were the same five, in the order DHS, VA, DoD, DOJ and HHS, with DHS at only 19.4%.</li>
-<li>In FY2025 the second agency, DOJ, received 159,743 and the third, VA, 124,414, an order of magnitude below DHS. "How agencies differ" is therefore first of all a difference between DHS and everyone else.</li>
+<li>In FY2025 the second agency, DOJ, received 159,743 and the third, VA, 124,414; DHS received 6.4 times as many as DOJ and 8.2 times as many as VA. "How agencies differ" is therefore first of all a difference between DHS and everyone else.</li>
 <li>USDA and EEOC have no FY2008 data; the table shows "–" and the chart has no grey bar for them. This is not zero.</li>
 </ul>
-<h2 id="5.-Is-processing-keeping-up?">5. Is processing keeping up?<a class="anchor-link" href="#5.-Is-processing-keeping-up?">¶</a></h2><p>Requests processed ÷ requests received, for all government, the four units and the rest. Above 100% means more was processed than received. The vertical axis runs from 80% to 115%, with a dashed line at 100%; two of the four units' values, FY2009 and FY2015, are off the scale and left as gaps (values in the chart note and the table). Finally, how much of what was processed is perfected requests.</p>
+<h2 id="5.-Is-processing-keeping-up?">5. Is processing keeping up?<a class="anchor-link" href="#5.-Is-processing-keeping-up?">¶</a></h2><p>Requests processed ÷ requests received, for all government, the four units and the rest. Above 100% means more was processed than received. The vertical axis runs from 80% to 115%, with a dashed line at 100%; two of the four units' values, FY2009 and FY2015, are off the scale and left as gaps (values in the chart note and the table). Then how much of the FY2025 shortfall outside the four units is at one unit, and finally how many processed requests were closed without being perfected.</p>
 </div>
 </div>
 </div>
@@ -9199,15 +9201,35 @@ a.anchor-link {
 <span class="n">display</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2019</span><span class="p">,</span><span class="mi">2023</span><span class="p">,</span><span class="mi">2024</span><span class="p">,</span><span class="mi">2025</span><span class="p">],</span><span class="s1">'Four units'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mf">105.4</span><span class="p">,</span><span class="mf">93.7</span><span class="p">,</span><span class="mf">99.7</span><span class="p">,</span><span class="mf">101.8</span><span class="p">]</span>
 <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2019</span><span class="p">,</span><span class="mi">2023</span><span class="p">,</span><span class="mi">2024</span><span class="p">,</span><span class="mi">2025</span><span class="p">],</span><span class="s1">'Outside the four units'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mf">99.4</span><span class="p">,</span><span class="mf">93.3</span><span class="p">,</span><span class="mf">100.1</span><span class="p">,</span><span class="mf">88.0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">p</span><span class="p">[</span><span class="s1">'Outside the four units'</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span><span class="o">==</span><span class="mi">2025</span>
-<span class="c1"># Perfected requests: Tables 16-18 (handbook Section VII, perfected requests only) against Table 01 processed (Section V, all requests)</span>
+<span class="c1"># FY2025 outside the four units: how much of the shortfall (received minus processed) is at one unit</span>
+<span class="n">short</span><span class="o">=</span><span class="n">recr</span><span class="p">[</span><span class="mi">2025</span><span class="p">]</span><span class="o">-</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">PRO</span><span class="p">,</span><span class="mi">2025</span><span class="p">,</span><span class="n">ni</span><span class="p">);</span> <span class="n">priv_short</span><span class="o">=</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">REC</span><span class="p">,</span><span class="mi">2025</span><span class="p">,</span><span class="n">isPRIV</span><span class="p">)</span><span class="o">-</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">PRO</span><span class="p">,</span><span class="mi">2025</span><span class="p">,</span><span class="n">isPRIV</span><span class="p">)</span>
+<span class="n">noPRIV</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">ni</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isPRIV</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="n">pr_np</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">yearly</span><span class="p">(</span><span class="n">PRO</span><span class="p">,</span><span class="n">noPRIV</span><span class="p">)</span><span class="o">/</span><span class="n">yearly</span><span class="p">(</span><span class="n">REC</span><span class="p">,</span><span class="n">noPRIV</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">short</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">priv_short</span><span class="p">)]</span><span class="o">==</span><span class="p">[</span><span class="mi">89584</span><span class="p">,</span><span class="mi">49265</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">priv_short</span><span class="o">/</span><span class="n">short</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">55.0</span>
+<span class="k">assert</span> <span class="n">pr_np</span><span class="p">[</span><span class="mi">2025</span><span class="p">]</span><span class="o">==</span><span class="mf">93.3</span> <span class="ow">and</span> <span class="n">pr_np</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span><span class="o">==</span><span class="mi">2025</span> <span class="ow">and</span> <span class="n">pr_np</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">2025</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">==</span><span class="mf">96.0</span> <span class="ow">and</span> <span class="n">pr_np</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">2025</span><span class="p">)</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span><span class="o">==</span><span class="mi">2023</span>
+<span class="c1"># Requests closed without being perfected: Table 02 has two such closures (handbook Section V),</span>
+<span class="c1"># "Records not reasonably described" and "Improper FOIA request for other reason"</span>
+<span class="n">IMP</span><span class="p">,</span><span class="n">ND</span><span class="o">=</span><span class="n">col</span><span class="p">(</span><span class="s1">'02'</span><span class="p">,</span><span class="s1">'[ImproperRequest]'</span><span class="p">),</span><span class="n">col</span><span class="p">(</span><span class="s1">'02'</span><span class="p">,</span><span class="s1">'[NotDescribed]'</span><span class="p">)</span>
+<span class="n">nonperf</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">y</span><span class="p">:</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">IMP</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">ND</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">YR</span><span class="p">});</span> <span class="n">np_share</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">nonperf</span><span class="o">/</span><span class="n">pro</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Tables 16-18 (handbook Section VII, perfected requests only) against Table 01 processed (Section V, all requests)</span>
 <span class="n">PERF</span><span class="o">=</span><span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'16_'</span><span class="p">,</span><span class="s1">'17_'</span><span class="p">,</span><span class="s1">'18_'</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">'TimeIncrementProcessedQuantity['</span> <span class="ow">in</span> <span class="n">c</span><span class="p">]</span>
-<span class="n">perf</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">y</span><span class="p">:</span><span class="nb">sum</span><span class="p">(</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">PERF</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">YR</span><span class="p">});</span> <span class="n">perf_share</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">perf</span><span class="o">/</span><span class="n">pro</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Processed (Table 01)'</span><span class="p">:</span><span class="n">pro</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="s1">'Perfected processed (Tables 16–18)'</span><span class="p">:</span><span class="n">perf</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="s1">'Perfected share (%)'</span><span class="p">:</span><span class="n">perf_share</span><span class="p">})</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2017</span><span class="p">:</span><span class="mi">2025</span><span class="p">])</span>
+<span class="n">perf</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">y</span><span class="p">:</span><span class="nb">sum</span><span class="p">(</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">PERF</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">YR</span><span class="p">});</span> <span class="n">perf_share</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">perf</span><span class="o">/</span><span class="n">pro</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">gap</span><span class="o">=</span><span class="n">pro</span><span class="o">-</span><span class="n">perf</span><span class="p">;</span> <span class="n">expl</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">nonperf</span><span class="o">/</span><span class="n">gap</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Processed (Table 01)'</span><span class="p">:</span><span class="n">pro</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="s1">'Closed as not perfected (Table 02)'</span><span class="p">:</span><span class="n">nonperf</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="s1">'Share of processed (%)'</span><span class="p">:</span><span class="n">np_share</span><span class="p">,</span>
+                      <span class="s1">'Tables 16–18'</span><span class="p">:</span><span class="n">perf</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="s1">'Tables 16–18 as share of processed (%)'</span><span class="p">:</span><span class="n">perf_share</span><span class="p">,</span><span class="s1">'Processed minus Tables 16–18'</span><span class="p">:</span><span class="n">gap</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span><span class="s1">'Closed as not perfected, </span><span class="si">% o</span><span class="s1">f that difference'</span><span class="p">:</span><span class="n">expl</span><span class="p">}))</span>
+<span class="k">assert</span> <span class="p">[</span><span class="n">np_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2014</span><span class="p">:</span><span class="mi">2019</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">np_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2014</span><span class="p">:</span><span class="mi">2019</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span><span class="o">==</span><span class="p">[</span><span class="mf">5.1</span><span class="p">,</span><span class="mf">5.9</span><span class="p">]</span> <span class="ow">and</span> <span class="n">np_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2022</span><span class="p">:</span><span class="mi">2025</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mf">8.8</span><span class="p">,</span><span class="mf">9.6</span><span class="p">,</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">9.3</span><span class="p">]</span> <span class="ow">and</span> <span class="n">np_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2008</span><span class="p">,</span><span class="mi">2009</span><span class="p">]]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mf">7.5</span><span class="p">,</span><span class="mf">8.9</span><span class="p">]</span>
 <span class="k">assert</span> <span class="p">[</span><span class="n">perf_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2008</span><span class="p">:</span><span class="mi">2021</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">perf_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2008</span><span class="p">:</span><span class="mi">2021</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span><span class="o">==</span><span class="p">[</span><span class="mf">91.6</span><span class="p">,</span><span class="mf">95.7</span><span class="p">]</span> <span class="ow">and</span> <span class="n">perf_share</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2022</span><span class="p">:</span><span class="mi">2025</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mf">90.2</span><span class="p">,</span><span class="mf">88.9</span><span class="p">,</span><span class="mf">77.5</span><span class="p">,</span><span class="mf">87.4</span><span class="p">]</span>
-<span class="n">usc</span><span class="o">=</span><span class="n">unit</span><span class="p">(</span><span class="s1">'DHS'</span><span class="p">,</span><span class="s1">'USCIS'</span><span class="p">);</span> <span class="n">gap24</span><span class="o">=</span><span class="n">pro</span><span class="p">[</span><span class="mi">2024</span><span class="p">]</span><span class="o">-</span><span class="n">perf</span><span class="p">[</span><span class="mi">2024</span><span class="p">];</span> <span class="n">usc_gap24</span><span class="o">=</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">PRO</span><span class="p">,</span><span class="mi">2024</span><span class="p">,</span><span class="n">usc</span><span class="p">)</span><span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="mi">2024</span><span class="p">,</span><span class="n">usc</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">PERF</span><span class="p">)</span>
+<span class="k">assert</span> <span class="p">[</span><span class="n">expl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2008</span><span class="p">:</span><span class="mi">2023</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">expl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2008</span><span class="p">:</span><span class="mi">2023</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span><span class="o">==</span><span class="p">[</span><span class="mi">82</span><span class="p">,</span><span class="mi">117</span><span class="p">]</span> <span class="ow">and</span> <span class="n">expl</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">2024</span><span class="p">,</span><span class="mi">2025</span><span class="p">]]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mi">44</span><span class="p">,</span><span class="mi">74</span><span class="p">]</span>
+<span class="c1"># FY2024: USCIS's Tables 16-18 cover fewer requests than its Table 02 closures that need a search of records</span>
+<span class="n">usc</span><span class="o">=</span><span class="n">unit</span><span class="p">(</span><span class="s1">'DHS'</span><span class="p">,</span><span class="s1">'USCIS'</span><span class="p">);</span> <span class="n">SEARCH</span><span class="o">=</span><span class="p">[</span><span class="n">FG</span><span class="p">,</span><span class="n">PG</span><span class="p">,</span><span class="n">FD</span><span class="p">,</span><span class="n">NR</span><span class="p">]</span>   <span class="c1"># full grants, partial grants, full denials on exemptions, no records</span>
+<span class="n">u</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Processed (Table 01)'</span><span class="p">:</span><span class="n">yearly</span><span class="p">(</span><span class="n">PRO</span><span class="p">,</span><span class="n">usc</span><span class="p">),</span><span class="s1">'Tables 16–18'</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">y</span><span class="p">:</span><span class="nb">sum</span><span class="p">(</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">usc</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">PERF</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">YR</span><span class="p">}),</span>
+                <span class="s1">'Closed after a search (Table 02)'</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">y</span><span class="p">:</span><span class="nb">sum</span><span class="p">(</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">usc</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">SEARCH</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">YR</span><span class="p">}),</span><span class="s1">'Closed as improper request (Table 02)'</span><span class="p">:</span><span class="n">yearly</span><span class="p">(</span><span class="n">IMP</span><span class="p">,</span><span class="n">usc</span><span class="p">)})</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">u</span><span class="p">[</span><span class="s1">'Processed minus Tables 16–18'</span><span class="p">]</span><span class="o">=</span><span class="n">u</span><span class="p">[</span><span class="s1">'Processed (Table 01)'</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="s1">'Tables 16–18'</span><span class="p">];</span> <span class="n">display</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2019</span><span class="p">:</span><span class="mi">2025</span><span class="p">])</span>
+<span class="n">gap24</span><span class="o">=</span><span class="n">gap</span><span class="p">[</span><span class="mi">2024</span><span class="p">];</span> <span class="n">usc_gap24</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2024</span><span class="p">,</span><span class="s1">'Processed minus Tables 16–18'</span><span class="p">]</span>
 <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">gap24</span><span class="p">)</span><span class="o">==</span><span class="mi">337581</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">usc_gap24</span><span class="p">)</span><span class="o">==</span><span class="mi">199533</span> <span class="ow">and</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">usc_gap24</span><span class="o">/</span><span class="n">gap24</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mf">59.1</span>
+<span class="k">assert</span> <span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2024</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">==</span><span class="p">[</span><span class="mi">551640</span><span class="p">,</span><span class="mi">352107</span><span class="p">,</span><span class="mi">469204</span><span class="p">,</span><span class="mi">27201</span><span class="p">,</span><span class="mi">199533</span><span class="p">]</span> <span class="ow">and</span> <span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2024</span><span class="p">,</span><span class="s1">'Closed after a search (Table 02)'</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2024</span><span class="p">,</span><span class="s1">'Tables 16–18'</span><span class="p">]</span><span class="o">==</span><span class="mi">117097</span>
+<span class="k">assert</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">YR</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="s1">'Tables 16–18'</span><span class="p">]</span><span class="o">&lt;</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="s1">'Closed after a search (Table 02)'</span><span class="p">]]</span><span class="o">==</span><span class="p">[</span><span class="mi">2024</span><span class="p">]</span>   <span class="c1"># the only year in which the tables fall short</span>
+<span class="k">assert</span> <span class="p">[(</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="s1">'Processed minus Tables 16–18'</span><span class="p">],</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="s1">'Closed as improper request (Table 02)'</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2021</span><span class="p">,</span><span class="mi">2022</span><span class="p">,</span><span class="mi">2023</span><span class="p">)]</span><span class="o">==</span><span class="p">[(</span><span class="mi">7403</span><span class="p">,</span><span class="mi">7403</span><span class="p">),(</span><span class="mi">17127</span><span class="p">,</span><span class="mi">17127</span><span class="p">),(</span><span class="mi">35560</span><span class="p">,</span><span class="mi">35561</span><span class="p">)]</span>
+<span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">tot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">ND</span><span class="p">,</span><span class="mi">2024</span><span class="p">,</span><span class="n">usc</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span>
 <span class="k">assert</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">((</span><span class="n">num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">PRO</span><span class="p">])</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">num</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">PERF</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">G</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'Fiscal Year'</span><span class="p">])</span><span class="o">&gt;=</span><span class="mi">2022</span><span class="p">)</span>   <span class="c1"># no unit-year leaves Tables 16-18 entirely blank</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'FY2024: processed minus perfected processed = </span><span class="si">{</span><span class="n">gap24</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">, of which USCIS </span><span class="si">{</span><span class="n">usc_gap24</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">usc_gap24</span><span class="o">/</span><span class="n">gap24</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -9385,64 +9407,194 @@ a.anchor-link {
 <tr style="text-align: right;">
 <th></th>
 <th>Processed (Table 01)</th>
-<th>Perfected processed (Tables 16–18)</th>
-<th>Perfected share (%)</th>
+<th>Closed as not perfected (Table 02)</th>
+<th>Share of processed (%)</th>
+<th>Tables 16–18</th>
+<th>Tables 16–18 as share of processed (%)</th>
+<th>Processed minus Tables 16–18</th>
+<th>Closed as not perfected, % of that difference</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<th>2008</th>
+<td>578141</td>
+<td>43175</td>
+<td>7.5</td>
+<td>534835</td>
+<td>92.5</td>
+<td>43306</td>
+<td>100</td>
+</tr>
+<tr>
+<th>2009</th>
+<td>569896</td>
+<td>50841</td>
+<td>8.9</td>
+<td>521847</td>
+<td>91.6</td>
+<td>48049</td>
+<td>106</td>
+</tr>
+<tr>
+<th>2010</th>
+<td>600849</td>
+<td>36605</td>
+<td>6.1</td>
+<td>565025</td>
+<td>94.0</td>
+<td>35824</td>
+<td>102</td>
+</tr>
+<tr>
+<th>2011</th>
+<td>631424</td>
+<td>38254</td>
+<td>6.1</td>
+<td>594303</td>
+<td>94.1</td>
+<td>37121</td>
+<td>103</td>
+</tr>
+<tr>
+<th>2012</th>
+<td>665924</td>
+<td>36168</td>
+<td>5.4</td>
+<td>624586</td>
+<td>93.8</td>
+<td>41338</td>
+<td>87</td>
+</tr>
+<tr>
+<th>2013</th>
+<td>678391</td>
+<td>34351</td>
+<td>5.1</td>
+<td>649084</td>
+<td>95.7</td>
+<td>29307</td>
+<td>117</td>
+</tr>
+<tr>
+<th>2014</th>
+<td>647142</td>
+<td>36595</td>
+<td>5.7</td>
+<td>613386</td>
+<td>94.8</td>
+<td>33756</td>
+<td>108</td>
+</tr>
+<tr>
+<th>2015</th>
+<td>769903</td>
+<td>39233</td>
+<td>5.1</td>
+<td>728943</td>
+<td>94.7</td>
+<td>40960</td>
+<td>96</td>
+</tr>
+<tr>
+<th>2016</th>
+<td>759842</td>
+<td>42217</td>
+<td>5.6</td>
+<td>714298</td>
+<td>94.0</td>
+<td>45544</td>
+<td>93</td>
+</tr>
+<tr>
 <th>2017</th>
 <td>823223</td>
+<td>48517</td>
+<td>5.9</td>
 <td>763723</td>
 <td>92.8</td>
+<td>59500</td>
+<td>82</td>
 </tr>
 <tr>
 <th>2018</th>
 <td>830060</td>
+<td>46549</td>
+<td>5.6</td>
 <td>778787</td>
 <td>93.8</td>
+<td>51273</td>
+<td>91</td>
 </tr>
 <tr>
 <th>2019</th>
 <td>877964</td>
+<td>51337</td>
+<td>5.8</td>
 <td>818294</td>
 <td>93.2</td>
+<td>59670</td>
+<td>86</td>
 </tr>
 <tr>
 <th>2020</th>
 <td>772869</td>
+<td>52616</td>
+<td>6.8</td>
 <td>713434</td>
 <td>92.3</td>
+<td>59435</td>
+<td>89</td>
 </tr>
 <tr>
 <th>2021</th>
 <td>838668</td>
+<td>55744</td>
+<td>6.6</td>
 <td>771188</td>
 <td>92.0</td>
+<td>67480</td>
+<td>83</td>
 </tr>
 <tr>
 <th>2022</th>
 <td>878420</td>
+<td>77694</td>
+<td>8.8</td>
 <td>792355</td>
 <td>90.2</td>
+<td>86065</td>
+<td>90</td>
 </tr>
 <tr>
 <th>2023</th>
 <td>1122211</td>
+<td>107287</td>
+<td>9.6</td>
 <td>998020</td>
 <td>88.9</td>
+<td>124191</td>
+<td>86</td>
 </tr>
 <tr>
 <th>2024</th>
 <td>1499265</td>
+<td>149203</td>
+<td>10.0</td>
 <td>1161684</td>
 <td>77.5</td>
+<td>337581</td>
+<td>44</td>
 </tr>
 <tr>
 <th>2025</th>
 <td>1635171</td>
+<td>151350</td>
+<td>9.3</td>
 <td>1429914</td>
 <td>87.4</td>
+<td>205257</td>
+<td>74</td>
 </tr>
 </tbody>
 </table>
@@ -9451,9 +9603,92 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>FY2024: processed minus perfected processed = 337,581, of which USCIS 199,533 (59.1%)
-</pre>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Processed (Table 01)</th>
+<th>Tables 16–18</th>
+<th>Closed after a search (Table 02)</th>
+<th>Closed as improper request (Table 02)</th>
+<th>Processed minus Tables 16–18</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>2019</th>
+<td>225075</td>
+<td>216466</td>
+<td>191751</td>
+<td>8273</td>
+<td>8609</td>
+</tr>
+<tr>
+<th>2020</th>
+<td>191114</td>
+<td>177147</td>
+<td>160310</td>
+<td>13304</td>
+<td>13967</td>
+</tr>
+<tr>
+<th>2021</th>
+<td>251289</td>
+<td>243886</td>
+<td>230720</td>
+<td>7403</td>
+<td>7403</td>
+</tr>
+<tr>
+<th>2022</th>
+<td>299690</td>
+<td>282563</td>
+<td>267598</td>
+<td>17127</td>
+<td>17127</td>
+</tr>
+<tr>
+<th>2023</th>
+<td>384311</td>
+<td>348751</td>
+<td>325636</td>
+<td>35561</td>
+<td>35560</td>
+</tr>
+<tr>
+<th>2024</th>
+<td>551640</td>
+<td>352107</td>
+<td>469204</td>
+<td>27201</td>
+<td>199533</td>
+</tr>
+<tr>
+<th>2025</th>
+<td>574797</td>
+<td>512173</td>
+<td>508643</td>
+<td>26273</td>
+<td>62624</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -9468,17 +9703,18 @@ a.anchor-link {
 <p><strong>Section 5:</strong></p>
 <ul>
 <li>The four units: 105.4% in FY2019, falling to 93.7% in FY2023 and back to 99.7% and 101.8% in FY2024–25. FY2009 and FY2015, at 152.2% and 124.2%, are off the chart's scale and shown as gaps.</li>
-<li>Outside the four units: 99.4% in FY2019, 93.3% in FY2023, 100.1% in FY2024 and only 88.0% in FY2025, the lowest of the 18 years. Receipts are rising faster than processing, the other side of the rising backlog in Storyline 4.</li>
-<li><strong>Doubling the count need not double the work of searching records (last table):</strong> receipts and processed requests both include non-perfected requests (handbook Section V), while Tables 16–18 count perfected requests only (Section VII). Government-wide, Tables 16–18 together were 91.6%–95.7% of processed requests in FY2008–21, and 90.2%, 88.9%, 77.5% and 87.4% in FY2022–25. In FY2024 the difference is 337,581, of which USCIS accounts for 199,533 (59.1%). In FY2022–25 no unit-year with processed requests leaves Tables 16–18 entirely blank; under the handbook the difference should be non-perfected requests, but the reports cannot show whether part of it is under-reporting in Tables 16–18.</li>
+<li>Outside the four units: 99.4% in FY2019, 93.3% in FY2023, 100.1% in FY2024 and only 88.0% in FY2025, the lowest of the 18 years. Receipts are rising faster than processing, the other side of the rising backlog in Storyline 4. More than half of the FY2025 shortfall is at one unit: outside the four units 89,584 more requests were received than processed, 49,265 of them (55.0%) at DHS PRIV. Without PRIV the figure is 93.3%, still the lowest of the 18 years (the next lowest is 96.0%, in FY2023).</li>
+<li><strong>More requests are closed without being perfected (second table):</strong> receipts and processed requests both include non-perfected requests (handbook Section V). Table 02 has two closures for them: "Records not reasonably described" and "Improper FOIA request for other reason". Government-wide the two were 5.1%–5.9% of processed requests each year in FY2014–19, and 8.8%, 9.6%, 10.0% and 9.3% in FY2022–25 (they were also 7.5% and 8.9% in FY2008–09). Doubling the count therefore need not double the work of searching records, but the shift is a few points of processed requests.</li>
+<li><strong>Tables 16–18 cannot measure this in FY2024 (second and third tables):</strong> Tables 16–18 count perfected requests only (Section VII), so processed requests minus Tables 16–18 should be the non-perfected ones. In FY2008–23 the two Table 02 closures are 82%–117% of that difference each year; in FY2024 they are 44% of it, and 74% in FY2025. In FY2024 the difference is 337,581, of which USCIS accounts for 199,533 (59.1%), yet USCIS closed only 27,201 requests as improper that year. Its Tables 16–18 cover 352,107 requests, while its Table 02 has 469,204 closures that need a search of records (full grants, partial grants, full denials on exemptions and no records), 117,097 more; FY2024 is the only year in which this happens at USCIS. In FY2021–23 its difference equals its improper-request closures almost exactly (7,403 and 7,403; 17,127 and 17,127; 35,560 and 35,561). USCIS's Tables 16–18 are therefore incomplete in FY2024, and that year's government-wide 77.5% (Tables 16–18 as a share of processed requests; 91.6%–95.7% in FY2008–21, and 90.2%, 88.9% and 87.4% in FY2022, FY2023 and FY2025) is not a measure of non-perfected requests. In FY2022–25 no unit-year with processed requests leaves Tables 16–18 entirely blank, so a blank table is not what shows the gap.</li>
 </ul>
-<h2 id="6.-The-resulting-story">6. The resulting story<a class="anchor-link" href="#6.-The-resulting-story">¶</a></h2><p><strong>In one sentence:</strong> government-wide FOIA requests received nearly tripled over FY2008–25 (3.04 times the FY2008 level, 2.86 times FY2010); 74.3% of the increase is at four immigration-related units (74.4% from FY2010), whose share of all requests rose from 19.7% to 58.7% in FY2024; requests at other units (without VBA and DHS's other components) were roughly flat for a decade, fell to a low in FY2020–22, recovered by FY2024, and were the highest of the 18 years only in FY2025.</p>
+<h2 id="6.-The-resulting-story">6. The resulting story<a class="anchor-link" href="#6.-The-resulting-story">¶</a></h2><p><strong>In one sentence:</strong> government-wide FOIA requests received nearly tripled over FY2008–25 (3.04 times the FY2008 level, 2.86 times FY2010); 74.3% of the increase is at four immigration-related units (74.4% from FY2010), whose share of all requests rose from 19.7% to 58.7% in FY2024 (56.4% in FY2025); requests at other units rose 1.65 times (1.62 from FY2010), and without VBA and DHS's other components they were roughly flat for a decade, fell to a low in FY2020–22, recovered by FY2024, and were the highest of the 18 years only in FY2025.</p>
 <p><strong>Key points:</strong></p>
 <ol>
 <li><strong>Volume (Section 1):</strong> 560,978 in FY2008 to 1,707,413 in FY2025, 2.04 times as many in the last four years; 26 agencies are missing in FY2008, and from FY2010 the multiple is 2.86.</li>
 <li><strong>Growth concentrated at the four immigration-related units (Section 2):</strong> 8.72 times as many, against 1.65 times elsewhere; the four units account for 74.3% of the increase (74.4% from FY2010), and USCIS alone for 60.0% of the four units' increase; of the 869,249 requests added in FY2021–25, 59.6% are at the four units.</li>
-<li><strong>Everyone else (Section 3):</strong> without VBA and DHS's other components, 394,268–444,654 each year in FY2010–19, a low in FY2020–22, back within the earlier range in FY2024, and 484,098 in FY2025, 8.9% above the FY2010–19 maximum; on the FY2024–25 average, 87 of 95 agencies exceed their own FY2014–19 average, though larger agencies less uniformly: 20 of the 27 averaging at least 1,000 requests a year, and 8 of the 13 averaging at least 10,000. PRIV's FY2019 jump is a transfer from CISA.</li>
+<li><strong>Everyone else (Section 3):</strong> without VBA and DHS's other components, 394,268–444,654 each year in FY2010–19, a low in FY2020–22, back within the earlier range in FY2024, and 484,098 in FY2025, 8.9% above the FY2010–19 maximum; on the FY2024–25 average, 87 of 95 agencies exceed their own FY2014–19 average, though larger agencies less uniformly: 20 of the 27 averaging at least 1,000 requests a year, and 8 of the 13 averaging at least 10,000. PRIV's FY2019 jump mirrors CISA's fall, consistent with a transfer.</li>
 <li><strong>Highly concentrated (Section 4):</strong> DHS alone receives 59.7%, the top five agencies 84.1%.</li>
-<li><strong>Processing not keeping up (Section 5):</strong> outside the four units, FY2025 processing was only 88.0% of receipts (see Storyline 4); and the perfected share of processed requests fell to 77.5% in FY2024.</li>
+<li><strong>Processing not keeping up (Section 5):</strong> outside the four units, FY2025 processing was only 88.0% of receipts (see Storyline 4), more than half of the shortfall at PRIV; closures of non-perfected requests rose from 5.1%–5.9% of processed requests in FY2014–19 to 9.3%–10.0% in FY2023–25.</li>
 </ol>
 <p><strong>What not to say:</strong></p>
 <ul>
@@ -9487,16 +9723,16 @@ a.anchor-link {
 <li>Do not call the four units' requests "immigration requests": it is a grouping of units, not of request topics.</li>
 <li>Do not read request counts as numbers of requesters: one requester can file many requests.</li>
 <li>Do not treat FY2008 as covering all agencies: 26 agencies are missing that year.</li>
-<li>Do not read PRIV's FY2019 rise as a jump in requests: the same requests were reported under CISA before; VBA's large rise from FY2023 also needs to be read on its own.</li>
+<li>Do not read PRIV's FY2019 rise as a jump in requests: CISA's requests fell by about as much in the same year; VBA's large rise from FY2023 also needs to be read on its own.</li>
 <li>Do not state causes: the annual reports do not show why requests increased.</li>
 </ul>
 <p><strong>Leads to follow up separately:</strong></p>
 <ul>
-<li><strong>CISA and PRIV:</strong> one stream of requests, 8,480 in FY2014 and 148,873 in FY2025, reported under CISA through FY2018 and under PRIV from FY2019. What these requests are, and whether the stream belongs with the immigration-related units, needs checking.</li>
+<li><strong>CISA and PRIV:</strong> together 8,480 in FY2014 and 148,873 in FY2025; the counts are consistent with one stream of requests, reported under CISA through FY2018 and under PRIV from FY2019. What these requests are, and whether the stream belongs with the immigration-related units, needs checking.</li>
 <li><strong>VBA:</strong> 61,658–100,897 a year from FY2023, the same change behind VBA's partial releases in Storyline 1 and the denominator in Storyline 4.</li>
 <li>Why requests at other agencies recovered after the FY2020–22 low.</li>
-<li>Outside the four units, FY2025 processing was only 88.0% of receipts.</li>
-<li>More non-perfected requests: 59.1% of the FY2024 difference is at USCIS.</li>
+<li>Outside the four units, FY2025 processing was only 88.0% of receipts; 49,265 of the 89,584 shortfall is at PRIV.</li>
+<li>USCIS's Tables 16–18 for FY2024 cover 352,107 requests, 117,097 fewer than its closures that need a search of records: the tables look incomplete that year.</li>
 </ul>
 <p><strong>What the next storylines cover:</strong></p>
 <ul>
@@ -9507,12 +9743,12 @@ a.anchor-link {
 <h3 id="Methods-and-remaining-questions">Methods and remaining questions<a class="anchor-link" href="#Methods-and-remaining-questions">¶</a></h3><ul>
 <li>Requests received include non-perfected requests (handbook Section V); counts are of requests, not requesters.</li>
 <li>The de-duplication rule is the same as in the other storylines: agencies with components use component rows, agencies without them use the Agency Overall row, and Exclude and second-entry rows are dropped.</li>
-<li>26 agencies are missing in FY2008–09 (Section 1); FY2025 has no following-year report yet. The reports are self-reported.</li>
+<li>26 agencies are missing in FY2008 and 24 in FY2009 (Section 1); FY2025 has no following-year report yet. The reports are self-reported.</li>
 <li>The four units are a grouping of units; other agencies may also handle immigration-related requests.</li>
-<li>Section 3 removes all of DHS's other components: requests have moved between DHS components (CISA to PRIV), and removing them all avoids deciding how DHS's components should be grouped.</li>
+<li>Section 3 removes all of DHS's other components: requests appear to have moved between DHS components (CISA to PRIV), and removing them all avoids deciding how DHS's components should be grouped.</li>
 <li>Checks: the four units' share of the increase is checked against the starting year (74.3% from FY2008, 74.4% from FY2010) and split by unit (Section 2); the rise outside the four units is checked against removing single agencies and against different comparison years (Section 3). Shares and multiples are direct descriptions of the totals.</li>
 </ul>
-<h3 id="Data-and-reproduction">Data and reproduction<a class="anchor-link" href="#Data-and-reproduction">¶</a></h3><p>Source: <code>data/component_master_no_03_06_11.csv</code>: Table 01 requests received, processed, and pending at the start and end of the year; Tables 16–18 perfected requests processed. Shared functions are in <code>storyline_lib.py</code>; every figure quoted in the text is checked with an assertion.</p>
+<h3 id="Data-and-reproduction">Data and reproduction<a class="anchor-link" href="#Data-and-reproduction">¶</a></h3><p>Source: <code>data/component_master_no_03_06_11.csv</code>: Table 01 requests received, processed, and pending at the start and end of the year; Table 02 dispositions; Tables 16–18 perfected requests processed. Shared functions are in <code>storyline_lib.py</code>; every figure quoted in the text is checked with an assertion.</p>
 </div>
 </div>
 </div>

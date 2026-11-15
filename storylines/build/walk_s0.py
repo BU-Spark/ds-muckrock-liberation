@@ -1,6 +1,6 @@
 """Requests (S0) storyline, from the notebook S0-request-volume-en. Series are recomputed with storyline_lib and anchored to
 the notebook's assertions; every number in the text is checked against the notebook text."""
-from storyline_lib import G, YR, REC, PRO, tot, bykey, allr, ni, vba, isD, AGK, COK
+from storyline_lib import G, YR, REC, PRO, FG, PG, FD, NR, col, tot, bykey, allr, ni, vba, isD, AGK, COK
 from walk_common import check_numbers
 
 r0 = lambda v: int(round(v)); r1 = lambda v: round(float(v), 1)
@@ -36,13 +36,27 @@ def build():
     PERF = [c for c in G[0] if c[:3] in ("16_", "17_", "18_") and "TimeIncrementProcessedQuantity[" in c]
     perf = {y: 100 * sum(tot(G, c, y) for c in PERF) / pro[y] for y in YR}
     assert [r1(perf[y]) for y in (2022, 2023, 2024, 2025)] == [90.2, 88.9, 77.5, 87.4]
+    assert round(rec[2025] / rec[2010], 2) == 2.86 and round(recr[2025] / recr[2008], 2) == 1.65 and round(recr[2025] / recr[2010], 2) == 1.62 and r1(share4[2025]) == 56.4
+    assert [round(g25[0][1] / dict(g25)[k], 1) for k in ("DOJ", "VA")] == [6.4, 8.2]
+    # FY2025 outside the four units: PRIV's part of the shortfall (received minus processed)
+    is_priv = unit("DHS", "PRIV"); no_priv = lambda r: ni(r) and not is_priv(r)
+    short, priv_short = recr[2025] - tot(G, PRO, 2025, ni), tot(G, REC, 2025, is_priv) - tot(G, PRO, 2025, is_priv)
+    wo = {y: r1(100 * tot(G, PRO, y, no_priv) / tot(G, REC, y, no_priv)) for y in YR}
+    assert [r0(short), r0(priv_short)] == [89584, 49265] and wo[2025] == 93.3 == min(wo.values())
+    # requests closed without being perfected (Table 02), as a share of processed requests
+    IMP, ND = col("02", "[ImproperRequest]"), col("02", "[NotDescribed]")
+    npf = {y: r1(100 * (tot(G, IMP, y) + tot(G, ND, y)) / pro[y]) for y in YR}
+    assert [min(npf[y] for y in range(2014, 2020)), max(npf[y] for y in range(2014, 2020))] == [5.1, 5.9] and [npf[y] for y in (2022, 2023, 2024, 2025)] == [8.8, 9.6, 10.0, 9.3]
+    # USCIS, FY2024: Tables 16-18 against the closures that need a search of records
+    usc = unit("DHS", "USCIS")
+    assert [r0(sum(tot(G, c, 2024, usc) for c in PERF)), r0(sum(tot(G, c, 2024, usc) for c in (FG, PG, FD, NR)))] == [352107, 469204]
     L = lambda d: [r0(d[y]) for y in YR]; P = lambda d: [r1(d[y]) for y in YR]
     cover_chart = {"title": "Requests received", "unit": "count", "series": {"Four units (USCIS, CBP, ICE, EOIR)": L(rec4), "Outside the four units": L(recr)},
                    "short": {"Four units (USCIS, CBP, ICE, EOIR)": "four units", "Outside the four units": "the rest"}, "colors": {"Four units (USCIS, CBP, ICE, EOIR)": "#8c3a91", "Outside the four units": "#4582cc"}}
     walk = {"id": "s0", "name": "Requests",
       "cover": {"kicker": "Requests", "title": "Requests nearly tripled, mostly at four immigration-related units",
-        "body": "Requests received rose from 560,978 in FY2008 to 1,707,413 in FY2025, 3.04 times as many (2.86 times from FY2010). 74.3% of the increase is at USCIS, CBP, ICE and EOIR. Outside these four, requests rose 1.65 times; leaving out VBA and DHS's other components as well, they were roughly flat for a decade and passed their FY2010–19 high only in FY2025.",
-        "foot": "Requests received (Table 01). The four units are a grouping of units, not of request topics. FY2008–09: 26 agencies are not yet in the data.", "chart": cover_chart},
+        "body": "Requests received rose from 560,978 in FY2008 to 1,707,413 in FY2025, 3.04 times as many (2.86 times from FY2010). 74.3% of the increase is at USCIS, CBP, ICE and EOIR. Outside these four, requests rose 1.65 times (1.62 from FY2010); leaving out VBA and DHS's other components as well, they were roughly flat for a decade and passed their FY2010–19 high only in FY2025.",
+        "foot": "Requests received (Table 01). The four units are a grouping of units, not of request topics. 26 agencies are not yet in the data in FY2008, and 24 in FY2009.", "chart": cover_chart},
       "steps": [
         {"kicker": "All agencies", "title": "Requests received rose from 560,978 to 1,707,413",
          "sections": [
@@ -59,7 +73,7 @@ def build():
            {"h": "What we looked at", "p": ["USCIS, CBP and ICE (in DHS) and EOIR (the immigration courts, in DOJ), against all other units. This is a grouping of units, not of request topics."]},
            {"h": "What the charts show", "p": [
              "Requests at the four units rose from 110,388 to 962,166, 8.72 times as many; at the rest, from 450,590 to 745,247, 1.65 times. Of the 1,146,435 requests added over FY2008–25, 74.3% are at the four units (74.4% counted from FY2010).",
-             "Their share of all requests rose from 19.7% in FY2008 to 47.3% in FY2019 and 58.7% in FY2024. All of DHS rose from 19.4% to 59.7%."]},
+             "Their share of all requests rose from 19.7% in FY2008 to 47.3% in FY2019 and 58.7% in FY2024 (56.4% in FY2025). All of DHS rose from 19.4% to 59.7%."]},
            {"h": "Within the four units", "p": [
              "Mainly USCIS: 78,985 to 589,972, 60.0% of the four units' increase. CBP accounts for 22.7%, EOIR 10.5% and ICE 6.8% (table)."]},
            {"h": "Why it matters", "p": ["Government-wide request volume mainly reflects these four units, which is why the later storylines separate them first."]}],
@@ -71,27 +85,27 @@ def build():
         {"kicker": "Outside the four units", "title": "Everyone else, without VBA and DHS's other components: flat for a decade, a new high only in FY2025",
          "sections": [
            {"h": "What we looked at", "p": [
-             "Requests received outside the four units, then a second line that also leaves out VBA and DHS's other components. Those two account for 54.1% of what the rest added in FY2021–25, and requests have moved between DHS components."]},
+             "Requests received outside the four units, then a second line that also leaves out VBA and DHS's other components. Those two account for 54.1% of what the rest added in FY2021–25, and requests appear to have moved between DHS components."]},
            {"h": "What the chart shows", "p": [
              "Outside the four units as a whole (first line), requests were already above their earlier high in FY2023.",
              "Without VBA and DHS's other components, receipts were 394,268–444,654 each year in FY2010–19 (dashed lines). FY2020–22 is a low (322,865 in FY2021); FY2024, at 417,789, is back within the earlier range; FY2025, at 484,098, is the highest of the 18 years, 8.9% above the FY2010–19 maximum.",
              "So without those two, through FY2024 this is a recovery; only FY2025 is a new high. Leaving out any one agency, the FY2019–25 rise is still at least 64,000 (removing DOS)."]},
-           {"h": "PRIV's FY2019 jump is a transfer", "p": [
-             "CISA received 37,516 requests in FY2018 and 353 in FY2019, while DHS's Privacy Office (PRIV) went from 1,448 to 43,024: the same requests, reported under a different component."]}],
+           {"h": "PRIV's FY2019 jump mirrors CISA's fall", "p": [
+             "CISA received 37,516 requests in FY2018 and 353 in FY2019, while DHS's Privacy Office (PRIV) went from 1,448 to 43,024: consistent with one stream of requests moving from CISA to PRIV."]}],
          "method": "DHS's other components = every DHS component except USCIS, CBP and ICE. VBA = VA's Veterans Benefits Administration.",
-         "charts": [{"title": "Requests received outside the four units", "unit": "count",
+         "charts": [{"title": "Requests received outside the four units (dashed: the second line's FY2010–19 low and high)", "unit": "count",
                      "series": {"Outside the four units": L(recr), "Also without VBA and DHS's other components": L(rc)},
                      "short": {"Outside the four units": "outside", "Also without VBA and DHS's other components": "also without VBA, DHS"},
                      "colors": {"Outside the four units": "#4582cc", "Also without VBA and DHS's other components": "#21304a"},
-                     "ref": [{"v": r0(lo), "label": "FY2010–19 low"}, {"v": r0(hi), "label": "FY2010–19 high"}]}],
-         "tables": [{"title": "CISA and PRIV: one stream of requests", "head": ["", "FY2018", "FY2019"],
+                     "ref": [{"v": r0(lo), "label": ""}, {"v": r0(hi), "label": ""}]}],
+         "tables": [{"title": "CISA and PRIV, requests received", "head": ["", "FY2018", "FY2019"],
                      "rows": [["CISA", f"{r0(cisa[2018]):,}", f"{r0(cisa[2019]):,}"], ["PRIV", f"{r0(priv[2018]):,}", f"{r0(priv[2019]):,}"]]}]},
         {"kicker": "By agency", "title": "DHS alone receives 59.7% of all requests",
          "sections": [
            {"h": "What we looked at", "p": ["Agency totals (all components included): the 15 agencies with the most requests received in FY2025."]},
            {"h": "What the chart shows", "p": [
              "117 agencies received requests in FY2025. DHS alone received 59.7% (1,019,496), and the top five (DHS, DOJ, VA, DoD and HHS) 84.1%.",
-             "The second agency, DOJ, received 159,743 and the third, VA, 124,414, an order of magnitude below DHS. The top five in FY2008 were the same five, with DHS at only 19.4%."]},
+             "The second agency, DOJ, received 159,743 and the third, VA, 124,414; DHS received 6.4 and 8.2 times as many. The top five in FY2008 were the same five, with DHS at only 19.4%."]},
            {"h": "Why it matters", "p": ["“How agencies differ” is first of all a difference between DHS and everyone else."]}],
          "method": "Requests received in FY2025, agency totals.",
          "charts": [{"kind": "dbars", "fmt": "count", "title": "Requests received in FY2025: the 15 largest agencies",
@@ -101,24 +115,29 @@ def build():
            {"h": "What we looked at", "p": ["Requests processed ÷ requests received. Above 100% means more was processed than received. Two of the four units' values, FY2009 and FY2015 (152.2% and 124.2%), are off the scale and left as gaps."]},
            {"h": "What the chart shows", "p": [
              "The four units: 105.4% in FY2019, 93.7% in FY2023, then 99.7% and 101.8% in FY2024–25.",
-             "Outside the four units: 99.4% in FY2019, 93.3% in FY2023, 100.1% in FY2024 and only 88.0% in FY2025, the lowest of the 18 years. Receipts are rising faster than processing, the other side of the rising backlog in the Backlog storyline."]},
-           {"h": "More of the count is not yet complete", "p": [
-             "Counts include requests that are not perfected. Perfected requests were 91.6%–95.7% of processed requests in FY2008–21, and 90.2%, 88.9%, 77.5% and 87.4% in FY2022–25. In FY2024, 59.1% of the difference is at USCIS."]}],
-         "method": "Processed and received from Table 01; perfected requests from Tables 16–18, which count perfected requests only.",
-         "charts": [{"title": "Requests processed ÷ requests received", "series": plot_ratio, "yMin": 80, "yMax": 115, "ref": [{"v": 100, "label": "100%"}],
+             "Outside the four units: 99.4% in FY2019, 93.3% in FY2023, 100.1% in FY2024 and only 88.0% in FY2025, the lowest of the 18 years. Receipts are rising faster than processing, the other side of the rising backlog in the Backlog storyline.",
+             "More than half of the FY2025 shortfall is at one unit: 89,584 more requests were received than processed, 49,265 of them at DHS PRIV. Without PRIV the figure is 93.3%, still the lowest of the 18 years."]},
+           {"h": "More requests are closed without being perfected", "p": [
+             "Counts include requests that are not perfected (not complete enough to process). Requests closed as not reasonably described or as improper requests were 5.1%–5.9% of processed requests each year in FY2014–19, and 8.8%, 9.6%, 10.0% and 9.3% in FY2022–25.",
+             "Tables 16–18, which count perfected requests only, cannot measure this in FY2024: at USCIS they cover 352,107 requests, fewer than the 469,204 it closed after a search of records."]}],
+         "method": "Processed and received from Table 01. Closed without being perfected: Table 02, records not reasonably described and improper request for other reason.",
+         "charts": [{"title": "Requests processed ÷ requests received (dashed line: 100%)", "series": plot_ratio, "yMin": 80, "yMax": 115, "ref": [{"v": 100, "label": ""}],
                      "colors": {"All government": "#9aa3ae", "Four units": "#8c3a91", "Outside the four units": "#4582cc"}, "dashed": ["All government"],
                      "short": {"All government": "all", "Four units": "four units", "Outside the four units": "outside"}}]},
         {"kicker": "The finding", "title": "Requests nearly tripled, mostly at four immigration-related units",
          "sections": [
            {"h": "In one sentence", "p": [
-             "Requests received nearly tripled over FY2008–25 (3.04 times the FY2008 level, 2.86 times FY2010); 74.3% of the increase is at four immigration-related units, whose share of all requests rose from 19.7% to 58.7% in FY2024; elsewhere (without VBA and DHS's other components) requests were roughly flat for a decade, fell to a low in FY2020–22, recovered by FY2024, and were the highest of the 18 years only in FY2025."]},
+             "Requests received nearly tripled over FY2008–25 (3.04 times the FY2008 level, 2.86 times FY2010); 74.3% of the increase is at four immigration-related units, whose share of all requests rose from 19.7% to 58.7% in FY2024 (56.4% in FY2025); elsewhere requests rose 1.65 times (1.62 from FY2010), and without VBA and DHS's other components they were roughly flat for a decade, fell to a low in FY2020–22, recovered by FY2024, and were the highest of the 18 years only in FY2025."]},
            {"h": "What not to say", "p": [
              "That requests surged across the board: 74.3% of the increase is at four units.",
              "That the rise elsewhere is a broad multi-year trend: without VBA and DHS's other components, only FY2025 exceeds the FY2010–19 range, and FY2025 has no following-year report yet.",
              "That these are “immigration requests”, or that counts are numbers of requesters. Or any cause: the reports do not show why requests increased."]},
            {"h": "Leads to follow up", "p": [
-             "CISA and PRIV, one stream of requests (8,480 in FY2014, 148,873 in FY2025) · VBA's 61,658–100,897 a year from FY2023 · outside the four units, FY2025 processing at 88.0% of receipts."]}],
-         "method": "Annual totals reported by the agencies themselves. 26 agencies are missing in FY2008–09; FY2025 has no following-year report yet. Full analysis: Storyline 0 notebook.",
-         "charts": [cover_chart]}]}
+             "CISA and PRIV together (8,480 in FY2014, 148,873 in FY2025) · VBA's 61,658–100,897 a year from FY2023 · outside the four units, FY2025 processing at 88.0% of receipts, 49,265 of the 89,584 shortfall at PRIV."]}],
+         "method": "Annual totals reported by the agencies themselves. 26 agencies are missing in FY2008 and 24 in FY2009; FY2025 has no following-year report yet. Full analysis: Storyline 0 notebook.",
+         "charts": [{"title": "Requests received", "unit": "count",
+                     "series": {**cover_chart["series"], "Outside the four units, also without VBA and DHS's other components": L(rc)},
+                     "short": {**cover_chart["short"], "Outside the four units, also without VBA and DHS's other components": "also w/o VBA, DHS"},
+                     "colors": {**cover_chart["colors"], "Outside the four units, also without VBA and DHS's other components": "#21304a"}}]}]}
     check_numbers(walk, "S0-request-volume-en", allow=(15, 2008, 2025))
     return walk
