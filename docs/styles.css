@@ -20,10 +20,6 @@
 .qbtn .qno { min-width: 1em; color: #4582CC; font-weight: 600; }
 /* nothing chosen: no tab strip */
 body.noq .card .nav-tabs { visibility: hidden; }
-/* start page, before the storylines load: the MuckRock logotype as a faint watermark */
-.empty-state { width: 100%; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.empty-state .watermark { width: min(55%, 620px); opacity: 0.09; user-select: none; pointer-events: none; }
-.empty-state .wm-text { margin-top: 1.2rem; color: #333C47; opacity: 0.35; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
 .chart-note { padding: 1.5rem 1rem; color: #6c6b66; max-width: 420px; }
 .qbtn, .qbtn:hover, .qbtn:focus, .qbtn:active { color: #212529 !important; outline: none; }
 /* component list before an agency is chosen */
@@ -46,7 +42,8 @@ select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed
 .chip button { border: 0; background: transparent; color: #4582CC; font-weight: 700; cursor: pointer; padding: 0 2px; }
 /* overview: tiles and small charts */
 .tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
-.tile { border: 1px solid #e3e7ee; border-radius: 6px; padding: 8px 10px; }
+.tile { border: 1px solid #e3e7ee; border-radius: 6px; padding: 8px 10px; background: #fff; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.tile:hover { border-color: #4582cc; background: #f5f8fc; }
 .tlabel { font-size: 0.75rem; color: #6c6b66; line-height: 1.2; min-height: 2.2em; }
 .tval { font-size: 1.35rem; font-weight: 600; }
 .tchg { font-size: 0.75rem; color: #6c6b66; }

@@ -1,7 +1,10 @@
-# Federal FOIA Dashboard — client meeting, Nov 17
+# Federal FOIA Dashboard
 
-Prototype v4 of the Federal FOIA Dashboard, built by BU Spark! (DS 701) for MuckRock, with everything needed to
-rebuild it: the data, the scripts that make the data, and the storyline notebooks.
+Prototype of the Federal FOIA Dashboard, built by BU Spark! (DS 701) for MuckRock, with everything needed to
+rebuild it: the data, the scripts that make the data, and the analysis notebooks.
+
+Branch `main` is prototype v4, shown at the client meeting on Nov 17. Branch `v4a` is the next version: the start
+page is an overview of the six questions, and the storyline cards are no longer on the page.
 
 **Live page:** https://crazythursv50.github.io/client-meeting-1117/
 
@@ -10,13 +13,13 @@ foia.gov (FY2008–FY2025).
 
 ## What is on the page
 
-- **Start page: four storylines** (Requests, Outcomes, Appeals, Backlog). Each card states one finding; "How we got
-  here" walks through the analysis step by step. The storylines are fixed: they do not change with the choices on the left.
+- **Start page: the overview.** One tile and one small chart for each of the six questions, for all agencies until
+  an agency, a component or a comparison is chosen. A tile opens its question.
 - **Questions 1–6 and Explore all data.** Choose an agency or component, the fiscal years, and up to five agencies or
   components to compare. Each question has a Chart tab and a Tables tab; the notes next to the tables explain how
   the numbers are made. Tables can be downloaded as CSV, and "Copy link to this view" keeps every choice in the link.
 - **How to use this dashboard** (start page) opens the user guide, including the rules used everywhere.
-- **Storyline notebooks**, the full analysis behind each storyline:
+- **Analysis notebooks** (not linked from the page yet), the checked analysis behind what the page shows:
   [Requests](https://crazythursv50.github.io/client-meeting-1117/notebooks/S0-request-volume-en.html) ·
   [Outcomes](https://crazythursv50.github.io/client-meeting-1117/notebooks/S1-partial-releases-en.html) ·
   [Appeals](https://crazythursv50.github.io/client-meeting-1117/notebooks/S3-appeals-en.html) ·
@@ -33,22 +36,18 @@ foia.gov API (one JSON per annual report)
           └─ data/exemption_statutes_06.csv          Exemption 3 statutes, table 06
               └─ pipeline/check_component_tables.py  every cell checked again before use
                   └─ pipeline/prep.py              -> docs/data/foia.json   (what the page reads)
-
-storylines/notebooks/*.ipynb  (+ storyline_lib.py, reading the same component table)
-  └─ storylines/build/build_walks.py            -> docs/data/walk_s0|s1|s3|s4.json   (the storyline cards)
 ```
 
-The page itself never calls the API: it reads `docs/data/foia.json` and the four `walk_*.json` files.
+The page itself never calls the API: it reads `docs/data/foia.json`.
 
 ## Folders
 
 | Folder | What is in it |
 |---|---|
-| `docs/` | The page (served by GitHub Pages): `index.html` (the dashboard; its code is inside the file, see "The page's code"), `stories.js` / `stories.css` (storylines, guide, year buttons, lists, links), `data/`, and the notebooks as HTML |
+| `docs/` | The page (served by GitHub Pages): `index.html` (the dashboard; its code is inside the file, see "The page's code"), `stories.js` / `stories.css` (guide, year buttons, lists, links), `data/`, and the notebooks as HTML |
 | `data/` | The three component-level tables built from the API (download of 2026-11-02; a second download on 11-06 gave identical tables), the agency-level table, and the data type map |
 | `pipeline/` | API download, table build, checks (`foia_fields.py` holds the definitions they share), and `prep.py` with `column_mapping.csv` (foia.gov's own column names) |
-| `storylines/notebooks/` | The four storyline notebooks (English) and `storyline_lib.py` |
-| `storylines/build/` | Turns the notebooks into the storyline cards; stops if a number in a card's text is not in the notebook |
+| `storylines/notebooks/` | The four analysis notebooks (requests, outcomes, appeals, backlog) and `storyline_lib.py`; every figure in their text is checked with an assertion |
 | `tools/` | `serve.py`: a local preview server without browser caching. `page_code.py`: writes out the dashboard code inside `docs/index.html`, and puts it back |
 
 ## Rebuild
@@ -71,15 +70,12 @@ python pipeline/build_component_tables_from_api.py raw/api pipeline/field_map.cs
 python pipeline/prep.py --components data/component_master_no_03_06_11.csv --types data/data_type_map.csv \
   --mapping pipeline/column_mapping.csv --out docs/data
 
-# 5. The storyline cards (asserts every number against the notebooks)
-MPLBACKEND=Agg python storylines/build/build_walks.py docs/data
-
 # Preview
 python tools/serve.py 8000 docs      # then open http://127.0.0.1:8000/
 ```
 
-Steps 4 and 5 on the files in this repository give exactly the `docs/data` files that are here (apart from the
-build date in `foia.json`).
+Step 4 on the files in this repository gives exactly the `docs/data/foia.json` that is here (apart from its build
+date).
 
 ## The page's code
 
@@ -92,7 +88,7 @@ python tools/page_code.py unpack cells     # one file per cell: cells/c01.js ...
 python tools/page_code.py pack cells       # write the edited cells back into docs/index.html
 ```
 
-The storylines, the guide, the year buttons and the links are plain files: `docs/stories.js`, `docs/stories.css`.
+The guide, the year buttons and the links are plain files: `docs/stories.js`, `docs/stories.css`.
 
 ## Notes
 
@@ -101,12 +97,10 @@ The storylines, the guide, the year buttons and the links are plain files: `docs
   no backlog is reported) is left blank.
 - **No double counting.** On the question pages, government totals add agency totals only; components are never
   added on top of their agency.
-- **Two ways to a government total.** The storylines add up components instead (plus numbers not assigned to a
-  component, and the totals of agencies without components), so that single units such as USCIS can be told apart.
-  The two totals differ slightly where an agency's total and its components disagree: FY2025 requests received
-  are 1,707,434 on the question pages and 1,707,413 in the storylines; the 21 are at Veterans Affairs.
-- **Storyline cards and question pages show different things.** "Open Question …" on a card opens that question
-  for all agencies: the general view, not the storyline's own grouping or measure.
+- **The notebooks add up components.** The page adds agency totals; the notebooks add components (plus numbers
+  not assigned to a component, and the totals of agencies without components), so that single units such as USCIS
+  can be told apart. The two differ slightly where an agency's total and its components disagree: FY2025 requests
+  received are 1,707,434 on the page and 1,707,413 in the notebooks; the 21 are at Veterans Affairs.
 - **Department of War (Department of Defense).** DOJ's FY2025 summary uses the new name; foia.gov's data still says
   Department of Defense. The page shows the current name first and the former one in brackets, and `prep.py` keeps
   both spellings as one agency, so a later rename in the data does not split it in two.
