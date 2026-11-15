@@ -13,8 +13,12 @@ foia.gov (FY2008–FY2025).
 
 ## What is on the page
 
-- **Start page: the overview.** One tile and one small chart for each of the six questions, for all agencies until
-  an agency, a component or a comparison is chosen. A tile opens its question.
+- **Start page: the overview.** Eight cards with the headline numbers (requests received and processed, backlog,
+  appeals, released in full, done within 20 working days, staff, cost), for all agencies until an agency, a
+  component or a comparison is chosen. The front of a card has the number for the last year chosen and its trend;
+  click it for the back: what the number is and what stands out in the years chosen (highest and lowest year,
+  years in a row up or down, largest one-year change, largest share), worked out from the data each time. From
+  there a button opens the question with the full view.
 - **Questions 1–6 and Explore all data.** Choose an agency or component, the fiscal years, and up to five agencies or
   components to compare. Each question has a Chart tab and a Tables tab; the notes next to the tables explain how
   the numbers are made. Tables can be downloaded as CSV, and "Copy link to this view" keeps every choice in the link.
