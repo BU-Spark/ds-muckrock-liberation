@@ -68,6 +68,17 @@ select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed
 .od-label span { display: block; font-size: 0.84rem; font-weight: 400; color: #6c6b66; }
 .od-val { font-size: 2.5rem; font-weight: 600; line-height: 1.15; margin-top: 0.5rem; }
 .od-chg { font-size: 0.86rem; color: #6c6b66; }
+/* with "Compare with": one number per line of the chart instead of one large number */
+.od-rows { margin-top: 0.6rem; border-collapse: collapse; width: 100%; }
+.od-rows caption { caption-side: top; text-align: left; font-size: 0.8rem; color: #6c6b66; padding: 0 0 0.25rem; }
+.od-rows tr { border-top: 1px solid #eef0f3; cursor: pointer; }
+.od-rows tr:hover, .od-rows tr:focus-visible { background: #f5f8fc; outline: none; }
+.od-rows tr.on { background: #eef3fa; }
+.od-rows td { padding: 0.35rem 0.5rem; font-size: 0.88rem; color: #333C47; vertical-align: baseline; }
+.od-rows td.v { font-size: 1.3rem; font-weight: 600; text-align: right; white-space: nowrap; color: #212529; }
+.od-rows td.c { font-size: 0.8rem; color: #6c6b66; white-space: nowrap; }
+.od-rows i, .oc-who i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 0.45rem; }
+.oc-who { font-size: 0.7rem; color: #6c6b66; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .od-text p { font-size: 0.93rem; line-height: 1.55; color: #333C47; margin: 0.9rem 0 0.4rem; }
 .od-text h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4582CC; margin: 1.1rem 0 0.4rem; }
 .od-text ul { padding-left: 1.1rem; margin: 0 0 0.6rem; }
