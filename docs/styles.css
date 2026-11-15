@@ -46,7 +46,7 @@ select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed
 .ocard:hover, .ocard:focus-visible { border-color: #4582cc; box-shadow: 0 1px 6px rgba(69, 130, 204, 0.2); outline: none; }
 .oc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; min-height: 2.3rem; }
 .oc-label { font-size: 0.8rem; font-weight: 600; color: #333C47; line-height: 1.25; }
-.oc-label span { display: block; font-weight: 400; font-size: 0.72rem; color: #6c6b66; }
+.oc-label .sub { display: block; font-weight: 400; font-size: 0.72rem; color: #6c6b66; }
 .oc-i { flex: none; width: 18px; height: 18px; border: 1px solid #9aa3ae; border-radius: 50%; font: italic 0.72rem/16px Georgia, serif; text-align: center; color: #55544f; }
 .oc-val { font-size: 1.6rem; font-weight: 600; line-height: 1.2; margin-top: 0.25rem; }
 .oc-chg { font-size: 0.75rem; color: #6c6b66; min-height: 1.1em; }
@@ -65,7 +65,7 @@ select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed
 .od-cols { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 2.4rem; align-items: start; }
 @media (max-width: 1250px) { .od-cols { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; } }
 .od-label { font-size: 1.2rem; font-weight: 600; line-height: 1.25; color: #212529; }
-.od-label span { display: block; font-size: 0.84rem; font-weight: 400; color: #6c6b66; }
+.od-label .sub { display: block; font-size: 0.84rem; font-weight: 400; color: #6c6b66; }
 .od-val { font-size: 2.5rem; font-weight: 600; line-height: 1.15; margin-top: 0.5rem; }
 .od-chg { font-size: 0.86rem; color: #6c6b66; }
 /* with "Compare with": one number per line of the chart instead of one large number */
