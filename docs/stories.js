@@ -14,7 +14,7 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
         <ol><li><b>Overview</b>, the start page: ten headline numbers, for all agencies or for the agency or component you pick. Click a card to read what its number means and what stands out in the years chosen; from there, open the question with the full view.</li>
           <li><b>Questions 1–6</b>, on the left: Requests received &amp; processed · Response time · Backlog, staff &amp; cost · Outcomes &amp; exemptions · Appeals · Backlog vs intake. Each opens a chart.</li>
           <li><b>Explore all data</b>: any measure in the reports. Choose a Data type, then a Measure.</li></ol>
-        <p class="fd-small">Click a selected item again to clear it.</p></section>
+        <p class="fd-small">“Home” in the top bar goes back to the overview; so does clicking a selected question again.</p></section>
       <section><h3>Choosing what you see</h3>
         <dl><dt>Agency</dt><dd>“All agencies (government total)”, or one agency.</dd>
           <dt>Component</dt><dd>An office inside the agency you picked.</dd>
@@ -300,4 +300,22 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
   // set before the dashboard builds its inputs (this file runs first), so the base holds on every page, not only on Question 5
   if (start.get("base") === "all") window.__memo = Object.assign(window.__memo || {}, {base5: "All processed appeals"});
   if ([...start.keys()].length) restore(start);
+})();
+
+/* ---------- "Home" in the top bar (and the dashboard's name): back to the overview. The agency, component, comparison and
+   years chosen stay as they are; "Clear all" resets those. ---------- */
+(function () {
+  const goHome = e => { if (e) e.preventDefault(); const on = document.querySelector(".qbtn.on"); if (on) on.click(); window.scrollTo(0, 0) };
+  let btn = null;
+  const update = () => { if (btn) btn.classList.toggle("fd-at-home", !document.querySelector(".qbtn.on")) };
+  function place() {
+    const nav = document.querySelector("nav.navbar"); if (!nav || nav.querySelector(".fd-home")) return;
+    btn = document.createElement("button"); btn.type = "button"; btn.className = "fd-home"; btn.title = "Back to the overview";
+    btn.innerHTML = '<i class="bi bi-house-door" aria-hidden="true"></i> Home';
+    btn.addEventListener("click", goHome); nav.appendChild(btn);
+    const name = nav.querySelector(".navbar-title-text > a"); if (name) name.addEventListener("click", goHome);
+    update();
+  }
+  document.addEventListener("DOMContentLoaded", place); place();
+  document.addEventListener("click", () => setTimeout(update, 0), true);
 })();

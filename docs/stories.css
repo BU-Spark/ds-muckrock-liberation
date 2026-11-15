@@ -60,6 +60,13 @@
 .fd-credit a:hover { text-decoration-color: #fff; }
 @media (max-width: 760px) { .fd-credit { display: none; } }
 
+/* top bar: "Home", back to the overview */
+nav.navbar { position: relative; }
+.fd-home { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); border: 1px solid rgba(255,255,255,0.7); background: transparent; color: #fff; border-radius: 6px;
+  padding: 0.15rem 0.7rem; font-size: 0.85rem; cursor: pointer; }
+.fd-home:hover { background: rgba(255,255,255,0.18); }
+.fd-home.fd-at-home { opacity: 0.55; cursor: default; }
+
 /* "Download CSV" and "Copy link to this view" */
 .csv { font-weight: 400; font-size: 0.78rem; margin-left: 0.5em; }
 .fd-linkrow { display: flex; justify-content: flex-end; margin-top: 6px; }
