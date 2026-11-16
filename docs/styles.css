@@ -207,3 +207,10 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .qsrc .qmod { flex: 0 1 420px; }
 /* subtraction: "Build your own" is off the menu while the six questions are being finished */
 .qpick .qpick-title ~ .qpick-title, .qpick .qbtn[data-id="7"] { display: none; }
+/* a card with entries to compare: one row per entry, marked with its colour on the charts */
+.qc-rows { width: 100%; border-collapse: collapse; margin: 0.25rem 0 0.2rem; }
+.qc-rows td { padding: 2px 0; vertical-align: baseline; font-variant-numeric: tabular-nums; }
+.qc-rows td:first-child { font-size: 0.82rem; color: #333C47; padding-right: 8px; width: 100%; max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qc-rows td:first-child i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.qc-rows td:nth-child(2) { font-size: 1.15rem; font-weight: 700; color: #1f2d3d; text-align: right; white-space: nowrap; padding-right: 10px; }
+.qc-rows td:nth-child(3) { font-size: 0.74rem; color: #1f4f8a; text-align: right; white-space: nowrap; }
