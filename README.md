@@ -27,7 +27,8 @@ foia.gov (FY2008–FY2025).
   component and years chosen: a few lines with their numbers and one chart. Under it, "Tables it was built from"
   shows the data types the answer uses, each as a card listing that table's columns with the ones used marked,
   and "How it was calculated" writes out each number in the answer (for example "Requests processed ÷ requests
-  received = 1,635,200 ÷ 1,707,434 = 95.8%"). Other views of the question are folded away under "More views";
+  received = 1,635,200 ÷ 1,707,434 = 95.8%"). With entries to compare, the answer adds a small table of the same
+  numbers for each of them. Other views of the question are folded away under "More views";
   "Original charts" switches back to the earlier charts; the Tables tab is unchanged.
 - **Build your own.** A library of the 31 data types on the left (06, the Exemption 3 statutes, is not in the
   page's data); click a field to add it to a block, then choose how the fields are combined. Combinations that
