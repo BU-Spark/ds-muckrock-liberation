@@ -214,3 +214,5 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .qc-rows td:first-child i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
 .qc-rows td:nth-child(2) { font-size: 1.15rem; font-weight: 700; color: #1f2d3d; text-align: right; white-space: nowrap; padding-right: 10px; }
 .qc-rows td:nth-child(3) { font-size: 0.74rem; color: #1f4f8a; text-align: right; white-space: nowrap; }
+.qcharts.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1250px) { .qcharts.three { grid-template-columns: minmax(0, 1fr); } }
