@@ -216,3 +216,12 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .qc-rows td:nth-child(3) { font-size: 0.74rem; color: #1f4f8a; text-align: right; white-space: nowrap; }
 .qcharts.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 1250px) { .qcharts.three { grid-template-columns: minmax(0, 1fr); } }
+/* question 2: a dot in the track's colour on each card, the median as reported, one line of notes under the charts */
+.qc-label i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.qc-med { font-size: 0.78rem; color: #55544f; margin-top: 0.15rem; padding-top: 0.2rem; border-top: 1px solid #eef1f5; font-variant-numeric: tabular-nums; }
+.qc-med b { color: #1f2d3d; }
+.qc-rows td:nth-child(4) { font-size: 0.82rem; font-weight: 600; color: #1f2d3d; text-align: right; white-space: nowrap; padding-left: 12px; }
+.qc-rows tr.qc-head td { font-size: 0.66rem; font-weight: 400; color: #6c6b66; padding: 0 0 0 12px; text-align: right; white-space: nowrap; }
+.qnote { font-size: 0.78rem; color: #6c6b66; margin: -4px 2px 12px; }
+/* a narrow window: the two counts behind each share give way to the entry's name (they stay in the tooltip) */
+@media (max-width: 1350px) { .qcards.q2c .qc-rows td:nth-child(3) { display: none; } }
