@@ -29,7 +29,7 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
           <dt>Released in full, partly released, fully denied on exemptions</dt><dd>How a closed request ended after its records were reviewed. Many end in other ways: no records found, withdrawn, referred and more.</dd>
           <dt>Exemptions</dt><dd>The nine reasons in the law (5 U.S.C. § 552(b)) that let an agency withhold records.</dd>
           <dt>Backlog</dt><dd>Requests still pending at the end of the year beyond the legal time limit: 20 working days from a complete request, plus 10 in unusual circumstances.</dd>
-          <dt>Response time</dt><dd>Working days (as the reports count them) from receiving a complete request to closing it.</dd>
+          <dt>Response time</dt><dd>Working days (as the reports count them) from receiving a complete request to closing it. An agency reports a median, and separately how many requests it closed in each range of days. The two do not always agree (National Archives, complex requests, FY2025: a median of 1,384 days, while 1,273 of its 1,551 were closed within 20), and the reports do not say why; Question 2 shows both as reported.</dd>
           <dt>Appeal</dt><dd>The requester asks the agency to review its decision.</dd></dl></section>
     </div>
     <section class="fd-rules"><h3>Rules used everywhere</h3><div class="fd-rules-body"></div></section>

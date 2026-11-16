@@ -225,3 +225,6 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .qnote { font-size: 0.78rem; color: #6c6b66; margin: -4px 2px 12px; }
 /* a narrow window: the two counts behind each share give way to the entry's name (they stay in the tooltip) */
 @media (max-width: 1350px) { .qcards.q2c .qc-rows td:nth-child(3) { display: none; } }
+/* the Tables tab is hidden for now, and with it the tab bar (one tab needs none). Its code is still in the page:
+   remove this line to bring it back */
+.card:has(> .card-header .nav-tabs) > .card-header { display: none; }
