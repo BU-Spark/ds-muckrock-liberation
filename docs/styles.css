@@ -193,3 +193,17 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .ws-op.on, .ws-op.on:hover:not(:disabled) { background: #4582CC; border-color: #4582CC; color: #fff; }
 .ws-op:disabled { color: #b8bec7; border-color: #e9ecf1; cursor: not-allowed; }
 .ws-bar .mb-btn, .ws-mod span { white-space: nowrap; }
+/* the sample question page: number cards, two charts, the table it was built from */
+.qcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 12px; }
+.qcard { border: 1px solid #dfe5ee; border-radius: 10px; background: #fff; padding: 0.45rem 0.9rem 0.4rem; }
+.qc-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #5b6470; }
+.qc-big { font-size: 1.9rem; font-weight: 700; line-height: 1.2; color: #1f2d3d; font-variant-numeric: tabular-nums; }
+.qc-how { font-size: 0.78rem; color: #55544f; font-variant-numeric: tabular-nums; }
+.qc-cmp { font-size: 0.78rem; color: #1f4f8a; font-weight: 600; min-height: 1.1em; }
+.qcharts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-bottom: 12px; }
+.qcharts > div { border: 1px solid #dfe5ee; border-radius: 10px; background: #fff; padding: 0.6rem 0.8rem; min-width: 0; }
+@media (max-width: 1250px) { .qcharts { grid-template-columns: minmax(0, 1fr); } }
+.qfig-sub { font-size: 0.78rem; color: #6c6b66; margin: -0.1rem 0 0.3rem; }
+.qsrc .qmod { flex: 0 1 420px; }
+/* subtraction: "Build your own" is off the menu while the six questions are being finished */
+.qpick .qpick-title ~ .qpick-title, .qpick .qbtn[data-id="7"] { display: none; }
