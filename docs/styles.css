@@ -176,3 +176,20 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .qa-cmp th { font-weight: 600; color: #6c6b66; font-size: 0.72rem; vertical-align: bottom; }
 .qa-cmp td:first-child, .qa-cmp th:first-child { text-align: left; }
 .qa-cmp tr.sel td { font-weight: 600; }
+/* build your own: ticking columns, the two sides of A and B, and what to show */
+.ws-field span { text-align: left; }
+.ws-mod.has span { color: #4582CC; font-weight: 600; }
+.ws-all { display: flex; gap: 12px; margin: 2px 0 3px 16px; }
+.ws-all button, .ws-chip button { border: 0; background: none; color: #1f4f8a; font-size: 0.72rem; padding: 0; cursor: pointer; }
+.ws-all button { text-decoration: underline; }
+.ws-side { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; border: 1px dashed #c9d6ea; border-radius: 8px; padding: 3px 8px; margin-bottom: 4px; cursor: pointer; }
+.ws-side.on { border-style: solid; border-color: #4582CC; background: #f4f8fd; }
+.ws-side > b { color: #4582CC; width: 1.1rem; }
+.ws-ops { margin: 0.4rem 0 0.3rem; }
+.ws-ops > div { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 4px; }
+.ws-ops > div > span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #6c6b66; width: 5.4rem; }
+.ws-op { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; border-radius: 6px; padding: 0.1rem 0.6rem; font-size: 0.8rem; cursor: pointer; }
+.ws-op:hover:not(:disabled) { background: #e3edf9; }
+.ws-op.on, .ws-op.on:hover:not(:disabled) { background: #4582CC; border-color: #4582CC; color: #fff; }
+.ws-op:disabled { color: #b8bec7; border-color: #e9ecf1; cursor: not-allowed; }
+.ws-bar .mb-btn, .ws-mod span { white-space: nowrap; }

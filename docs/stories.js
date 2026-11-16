@@ -13,7 +13,7 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
         <h3>Three ways in</h3>
         <ol><li><b>Overview</b>, the start page: ten headline numbers, for all agencies or for the agency or component you pick. Click a card to open it: what its number means, what stands out in the years chosen, and a larger chart. The agency, component and years can still be changed while a card is open.</li>
           <li><b>Questions 1–6</b>, on the left: Requests received &amp; processed · Response time · Backlog, staff &amp; cost · Outcomes &amp; exemptions · Appeals · Backlog vs intake. Each is a set of blocks; a block names the data types and fields it uses and how they are combined.</li>
-          <li><b>Build your own</b>: pick a data type and its fields on the left, then show them side by side, divide one by the other, subtract, or show their shares. “Customize” on any block of a question opens it here.</li></ol>
+          <li><b>Build your own</b>: open a table on the left and tick its columns, then choose what to show: each column over time, added up, shares, A ÷ B, A − B, growth from the first year, change from the year before, or, for the last year, column by column, the largest agencies or components, and one column against another. “Customize” on a question's extra views opens them here.</li></ol>
         <p class="fd-small">“Home” in the top bar goes back to the overview; so does clicking a selected question again.</p></section>
       <section><h3>Choosing what you see</h3>
         <dl><dt>Agency</dt><dd>“All agencies (government total)”, or one agency.</dd>
