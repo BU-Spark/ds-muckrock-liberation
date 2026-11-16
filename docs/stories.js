@@ -12,8 +12,8 @@ function fdAgency(a) { return a === "Department of Defense" || a === "Department
         <p>Data: foia.gov annual reports, built 2026-11-02.</p>
         <h3>Three ways in</h3>
         <ol><li><b>Overview</b>, the start page: ten headline numbers, for all agencies or for the agency or component you pick. Click a card to open it: what its number means, what stands out in the years chosen, and a larger chart. The agency, component and years can still be changed while a card is open.</li>
-          <li><b>Questions 1–6</b>, on the left: Requests received &amp; processed · Response time · Backlog, staff &amp; cost · Outcomes &amp; exemptions · Appeals · Backlog vs intake. Each opens a chart.</li>
-          <li><b>Explore all data</b>: any measure in the reports. Choose a Data type, then a Measure.</li></ol>
+          <li><b>Questions 1–6</b>, on the left: Requests received &amp; processed · Response time · Backlog, staff &amp; cost · Outcomes &amp; exemptions · Appeals · Backlog vs intake. Each is a set of blocks; a block names the data types and fields it uses and how they are combined.</li>
+          <li><b>Build your own</b>: pick a data type and its fields on the left, then show them side by side, divide one by the other, subtract, or show their shares. “Customize” on any block of a question opens it here.</li></ol>
         <p class="fd-small">“Home” in the top bar goes back to the overview; so does clicking a selected question again.</p></section>
       <section><h3>Choosing what you see</h3>
         <dl><dt>Agency</dt><dd>“All agencies (government total)”, or one agency.</dd>

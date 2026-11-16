@@ -3,8 +3,10 @@
 Prototype of the Federal FOIA Dashboard, built by BU Spark! (DS 701) for MuckRock, with everything needed to
 rebuild it: the data, the scripts that make the data, and the analysis notebooks.
 
-Branch `main` is prototype v4, shown at the client meeting on Nov 17. Branch `v4a` is the next version: the start
-page is an overview of the six questions, and the storyline cards are no longer on the page.
+Branch `main` is prototype v4, shown at the client meeting on Nov 17. Branch `v4a`: the start page is an overview
+of headline numbers, and the storyline cards are no longer on the page. Branch `v4b` (this one) builds the page
+from modules: the annual report's data types are the building blocks, each of the six questions is a set of
+ready-made blocks, and "Build your own" lets the reader make blocks.
 
 **Live page:** https://crazythursv50.github.io/client-meeting-1117/
 
@@ -21,9 +23,18 @@ foia.gov (FY2008–FY2025).
   largest share), worked out from the data each time, and a large chart with those points marked. The agency,
   component, comparison and years can still be changed while a card is open, and the panel follows. From there a
   button opens the question with the full view.
-- **Questions 1–6 and Explore all data.** Choose an agency or component, the fiscal years, and up to five agencies or
-  components to compare. Each question has a Chart tab and a Tables tab; the notes next to the tables explain how
-  the numbers are made. Tables can be downloaded as CSV, and "Copy link to this view" keeps every choice in the link.
+- **Questions 1–6, as sets of blocks.** A block takes fields from one or more data types and combines them in
+  one of four ways: side by side, A ÷ B, A − B, or shares of their total. Each block names the data types and
+  fields it uses, shows the chart, and gives the numbers (and a CSV) on request. "Original charts" switches a
+  question back to its earlier charts; the Tables tab is unchanged.
+- **Build your own.** A library of the 31 data types on the left (06, the Exemption 3 statutes, is not in the
+  page's data); click a field to add it to a block, then choose how the fields are combined. Combinations that
+  have no meaning are not offered: medians, averages, days and percentages are not added, divided or
+  subtracted, and a difference or shares need fields of the same kind. "Customize" on a question's block opens
+  it here. The blocks are kept while the page is open; they are not part of the copied link yet.
+- **One set of choices for everything.** The agency, component, comparison and years chosen in the sidebar and
+  with the year buttons apply to every block. A block with one result (a single field, A ÷ B, A − B) draws a
+  line for each compared entry; a block with several fields draws the selection only.
 - **How to use this dashboard** (start page) opens the user guide, including the rules used everywhere.
 - **Analysis notebooks** (not linked from the page yet), the checked analysis behind what the page shows:
   [Requests](https://crazythursv50.github.io/client-meeting-1117/notebooks/S0-request-volume-en.html) ·

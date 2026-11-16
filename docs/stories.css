@@ -29,7 +29,7 @@
 
 /* ---------- fiscal-year buttons ---------- */
 .fd-hidden { display: none !important; }
-.fd-has-tl > .card-body { padding-right: calc(min(470px, 46%) + 3.4rem); }
+.fd-has-tl > .card-body { padding-right: calc(min(470px, 46%) + 3.4rem); min-height: 6.9rem; }   /* room for the year buttons and the link button when the header is short */
 .fd-tl { position: absolute; top: 0.7rem; right: 3rem; width: min(470px, 46%); }
 .card[data-full-screen="true"] .fd-tl { display: none; }
 .card[data-full-screen="true"].fd-has-tl > .card-body { padding-right: 1rem; }

@@ -98,3 +98,48 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .yrow select { width: auto; flex: 1; }
 /* Compare with: agency, then component */
 .cmp select { margin-bottom: 4px; }
+/* ---------- modules: blocks, the six questions as sets of blocks, and "Build your own" ---------- */
+.mq-bar, .ws-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.8rem; color: #6c6b66; margin: 0 0 0.6rem; }
+.mgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1150px) { .mgrid { grid-template-columns: minmax(0, 1fr); } }
+.mblock { border: 1px solid #e3e7ee; border-radius: 8px; padding: 10px 12px 8px; background: #fff; min-width: 0; }
+.mblock h6 { font-size: 0.92rem; font-weight: 600; margin: 0 0 0.3rem; color: #212529; }
+.mb-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 0.25rem; }
+.mb-chip { background: #eef3fa; color: #1f3d66; border-radius: 4px; padding: 0 6px; font-size: 0.7rem; white-space: nowrap; }
+.mb-rel { border: 1px solid #c9d6ea; color: #1f4f8a; border-radius: 4px; padding: 0 6px; font-size: 0.7rem; font-weight: 600; }
+.mb-formula { font-size: 0.78rem; color: #55544f; margin-bottom: 0.3rem; }
+.mb-who { font-size: 0.72rem; color: #a15c00; margin-bottom: 0.2rem; }
+.mb-multi > div { margin-bottom: 2px; }
+.mb-mini { font-size: 0.72rem; font-weight: 600; color: #333C47; }
+.mb-foot { display: flex; justify-content: space-between; gap: 6px; margin-top: 0.2rem; }
+.mb-btn { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; border-radius: 6px; padding: 0.1rem 0.6rem; font-size: 0.76rem; cursor: pointer; }
+.mb-btn:hover, .mb-btn.on { background: #e3edf9; }
+.mb-table { margin-top: 0.4rem; }
+/* the workspace: data types on the left, the reader's blocks on the right */
+.ws { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 1000px) { .ws { grid-template-columns: minmax(0, 1fr); } }
+.ws-lib { border: 1px solid #e3e7ee; border-radius: 8px; padding: 8px; background: #fafbfd; max-height: 76vh; overflow-y: auto; position: sticky; top: 0; }
+.ws-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6c6b66; margin-bottom: 0.3rem; }
+.ws-group { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #4582CC; margin: 0.6rem 0 0.15rem; }
+.ws-mod { display: flex; align-items: baseline; gap: 6px; width: 100%; text-align: left; border: 0; background: none; padding: 3px 4px; border-radius: 4px; font-size: 0.8rem; color: #212529; cursor: pointer; }
+.ws-mod:hover, .ws-mod.open { background: #eef3fa; }
+.ws-mod b { color: #4582CC; font-weight: 600; }
+.ws-mod span { margin-left: auto; color: #9aa3ae; font-size: 0.7rem; }
+.ws-field { display: flex; justify-content: space-between; gap: 6px; width: calc(100% - 14px); margin-left: 14px; text-align: left; border: 0; border-left: 2px solid #dfe5ee; background: none; padding: 2px 6px; font-size: 0.76rem; color: #333C47; cursor: pointer; }
+.ws-field:hover { background: #e3edf9; }
+.ws-field.in { border-left-color: #4582CC; font-weight: 600; }
+.ws-field i { font-style: normal; color: #9aa3ae; font-size: 0.68rem; white-space: nowrap; }
+.ws-main .mblock { margin-bottom: 12px; cursor: pointer; }
+.ws-main .mblock.active { border-color: #4582CC; box-shadow: 0 0 0 2px rgba(69, 130, 204, 0.18); }
+.ws-edit { margin: 0.2rem 0 0.4rem; }
+.ws-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 0.3rem; }
+.ws-chip { display: inline-flex; align-items: center; gap: 4px; background: #e3edf9; border-radius: 10px; padding: 1px 4px 1px 8px; font-size: 0.76rem; }
+.ws-chip b { color: #4582CC; }
+.ws-chip button { border: 0; background: none; color: #4582CC; font-weight: 700; cursor: pointer; padding: 0 2px; }
+.ws-hint { font-size: 0.76rem; color: #9aa3ae; }
+.ws-rels { display: inline-flex; gap: 0; }
+.ws-rel { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; padding: 0.1rem 0.6rem; font-size: 0.76rem; cursor: pointer; margin-left: -1px; }
+.ws-rel:first-child { border-radius: 6px 0 0 6px; margin-left: 0; }
+.ws-rel:last-child { border-radius: 0 6px 6px 0; }
+.ws-rel.on { background: #4582CC; border-color: #4582CC; color: #fff; }
+.ws-rel:disabled { color: #b8bec7; cursor: not-allowed; }
