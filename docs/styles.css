@@ -143,3 +143,30 @@ body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
 .ws-rel:last-child { border-radius: 0 6px 6px 0; }
 .ws-rel.on { background: #4582CC; border-color: #4582CC; color: #fff; }
 .ws-rel:disabled { color: #b8bec7; cursor: not-allowed; }
+/* a question: the answer, then the tables it was built from and how it was calculated */
+.mq-bar { margin-bottom: 0.3rem; }
+.qa, .qh { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.6rem; border: 1px solid #e3e7ee; border-radius: 10px; background: #fff; padding: 0.8rem 1.2rem; margin-bottom: 12px; }
+.qh { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); background: #fafbfd; }
+@media (max-width: 1250px) { .qa, .qh { grid-template-columns: minmax(0, 1fr); } }
+.qa-h { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4582CC; margin-bottom: 0.45rem; }
+.qa-text ul { padding-left: 1.1rem; margin: 0; }
+.qa-text li { font-size: 1.02rem; line-height: 1.5; color: #212529; margin-bottom: 0.55rem; }
+.qfig { margin: 0; }
+.qfig h6 { font-size: 0.88rem; font-weight: 600; color: #333C47; margin: 0 0 0.2rem; }
+.qmods { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+.qmod { flex: 1 1 250px; border: 1px solid #c9d6ea; border-radius: 8px; background: #fff; padding: 6px 10px; min-width: 0; }
+.qmod-h { display: flex; align-items: baseline; gap: 6px; font-size: 0.86rem; font-weight: 600; color: #212529; margin-bottom: 0.2rem; }
+.qmod-h b { color: #4582CC; }
+.qmod-h span { margin-left: auto; font-size: 0.7rem; font-weight: 400; color: #6c6b66; white-space: nowrap; }
+.qmod table { width: 100%; border-collapse: collapse; }
+.qmod td { font-size: 0.78rem; padding: 1px 4px; color: #8a8f98; vertical-align: top; }
+.qmod td:first-child { width: 1em; color: #c3c9d2; }
+.qmod td:last-child { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.qmod tr.used td { color: #212529; font-weight: 600; }
+.qmod tr.used td:first-child { color: #4582CC; }
+.qmod details summary, .qmore summary { font-size: 0.74rem; color: #1f4f8a; cursor: pointer; margin-top: 0.2rem; }
+.qh-note { font-size: 0.72rem; color: #6c6b66; margin-top: 0.4rem; }
+.qh-calc ol { padding-left: 1.2rem; margin: 0; }
+.qh-calc li { font-size: 0.86rem; line-height: 1.5; color: #333C47; margin-bottom: 0.45rem; }
+.qmore { margin-top: 2px; }
+.qmore summary { font-size: 0.84rem; font-weight: 600; margin-bottom: 0.5rem; }

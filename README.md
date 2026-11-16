@@ -23,10 +23,12 @@ foia.gov (FY2008–FY2025).
   largest share), worked out from the data each time, and a large chart with those points marked. The agency,
   component, comparison and years can still be changed while a card is open, and the panel follows. From there a
   button opens the question with the full view.
-- **Questions 1–6, as sets of blocks.** A block takes fields from one or more data types and combines them in
-  one of four ways: side by side, A ÷ B, A − B, or shares of their total. Each block names the data types and
-  fields it uses, shows the chart, and gives the numbers (and a CSV) on request. "Original charts" switches a
-  question back to its earlier charts; the Tables tab is unchanged.
+- **Questions 1–6: the answer, then where it comes from.** A question opens with its answer for the agency,
+  component and years chosen: a few lines with their numbers and one chart. Under it, "Tables it was built from"
+  shows the data types the answer uses, each as a card listing that table's columns with the ones used marked,
+  and "How it was calculated" writes out each number in the answer (for example "Requests processed ÷ requests
+  received = 1,635,200 ÷ 1,707,434 = 95.8%"). Other views of the question are folded away under "More views";
+  "Original charts" switches back to the earlier charts; the Tables tab is unchanged.
 - **Build your own.** A library of the 31 data types on the left (06, the Exemption 3 statutes, is not in the
   page's data); click a field to add it to a block, then choose how the fields are combined. Combinations that
   have no meaning are not offered: medians, averages, days and percentages are not added, divided or
