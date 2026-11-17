@@ -1,0 +1,230 @@
+/* question header and two charts side by side */
+.qhead { font-size: 1.05rem; line-height: 1.35; }
+.qhead .qnum { font-weight: 600; margin-right: 0.4em; }
+.qhead .sel { color: #6c6b66; font-size: 0.85rem; margin-top: 0.2rem; }
+.pair { display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start; }
+.pair figure { margin: 0; }
+.pair h6 { margin: 0 0 6px; font-weight: 600; font-size: 0.92rem; }
+.side-note { font-size: 0.78rem; color: #6c6b66; margin-top: 0.5rem; }
+/* hidden code blocks still take space in a card */
+.card-body > .code-copy-outer-scaffold { display: none !important; }
+/* MuckRock blue for the title bar */
+.navbar { background-color: #4582CC !important; }
+/* question list: click to choose, click again to clear */
+.qpick { display: flex; flex-direction: column; gap: 2px; margin-bottom: 0.6rem; }
+.qpick-title { font-size: 0.8rem; font-weight: 600; color: #6c6b66; margin: 0.4rem 0 0.2rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.qbtn { display: flex; gap: 0.5em; align-items: baseline; text-align: left; border: 0; border-left: 3px solid transparent;
+        background: transparent; padding: 0.35rem 0.5rem; border-radius: 4px; font-size: 0.9rem; color: inherit; cursor: pointer; }
+.qbtn:hover { background: #eef3fa; }
+.qbtn.on { background: #e3edf9; border-left-color: #4582CC; font-weight: 600; }
+.qbtn .qno { min-width: 1em; color: #4582CC; font-weight: 600; }
+/* nothing chosen: no tab strip */
+body.noq .card .nav-tabs { visibility: hidden; }
+.chart-note { padding: 1.5rem 1rem; color: #6c6b66; max-width: 420px; }
+.qbtn, .qbtn:hover, .qbtn:focus, .qbtn:active { color: #212529 !important; outline: none; }
+/* component list before an agency is chosen */
+select:disabled { color: #8a8f98; background-color: #eef0f3; cursor: not-allowed; }
+/* Tables tab: the three views */
+.tview { display: inline-flex; border: 1px solid #c9d6ea; border-radius: 6px; overflow: hidden; margin-bottom: 0.8rem; }
+.tvbtn { border: 0; background: #fff; padding: 0.3rem 0.9rem; font-size: 0.88rem; color: #212529; cursor: pointer; }
+.tvbtn + .tvbtn { border-left: 1px solid #c9d6ea; }
+.tvbtn.on { background: #4582CC; color: #fff; }
+.tcap { margin-bottom: 1.2rem; }
+.tcap h6 { font-weight: 600; font-size: 0.92rem; margin: 0 0 0.4rem; }
+/* row checkboxes of Inputs.table: selecting rows does nothing here, so hide that column
+   (the bundled Inputs version ignores select: false) */
+.tab-pane table th:has(> input[type=checkbox]), .tab-pane table td:has(> input[type=checkbox]) { display: none; }
+/* Compare with: name box and removable chips */
+.cmp { margin: 0.2rem 0 0.8rem; }
+.cmp-label { font-size: 0.9rem; margin-bottom: 0.25rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; background: #e3edf9; border-radius: 10px; padding: 1px 4px 1px 8px; font-size: 0.78rem; }
+.chip button { border: 0; background: transparent; color: #4582CC; font-weight: 700; cursor: pointer; padding: 0 2px; }
+/* overview: one card per headline measure; the front has the number and its trend, the back the short explanation */
+.ocards { display: grid; gap: 12px; margin: 4px 0 8px; }   /* the number of columns is set from the window's width */
+.ocard { position: relative; border: 1px solid #e3e7ee; border-radius: 8px; padding: 10px 12px 6px; background: #fff; cursor: pointer; }
+.ocard:hover, .ocard:focus-visible { border-color: #4582cc; box-shadow: 0 1px 6px rgba(69, 130, 204, 0.2); outline: none; }
+.oc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; min-height: 2.3rem; }
+.oc-label { font-size: 0.8rem; font-weight: 600; color: #333C47; line-height: 1.25; }
+.oc-label .sub { display: block; font-weight: 400; font-size: 0.72rem; color: #6c6b66; }
+.oc-i { flex: none; width: 18px; height: 18px; border: 1px solid #9aa3ae; border-radius: 50%; font: italic 0.72rem/16px Georgia, serif; text-align: center; color: #55544f; }
+.oc-val { font-size: 1.6rem; font-weight: 600; line-height: 1.2; margin-top: 0.25rem; }
+.oc-chg { font-size: 0.75rem; color: #6c6b66; min-height: 1.1em; }
+.oc-go { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; border-radius: 6px; padding: 0.2rem 0.6rem; font-size: 0.78rem; cursor: pointer; margin: 0.1rem 0 0.3rem; }
+.oc-go:hover { background: #e3edf9; }
+/* a card opened: a large panel in the cards' place, text on the left and a large chart on the right */
+.odetail { border: 1px solid #c9d6ea; border-radius: 10px; background: #fff; padding: 0.7rem 1.4rem 1rem; margin: 4px 0 8px; }
+.od-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; }
+.od-close, .od-nav button { border: 1px solid #c9d6ea; background: #f5f8fc; color: #1f4f8a; border-radius: 6px; padding: 0.2rem 0.7rem; font-size: 0.82rem; cursor: pointer; }
+.od-close:hover, .od-nav button:hover:not(:disabled) { background: #e3edf9; }
+.od-nav button:disabled { opacity: 0.4; cursor: default; }
+.od-dots { display: flex; gap: 0.3rem; flex: 1; }
+.od-dot { width: 26px; height: 6px; border: 0; border-radius: 3px; padding: 0; background: #b9cbe6; cursor: pointer; }
+.od-dot.on { background: #4582CC; }
+.od-nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #6c6b66; }
+.od-cols { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 2.4rem; align-items: start; }
+@media (max-width: 1250px) { .od-cols { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; } }
+.od-label { font-size: 1.2rem; font-weight: 600; line-height: 1.25; color: #212529; }
+.od-label .sub { display: block; font-size: 0.84rem; font-weight: 400; color: #6c6b66; }
+.od-val { font-size: 2.5rem; font-weight: 600; line-height: 1.15; margin-top: 0.5rem; }
+.od-chg { font-size: 0.86rem; color: #6c6b66; }
+/* with "Compare with": one number per line of the chart instead of one large number */
+.od-rows { margin-top: 0.6rem; border-collapse: collapse; width: 100%; }
+.od-rows caption { caption-side: top; text-align: left; font-size: 0.8rem; color: #6c6b66; padding: 0 0 0.25rem; }
+.od-rows tr { border-top: 1px solid #eef0f3; cursor: pointer; }
+.od-rows tr:hover, .od-rows tr:focus-visible { background: #f5f8fc; outline: none; }
+.od-rows tr.on { background: #eef3fa; }
+.od-rows td { padding: 0.35rem 0.5rem; font-size: 0.88rem; color: #333C47; vertical-align: baseline; }
+.od-rows td.v { font-size: 1.3rem; font-weight: 600; text-align: right; white-space: nowrap; color: #212529; }
+.od-rows td.c { font-size: 0.8rem; color: #6c6b66; white-space: nowrap; }
+.od-rows i, .oc-who i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 0.45rem; }
+.oc-who { font-size: 0.7rem; color: #6c6b66; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.od-text p { font-size: 0.93rem; line-height: 1.55; color: #333C47; margin: 0.9rem 0 0.4rem; }
+.od-text h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4582CC; margin: 1.1rem 0 0.4rem; }
+.od-text ul { padding-left: 1.1rem; margin: 0 0 0.6rem; }
+.od-text li { font-size: 0.93rem; line-height: 1.5; color: #333C47; margin-bottom: 0.3rem; }
+.od-text .od-small { font-size: 0.8rem; color: #6c6b66; margin-top: 0.2rem; }
+.od-text .oc-go { font-size: 0.86rem; padding: 0.3rem 0.8rem; margin-top: 0.4rem; }
+.od-fig { margin: 0; }
+.od-fig h6 { font-size: 0.9rem; font-weight: 600; color: #333C47; margin: 0 0 0.3rem; }
+.od-key { font-size: 0.76rem; color: #6c6b66; margin-top: 0.2rem; }
+.qhead .warn { color: #a15c00; }
+/* nothing chosen / overview: no empty tab strip above the content */
+body.noq .card:has(> .card-header .nav-tabs) > .card-header { display: none; }
+.qhead .glance { margin-top: 0.3rem; font-size: 0.9rem; color: #1f3d66; background: #eef3fa; border-radius: 4px; padding: 0.15rem 0.5rem; display: inline-block; }
+/* fiscal years: [from] to [to] on one row */
+.years { margin: 0.2rem 0 0.8rem; }
+.yrow { display: flex; align-items: center; gap: 6px; }
+.yrow select { width: auto; flex: 1; }
+/* Compare with: agency, then component */
+.cmp select { margin-bottom: 4px; }
+/* ---------- modules: blocks, the six questions as sets of blocks, and "Build your own" ---------- */
+.mq-bar, .ws-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.8rem; color: #6c6b66; margin: 0 0 0.6rem; }
+.mgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1150px) { .mgrid { grid-template-columns: minmax(0, 1fr); } }
+.mblock { border: 1px solid #e3e7ee; border-radius: 8px; padding: 10px 12px 8px; background: #fff; min-width: 0; }
+.mblock h6 { font-size: 0.92rem; font-weight: 600; margin: 0 0 0.3rem; color: #212529; }
+.mb-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 0.25rem; }
+.mb-chip { background: #eef3fa; color: #1f3d66; border-radius: 4px; padding: 0 6px; font-size: 0.7rem; white-space: nowrap; }
+.mb-rel { border: 1px solid #c9d6ea; color: #1f4f8a; border-radius: 4px; padding: 0 6px; font-size: 0.7rem; font-weight: 600; }
+.mb-formula { font-size: 0.78rem; color: #55544f; margin-bottom: 0.3rem; }
+.mb-who { font-size: 0.72rem; color: #a15c00; margin-bottom: 0.2rem; }
+.mb-multi > div { margin-bottom: 2px; }
+.mb-mini { font-size: 0.72rem; font-weight: 600; color: #333C47; }
+.mb-foot { display: flex; justify-content: space-between; gap: 6px; margin-top: 0.2rem; }
+.mb-btn { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; border-radius: 6px; padding: 0.1rem 0.6rem; font-size: 0.76rem; cursor: pointer; }
+.mb-btn:hover, .mb-btn.on { background: #e3edf9; }
+.mb-table { margin-top: 0.4rem; }
+/* the workspace: data types on the left, the reader's blocks on the right */
+.ws { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 1000px) { .ws { grid-template-columns: minmax(0, 1fr); } }
+.ws-lib { border: 1px solid #e3e7ee; border-radius: 8px; padding: 8px; background: #fafbfd; max-height: 76vh; overflow-y: auto; position: sticky; top: 0; }
+.ws-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6c6b66; margin-bottom: 0.3rem; }
+.ws-group { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #4582CC; margin: 0.6rem 0 0.15rem; }
+.ws-mod { display: flex; align-items: baseline; gap: 6px; width: 100%; text-align: left; border: 0; background: none; padding: 3px 4px; border-radius: 4px; font-size: 0.8rem; color: #212529; cursor: pointer; }
+.ws-mod:hover, .ws-mod.open { background: #eef3fa; }
+.ws-mod b { color: #4582CC; font-weight: 600; }
+.ws-mod span { margin-left: auto; color: #9aa3ae; font-size: 0.7rem; }
+.ws-field { display: flex; justify-content: space-between; gap: 6px; width: calc(100% - 14px); margin-left: 14px; text-align: left; border: 0; border-left: 2px solid #dfe5ee; background: none; padding: 2px 6px; font-size: 0.76rem; color: #333C47; cursor: pointer; }
+.ws-field:hover { background: #e3edf9; }
+.ws-field.in { border-left-color: #4582CC; font-weight: 600; }
+.ws-field i { font-style: normal; color: #9aa3ae; font-size: 0.68rem; white-space: nowrap; }
+.ws-main .mblock { margin-bottom: 12px; cursor: pointer; }
+.ws-main .mblock.active { border-color: #4582CC; box-shadow: 0 0 0 2px rgba(69, 130, 204, 0.18); }
+.ws-edit { margin: 0.2rem 0 0.4rem; }
+.ws-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 0.3rem; }
+.ws-chip { display: inline-flex; align-items: center; gap: 4px; background: #e3edf9; border-radius: 10px; padding: 1px 4px 1px 8px; font-size: 0.76rem; }
+.ws-chip b { color: #4582CC; }
+.ws-chip button { border: 0; background: none; color: #4582CC; font-weight: 700; cursor: pointer; padding: 0 2px; }
+.ws-hint { font-size: 0.76rem; color: #9aa3ae; }
+.ws-rels { display: inline-flex; gap: 0; }
+.ws-rel { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; padding: 0.1rem 0.6rem; font-size: 0.76rem; cursor: pointer; margin-left: -1px; }
+.ws-rel:first-child { border-radius: 6px 0 0 6px; margin-left: 0; }
+.ws-rel:last-child { border-radius: 0 6px 6px 0; }
+.ws-rel.on { background: #4582CC; border-color: #4582CC; color: #fff; }
+.ws-rel:disabled { color: #b8bec7; cursor: not-allowed; }
+/* a question: the answer, then the tables it was built from and how it was calculated */
+.mq-bar { margin-bottom: 0.3rem; }
+.qa, .qh { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.6rem; border: 1px solid #e3e7ee; border-radius: 10px; background: #fff; padding: 0.8rem 1.2rem; margin-bottom: 12px; }
+.qh { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); background: #fafbfd; }
+@media (max-width: 1250px) { .qa, .qh { grid-template-columns: minmax(0, 1fr); } }
+.qa-h { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4582CC; margin-bottom: 0.45rem; }
+.qa-text ul { padding-left: 1.1rem; margin: 0; }
+.qa-text li { font-size: 1.02rem; line-height: 1.5; color: #212529; margin-bottom: 0.55rem; }
+.qfig { margin: 0; }
+.qfig h6 { font-size: 0.88rem; font-weight: 600; color: #333C47; margin: 0 0 0.2rem; }
+.qmods { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+.qmod { flex: 1 1 250px; border: 1px solid #c9d6ea; border-radius: 8px; background: #fff; padding: 6px 10px; min-width: 0; }
+.qmod-h { display: flex; align-items: baseline; gap: 6px; font-size: 0.86rem; font-weight: 600; color: #212529; margin-bottom: 0.2rem; }
+.qmod-h b { color: #4582CC; }
+.qmod-h span { margin-left: auto; font-size: 0.7rem; font-weight: 400; color: #6c6b66; white-space: nowrap; }
+.qmod table { width: 100%; border-collapse: collapse; }
+.qmod td { font-size: 0.78rem; padding: 1px 4px; color: #8a8f98; vertical-align: top; }
+.qmod td:first-child { width: 1em; color: #c3c9d2; }
+.qmod td:last-child { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.qmod tr.used td { color: #212529; font-weight: 600; }
+.qmod tr.used td:first-child { color: #4582CC; }
+.qmod details summary, .qmore summary { font-size: 0.74rem; color: #1f4f8a; cursor: pointer; margin-top: 0.2rem; }
+.qh-note { font-size: 0.72rem; color: #6c6b66; margin-top: 0.4rem; }
+.qh-calc ol { padding-left: 1.2rem; margin: 0; }
+.qh-calc li { font-size: 0.86rem; line-height: 1.5; color: #333C47; margin-bottom: 0.45rem; }
+.qmore { margin-top: 2px; }
+.qmore summary { font-size: 0.84rem; font-weight: 600; margin-bottom: 0.5rem; }
+.qa-cmp { margin-top: 0.7rem; border-top: 1px solid #e3e7ee; padding-top: 0.6rem; }
+.qa-cmp table { width: 100%; border-collapse: collapse; }
+.qa-cmp th, .qa-cmp td { font-size: 0.8rem; padding: 2px 6px; text-align: right; font-variant-numeric: tabular-nums; border-bottom: 1px solid #eef1f5; }
+.qa-cmp th { font-weight: 600; color: #6c6b66; font-size: 0.72rem; vertical-align: bottom; }
+.qa-cmp td:first-child, .qa-cmp th:first-child { text-align: left; }
+.qa-cmp tr.sel td { font-weight: 600; }
+/* build your own: ticking columns, the two sides of A and B, and what to show */
+.ws-field span { text-align: left; }
+.ws-mod.has span { color: #4582CC; font-weight: 600; }
+.ws-all { display: flex; gap: 12px; margin: 2px 0 3px 16px; }
+.ws-all button, .ws-chip button { border: 0; background: none; color: #1f4f8a; font-size: 0.72rem; padding: 0; cursor: pointer; }
+.ws-all button { text-decoration: underline; }
+.ws-side { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; border: 1px dashed #c9d6ea; border-radius: 8px; padding: 3px 8px; margin-bottom: 4px; cursor: pointer; }
+.ws-side.on { border-style: solid; border-color: #4582CC; background: #f4f8fd; }
+.ws-side > b { color: #4582CC; width: 1.1rem; }
+.ws-ops { margin: 0.4rem 0 0.3rem; }
+.ws-ops > div { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 4px; }
+.ws-ops > div > span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #6c6b66; width: 5.4rem; }
+.ws-op { border: 1px solid #c9d6ea; background: #fff; color: #1f4f8a; border-radius: 6px; padding: 0.1rem 0.6rem; font-size: 0.8rem; cursor: pointer; }
+.ws-op:hover:not(:disabled) { background: #e3edf9; }
+.ws-op.on, .ws-op.on:hover:not(:disabled) { background: #4582CC; border-color: #4582CC; color: #fff; }
+.ws-op:disabled { color: #b8bec7; border-color: #e9ecf1; cursor: not-allowed; }
+.ws-bar .mb-btn, .ws-mod span { white-space: nowrap; }
+/* the sample question page: number cards, two charts, the table it was built from */
+.qcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-bottom: 12px; }
+.qcard { border: 1px solid #dfe5ee; border-radius: 10px; background: #fff; padding: 0.45rem 0.9rem 0.4rem; }
+.qc-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #5b6470; }
+.qc-big { font-size: 1.9rem; font-weight: 700; line-height: 1.2; color: #1f2d3d; font-variant-numeric: tabular-nums; }
+.qc-how { font-size: 0.78rem; color: #55544f; font-variant-numeric: tabular-nums; }
+.qc-cmp { font-size: 0.78rem; color: #1f4f8a; font-weight: 600; min-height: 1.1em; }
+.qcharts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-bottom: 12px; }
+.qcharts > div { border: 1px solid #dfe5ee; border-radius: 10px; background: #fff; padding: 0.6rem 0.8rem; min-width: 0; }
+@media (max-width: 1250px) { .qcharts { grid-template-columns: minmax(0, 1fr); } }
+.qfig-sub { font-size: 0.78rem; color: #6c6b66; margin: -0.1rem 0 0.3rem; }
+.qsrc .qmod { flex: 0 1 420px; }
+/* subtraction: "Build your own" is off the menu while the six questions are being finished */
+.qpick .qpick-title ~ .qpick-title, .qpick .qbtn[data-id="7"] { display: none; }
+/* a card with entries to compare: one row per entry, marked with its colour on the charts */
+.qc-rows { width: 100%; border-collapse: collapse; margin: 0.25rem 0 0.2rem; }
+.qc-rows td { padding: 2px 0; vertical-align: baseline; font-variant-numeric: tabular-nums; }
+.qc-rows td:first-child { font-size: 0.82rem; color: #333C47; padding-right: 8px; width: 100%; max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qc-rows td:first-child i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.qc-rows td:nth-child(2) { font-size: 1.15rem; font-weight: 700; color: #1f2d3d; text-align: right; white-space: nowrap; padding-right: 10px; }
+.qc-rows td:nth-child(3) { font-size: 0.74rem; color: #1f4f8a; text-align: right; white-space: nowrap; }
+.qcharts.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1250px) { .qcharts.three { grid-template-columns: minmax(0, 1fr); } }
+/* question 2: a dot in the track's colour on each card, the median as reported, one line of notes under the charts */
+.qc-label i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.qc-med { font-size: 0.78rem; color: #55544f; margin-top: 0.15rem; padding-top: 0.2rem; border-top: 1px solid #eef1f5; font-variant-numeric: tabular-nums; }
+.qc-med b { color: #1f2d3d; }
+.qc-rows td:nth-child(4) { font-size: 0.82rem; font-weight: 600; color: #1f2d3d; text-align: right; white-space: nowrap; padding-left: 12px; }
+.qc-rows tr.qc-head td { font-size: 0.66rem; font-weight: 400; color: #6c6b66; padding: 0 0 0 12px; text-align: right; white-space: nowrap; }
+.qnote { font-size: 0.78rem; color: #6c6b66; margin: -4px 2px 12px; }
+/* a narrow window: the two counts behind each share give way to the entry's name (they stay in the tooltip) */
+@media (max-width: 1350px) { .qcards.q2c .qc-rows td:nth-child(3) { display: none; } }
+/* the Tables tab is hidden for now, and with it the tab bar (one tab needs none). Its code is still in the page:
+   remove this line to bring it back */
+.card:has(> .card-header .nav-tabs) > .card-header { display: none; }

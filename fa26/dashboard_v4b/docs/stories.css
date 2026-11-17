@@ -1,0 +1,88 @@
+/* ---------- header link and user guide ---------- */
+.fd-open { margin-top: 0.35rem; }
+.fd-link { border: 0; background: none; padding: 0; color: #1f4f8a; font-size: 0.86rem; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #b9cbe6; }
+.fd-link:hover { text-decoration-color: #1f4f8a; }
+.fd-guide { display: none; }
+.card[data-full-screen="true"] .fd-guide { display: block; padding: 1.4rem 0.6rem 1rem; border-top: 1px solid #e3e8ef; margin-top: 1rem; overflow-y: auto; }
+.card[data-full-screen="true"] .fd-open { display: none; }
+.fd-guide h2 { font-size: 1.3rem; font-weight: 600; color: #212529; margin: 0 0 1.1rem; }
+.fd-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.6rem; }
+@media (max-width: 1000px) { .fd-cols { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; } }
+.fd-guide h3 { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #4582CC; margin: 0 0 0.5rem; }
+.fd-guide h3:not(:first-child) { margin-top: 1.3rem; }
+.fd-guide p, .fd-guide li, .fd-guide dd { font-size: 0.9rem; line-height: 1.55; color: #333C47; }
+.fd-guide p { margin: 0 0 0.6rem; }
+.fd-guide ol { padding-left: 1.2rem; margin: 0 0 0.5rem; }
+.fd-guide li { margin-bottom: 0.45rem; }
+.fd-guide dl { margin: 0 0 0.8rem; }
+.fd-guide dt { font-size: 0.88rem; font-weight: 600; color: #212529; margin-top: 0.55rem; }
+.fd-guide dd { margin: 0.1rem 0 0; }
+.fd-small { font-size: 0.8rem !important; color: #6c6b66 !important; }
+.fd-keep { margin-top: 1.2rem !important; padding: 0.75rem 1rem; background: #f5f7fa; border-left: 3px solid #c9d6ea; border-radius: 0 6px 6px 0; font-size: 0.84rem !important; color: #4a5059 !important; max-width: 70rem; }
+.fd-card[data-full-screen="true"] .cell-output-display { display: none; }   /* expanded: the guide only */
+.card[data-full-screen="true"] .fd-guide { border-top: 0; margin-top: 0; padding: 0.5rem 0.8rem 0.6rem; }
+.fd-guide h2 { margin-bottom: 0.9rem; }
+.fd-guide p, .fd-guide li, .fd-guide dd { font-size: 0.88rem; line-height: 1.5; }
+.fd-guide dt { margin-top: 0.45rem; }
+.fd-guide h3:not(:first-child) { margin-top: 1.1rem; }
+.fd-keep { margin-top: 0.9rem !important; }
+
+/* ---------- fiscal-year buttons ---------- */
+.fd-hidden { display: none !important; }
+.fd-has-tl > .card-body { padding-right: calc(min(470px, 46%) + 3.4rem); min-height: 6.9rem; }   /* room for the year buttons and the link button when the header is short */
+.fd-tl { position: absolute; top: 0.7rem; right: 3rem; width: min(470px, 46%); }
+.card[data-full-screen="true"] .fd-tl { display: none; }
+.card[data-full-screen="true"].fd-has-tl > .card-body { padding-right: 1rem; }
+@media (max-width: 900px) { .fd-tl { position: static; width: auto; margin-top: 0.5rem; } .fd-has-tl > .card-body { padding-right: 1rem; } }
+.tl-top { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+.tl-p { border: 1px solid #c9d6ea; background: #fff; color: #212529; border-radius: 4px; padding: 1px 8px; font-size: 0.8rem; cursor: pointer; }
+.tl-p:hover { background: #eef3fa; }
+.tl-p.on { background: #4582CC; border-color: #4582CC; color: #fff; }
+.tl-label { margin-left: auto; font-size: 0.8rem; color: #55544f; white-space: nowrap; }
+.tl-years { display: flex; gap: 1px; }
+.tl-y { flex: 1 1 0; min-width: 0; border: 0; background: #eef0f3; color: #55544f; font-size: 0.7rem; line-height: 1; padding: 5px 0; cursor: pointer; }
+.tl-y:hover { background: #cfe0f4; }
+.tl-y.on { background: #78b7e2; color: #12233b; }
+.tl-y.anchor { background: #4582CC; color: #fff; }
+/* every page: the header card is as tall as its text, so no line is cut off */
+.bslib-grid[style*="17fr"] { grid-template-rows: auto minmax(3em, 1fr) !important; }
+
+/* "Clear all" on the Agency line */
+.fd-agform { position: relative; }
+.fd-clear { position: absolute; top: 0; right: 0; border: 0; background: none; padding: 0 0.1rem; font-size: 0.78rem; color: #1f4f8a; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: #b9cbe6; }
+.fd-clear:hover:not(:disabled) { text-decoration-color: #1f4f8a; }
+.fd-clear:disabled { color: #9aa3ae; text-decoration: none; cursor: default; }
+.fd-clear, .fd-clear:disabled { background: none !important; border: 0 !important; box-shadow: none !important; }
+
+/* top bar: who built it and for whom, smaller than the dashboard's name */
+.fd-credit { font-size: 0.6em; font-weight: 400; opacity: 0.9; margin-left: 0.15rem; vertical-align: 0.12em; white-space: nowrap; }
+.fd-credit a { color: inherit !important; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.55); text-underline-offset: 3px; }
+.fd-credit a:hover { text-decoration-color: #fff; }
+@media (max-width: 760px) { .fd-credit { display: none; } }
+
+/* top bar: "Home", back to the overview */
+nav.navbar { position: relative; }
+.fd-home { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); border: 1px solid rgba(255,255,255,0.7); background: transparent; color: #fff; border-radius: 6px;
+  padding: 0.15rem 0.7rem; font-size: 0.85rem; cursor: pointer; }
+.fd-home:hover { background: rgba(255,255,255,0.18); }
+.fd-home.fd-at-home { opacity: 0.55; cursor: default; }
+
+/* "Download CSV" and "Copy link to this view" */
+.csv { font-weight: 400; font-size: 0.78rem; margin-left: 0.5em; }
+.fd-linkrow { display: flex; justify-content: flex-end; margin-top: 6px; }
+.fd-copy { border: 1px solid #c9d6ea; background: #fff; color: #1f3d66; border-radius: 4px; padding: 1px 10px; font-size: 0.8rem; cursor: pointer; }
+.fd-copy:hover { background: #eef3fa; }
+
+/* Tables › Numbers in the chart, with "Compare with": the comparison table to the right of the selection's tables */
+.tpair { display: flex; flex-wrap: wrap; gap: 0 2.5rem; align-items: flex-start; }
+.tpair > div { min-width: 0; max-width: 100%; }
+
+/* Tables tab: each question's notes beside the tables, or below them when the tables need the width */
+.tpanel-wrap { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: flex-start; }
+.tpanel-wrap > .tpanel { flex: 0 1 auto; min-width: 0; max-width: 100%; }
+.tnotes { flex: 1 1 280px; margin-top: 3.05rem; padding: 0.8rem 1rem 0.5rem; background: #f6f8fb; border: 1px solid #e3e9f2; border-radius: 8px; }
+.tnotes h6 { font-weight: 600; font-size: 0.92rem; margin: 0 0 0.5rem; }
+.tnotes ul { padding-left: 1.1rem; margin: 0; }
+.tnotes li, .tnotes p { font-size: 0.86rem; line-height: 1.5; color: #333C47; margin-bottom: 0.45rem; }
+.fd-rules { margin-top: 1.2rem; max-width: 70rem; }
+.fd-rules ul { padding-left: 1.2rem; margin: 0; }

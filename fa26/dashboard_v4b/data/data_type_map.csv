@@ -1,0 +1,33 @@
+No.,foia.gov data type,Official file name (foia-*.csv),Column prefix in FOIA_agency_FY2008-2025.csv
+01,Requests,received-processed-and-pending-foia-requests,requests__
+02,Requests - Disposition (Dis.),disposition-of-foia-requests-all-processed-requests,disposition__
+03,"Requests - Dis. - ""Other"" Reasons",disposition-of-foia-requests-other-reasons,disposition_other_reasons__
+04,Requests - Expedited Processing,requests-for-expedited-processing,expedited__
+05,Exemptions,disposition-of-foia-requests-number-of-times-exemptions-applied,exemptions_applied__
+06,Exemptions - Exemption 3 Statutes,exemption-statutes,(separate file: exemption_statutes_FY2008-2025.csv)
+07,Appeals,received-processed-and-pending-administrative-appeals,appeals__
+08,Appeals - Disposition (Dis.),disposition-of-administrative-appeals-all-processed-appeals,appeals_disposition__
+09,Appeals - Dis. - Use of Exemptions,reasons-for-denial-on-appeal-number-of-times-exemptions-applied,appeals_exemptions_applied__
+10,Appeals - Dis. - Other Than Exs.,reasons-for-denial-on-appeal-reasons-other-than-exemptions,appeals_non_exemption_reasons__
+11,"Appeals - Dis. - ""Other"" Reasons",reasons-for-denial-on-appeal-other-reasons,appeals_other_reasons__
+12,Appeals - Response Time,response-time-for-administrative-appeals,appeals_response_time__
+13,Appeals - Ten Oldest Pending,ten-oldest-administrative-appeals,appeals_ten_oldest__
+14,Processing Time,processed-requests-response-time-for-all-processed-perfected-requests,response_time_all__
+15,Processing Time - Requests Granted,processed-requests-response-time-for-perfected-requests-in-which-information-was-granted,response_time_granted__
+16,Processing Time - Simple Requests,processed-requests-response-time-in-day-increments-simple-requests,days_simple__
+17,Processing Time - Complex Requests,processed-requests-response-time-in-day-increments-complex-requests,days_complex__
+18,Processing Time - Expedited Requests,processed-requests-response-time-in-day-increments-requests-granted-expedited-processing,days_expedited__
+19,Processing Time - Pending Requests,pending-requests-all-pending-perfected-requests,pending__
+20,Processing Time - Ten Oldest Requests,pending-requests-ten-oldest-pending-perfected-requests,pending_ten_oldest__
+21,Fee Waiver,requests-for-fee-waiver,fee_waiver__
+22,FOIA Personnel,foia-personnel,personnel__
+23,FOIA Costs,foia-costs-and-fees-collected-for-processing-requests,costs_fees__
+24,Exclusions,number-of-times-subsection-c-used,subsection_c_used__
+25,Proactive Disclosures,number-of-subsection-a-postings,subsection_a_postings__
+26,Backlog,backlogs-of-foia-requests-and-administrative-appeals,backlog__
+27,Consultations,consultations-on-foia-requests-received-processed-and-pending-consultations,consultations__
+28,Consultations - Ten Oldest,consultations-on-foia-requests-ten-oldest-consultations-received-from-other-agencies-pending-at-agency,consultations_ten_oldest__
+29,Comparisons,comparison-of-numbers-of-requests-from-previous-year-and-current-year-annual-report,requests_vs_prev_year__
+30,Comparisons - Requests Backlogged,comparison-of-backlogged-requests-from-previous-year-and-current-year-annual-report,backlog_requests_vs_prev_year__
+31,Comparisons - Administrative Appeals,comparison-of-numbers-of-administrative-appeals-from-previous-year-and-current-year-annual-report,appeals_vs_prev_year__
+32,Comparisons - Appeals Backlogged,comparison-of-backlogged-administrative-appeals-from-previous-year-and-current-year-annual-report,backlog_appeals_vs_prev_year__
